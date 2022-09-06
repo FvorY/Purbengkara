@@ -1,0 +1,34 @@
+:root{
+  --brand-primary: #4aa6e8;
+  --secondary: #59b5f7;
+  --white: #fff;
+  --black: #000;
+  --brk-dark-base: #272727;
+  --brk-base-1: #4aa6e8;
+  --brk-base-2: #408cc2;
+  --brk-base-3: #234f6e;
+  --brk-base-4: #e8ecff;
+  --brk-base-5: #408cc2;
+  --brk-base-6: #5193c2;
+  --brk-base-7: #4aa6e8;
+  --brk-base-8: #003e74;
+  --brk-secondary-1: #2a9beb;
+  --brk-secondary-2: #4597d1;
+  --brk-secondary-3: #3a6d91;
+  --brk-secondary-4: #4787b5;
+  --brk-secondary-5: #64b8f5;
+  --brk-secondary-6: #0792f7;
+  --text-base-color-1: #c4c4c4;
+  --text-base-color-2: #4aa6e8;
+  --text-base-color-3: #f3f3f3;
+  --form-color-1: #e8ecff;
+  --brand-primary-rgb: 74, 166, 232;
+  --secondary-rgb: 89, 181, 247;
+  --white-rgb: 255, 255, 255;
+  --black-rgb: 0, 0, 0;
+  --brk-dark-base-rgb: 39, 39, 39;
+  --brk-base-1-rgb: 74, 166, 232;
+  --brk-base-2-rgb: 0, 184.977, 106.08975;
+  --brk-base-3-rgb: 35, 79, 110;
+  --brk-base-4-rgb: 232, 236, 255;--brk-base-5-rgb: 0, 184.977, 71.27055;--brk-base-6-rgb: 6.65136, 180.32564, 136.90707;--brk-base-7-rgb: 96.977, 255, 188.19937;--brk-base-8-rgb: 0, 61.66734, 115.977;--brk-secondary-1-rgb: 66.86718, 206.32882, 117.70672;--brk-secondary-2-rgb: 0, 206.196, 125.38047;--brk-secondary-3-rgb: 0, 206.196, 166.39795;--brk-secondary-4-rgb: 94.97585, 199.22015, 141.52002;--brk-secondary-5-rgb: 115.75838, 226.43762, 118.19809;--brk-secondary-6-rgb: 30.196, 255, 228.31408;--text-base-color-1-rgb: 196, 196, 196;--text-base-color-2-rgb: 74, 166, 232, 157.06377;--text-base-color-3-rgb: 243, 243, 243;--form-color-1-rgb: 232, 236, 255;--b-radius: inherit}
+/*# sourceMappingURL=maps/brk-green-1.css.map */

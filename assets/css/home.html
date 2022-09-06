@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>SiReti</title>
+  <meta name="description" content="SiReti (Sistem Rekomendasi Properti)"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#44C4DC"/>
+  <link rel="icon" href="logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!-- Vue js -->
+  <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigasi -->
+  <div id="nav">
+      <div class="navbar-fixed">
+          <nav class="menutop">
+              <div class="nav-wrapper container">
+                  <b style="font-size: 17px; float: left;" id="titlePage"> List Properti </b>
+                  <i style="font-size: 13px; float: right;" onclick="kriteria()" id="redirectRekomendasi"> Gunakan Rekomendasi? </i>
+              </div>
+          </nav>
+      </div>
+  </div>
+
+  <!-- Akhir Navigasi -->
+  <div class="container" id="body-content">
+    <br>
+    <div id="app">
+
+       <div class="input-field col s12 input-search">
+         <input id="Search" type="Search" v-model="search" @keyup="getsearch">
+         <label for="Search">Search Properti</label>
+       </div>
+
+       <div class="row">
+       <div class="flight-types">
+        <input type="radio" name="flight-type" v-model="transaksi" value="jual" id="jual" v-on:change="getsearch" checked/>
+        <label for="jual">
+            Properti Jual
+        </label>
+
+        <input type="radio" name="flight-type" v-model="transaksi" value="sewa" id="sewa" v-on:change="getsearch" />
+        <label for="sewa">
+            Properti Sewa
+        </label>
+      </div>
+      </div>
+
+       <div class="show data" id="showdata" style="overflow-y: scroll; position:relative; margin-bottom: 40px;" align="center">
+         <template v-if="data.length != 0 && status == 'pembeli'">
+           <div>
+             <data-list :data="data"></data-list>
+          </div>
+         </template>
+         <template v-if="data.length == 0 && status == 'pembeli'">
+           <div>
+             <img-notfound></img-notfound>
+          </div>
+         </template>
+         <template v-if="data.length != 0 && status == 'penjual'">
+           <div>
+             <data-penjual :data="data"></data-penjual>
+          </div>
+         </template>
+         <template v-if="data.length == 0 && status == 'penjual'">
+           <div>
+             <img-notfound></img-notfound>
+          </div>
+         </template>
+       </div>
+
+      <div class="floatingButtonWrap" id="addProperty">
+          <div class="floatingButtonInner">
+              <a onclick="addproperty()" class="waves-effect floatingButton">
+                  <i class="fa fa-plus icon-default"></i>
+              </a>
+          </div>
+      </div>
+
+    </div>
+    <br>
+    <br>
+
+  </div>
+  <ul class="bottomnav" id="nav-mobile"></ul>
+
+  <!-- Modal Structure -->
+  <div id="modalKriteria" class="modal modal-fixed-footer" style="border-radius: 15px !important;">
+    <div class="moda-header" style="background-color: #44C4DC; color: white;">
+      <div class="container" style="padding: 10px;">
+        <h7><span class="badges badge--success" style="background-color: #edc524;">Input <span id="statusTabStatus">Kriteria</span> Properti <span id="statusTabActive"> </span> </span></h7>
+      </div>
+    </div>
+    <div class="modal-content">
+      <!-- Kriteria -->
+      <form id="formKriteria">
+        <div class="input-field col s12">
+          <input id="lokasi" type="text" name="lokasi">
+          <label for="lokasi">Lokasi Properti</label>
+          <div style="color: rgb(117, 58, 36)">
+            Contoh Lokasi : Alamat Daerah / Jalan, Provinsi, Kota, Kode POS
+          </div>
+        </div>
+        <div class="input-field col s12">
+          <select name="harga" id="harga">
+           <option value="" disabled selected>Pilih Range Harga</option>
+           <option value="1">> 300 JT</option>
+           <option value="0.75">200 - 300 JT</option>
+           <option value="0.5">150 - 200 JT</option>
+           <option value="0.25">< 150 JT</option>
+         </select>
+        </div>
+        <div class="input-field col s12">
+          <select name="kt" id="kt">
+           <option value="" disabled selected>Pilih Kamar Tidur</option>
+           <option value="0.25">Satu Kamar</option>
+           <option value="0.5">Dua Kamar</option>
+           <option value="0.75">Tiga Kamar</option>
+           <option value="1">Empat Kamar / Lebih</option>
+         </select>
+        </div>
+        <div class="input-field col s12">
+          <select name="km" id="km">
+           <option value="" disabled selected>Pilih Kamar Mandi</option>
+           <option value="0.25">Satu Kamar</option>
+           <option value="0.5">Dua Kamar</option>
+           <option value="0.75">Tiga Kamar</option>
+           <option value="1">Empat Kamar / Lebih</option>
+         </select>
+        </div>
+
+        <b>Luas Tanah</b>
+        <div class="row">
+          <center>
+            <div class="input-field col s5">
+              <input id="startlt" type="number" name="startlt">
+              <label for="startlt">0 m2</label>
+            </div>
+            <div class="input-field col s2">
+              <label>sd</label>
+            </div>
+            <div class="input-field col s5">
+              <input id="endlt" type="number" name="endlt">
+              <label for="endlt">0 m2</label>
+            </div>
+          </center>
+        </div>
+
+        <b>Luas Bangunan</b>
+        <div class="row">
+          <center>
+            <div class="input-field col s5">
+              <input id="startlb" type="number" name="startlb">
+              <label for="startlb">0 m2</label>
+            </div>
+            <div class="input-field col s2">
+              <label>sd</label>
+            </div>
+            <div class="input-field col s5">
+              <input id="endlb" type="number" name="endlb">
+              <label for="endlb">0 m2</label>
+            </div>
+          </center>
+        </div>
+
+        <div class="input-field col s12">
+          <select name="atap" id="atap">
+           <option value="" disabled selected>Pilih Atap</option>
+           <option value="genteng">Genteng</option>
+           <option value="asbes">Asbes</option>
+         </select>
+        </div>
+        <div class="input-field col s12">
+          <select name="pondasi" id="pondasi">
+           <option value="" disabled selected>Pilih Pondasi</option>
+           <option value="kali">Batu Kali</option>
+           <option value="kumbung">Batu Kumbung</option>
+         </select>
+        </div>
+        <div class="input-field col s12">
+          <select name="tembok" id="tembok">
+           <option value="" disabled selected>Pilih Dinding</option>
+           <option value="merah">Bata Merah</option>
+           <option value="putih">Bata Putih</option>
+         </select>
+        </div>
+      </form>
+
+      <!-- Prioritas -->
+      <form id="formPrioritas" style="display: none">
+        <div style="color: rgb(117, 58, 36)">
+          Pilih Prioritas Anda (1 - 9)
+        </div>
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Lokasi Properti</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="lokasip" type="text" name="lokasip" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="lokasip">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Harga Properti</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="hargap" type="text" name="hargap" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="hargap">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Kamar Tidur</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="ktp" type="text" name="ktp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="ktp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Kamar Mandi</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="kmp" type="text" name="kmp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="kmp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Luas Tanah</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="ltp" type="text" name="ltp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="ltp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Luas Bangunan</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="lbp" type="text" name="lbp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="lbp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Material Dinging</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="tembokp" type="text" name="tembokp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="tembokp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Material Atap</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="atapp" type="text" name="atapp" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="atapp">Prioritas</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 0px;">
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <label>Material Pondasi</label>
+          </div>
+          <div class="input-field col s6" style="margin-bottom: 0px;">
+            <input id="pondasip" type="text" name="pondasip" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" />
+            <label for="pondasip">Prioritas</label>
+          </div>
+        </div>
+      </form>
+      <br>
+      <br>
+    </div>
+    <div class="modal-footer">
+      <a onclick="closeRekomendasi()" id="btnCloseModal" class="waves-effect waves-green btn-flat" style="background-color: grey; border-radius: 12px; color: white;">Tutup</a>
+      <a onclick="submitKriteria()" id="btnSubmitModal" class="waves-effect waves-green btn-flat" style="background-color: #44C4DC; border-radius: 12px; color: white; ">Lanjutkan</a>
+    </div>
+  </div>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/jquery.maskMoney.js"></script>
+  <script type="text/javascript">
+
+  localStorage['menu'] = '#property';
+
+  const elem = document.getElementById('modalKriteria');
+  const instance = M.Modal.init(elem, {dismissible: false});
+
+  var lokasip = 0;
+  var hargap = 0;
+  var ktp = 0;
+  var kmp = 0;
+  var ltp = 0;
+  var lbp = 0;
+  var tembokp = 0;
+  var atapp = 0;
+  var pondasip = 0;
+
+  $('#lokasip').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (hargap == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ktp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         lokasip = parseInt($('#lokasip').val())
+       } else {
+         this.value = "";
+         lokasip = 0;
+       }
+  });
+
+  $('#hargap').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ktp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         hargap = parseInt($('#hargap').val())
+       } else {
+         this.value = "";
+         hargap = 0;
+       }
+  });
+
+  $('#ktp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (hargap == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         ktp = parseInt($('#ktp').val())
+       } else {
+         this.value = "";
+         ktp = 0;
+       }
+  });
+
+  $('#kmp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         kmp = parseInt($('#kmp').val())
+       } else {
+         this.value = "";
+         kmp = 0;
+       }
+  });
+
+  $('#ltp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         ltp = parseInt($('#ltp').val())
+       } else {
+         this.value = "";
+         ltp = 0;
+       }
+  });
+
+  $('#lbp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         lbp = parseInt($('#lbp').val())
+       } else {
+         this.value = "";
+         lbp = 0;
+       }
+  });
+
+  $('#tembokp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         tembokp = parseInt($('#tembokp').val())
+       } else {
+         this.value = "";
+         tembokp = 0;
+       }
+  });
+
+  $('#atapp').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (pondasip == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         atapp = parseInt($('#atapp').val())
+       } else {
+         this.value = "";
+         atapp = 0;
+       }
+  });
+
+  $('#pondasip').on('keyup paste', function(){
+       this.value = this.value.replace(/[^1-9]/g, '');
+
+       var check = true;
+       if (lokasip == this.value) {
+         check = false
+       }
+
+       if (hargap == this.value) {
+         check = false
+       }
+
+       if (ktp == this.value) {
+         check = false
+       }
+
+       if (kmp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (ltp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (lbp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (tembokp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (atapp == this.value) {
+         if (check == true) {
+           check = false
+         }
+       }
+
+       if (check == true) {
+         pondasip = parseInt($('#pondasip').val())
+       } else {
+         this.value = "";
+         pondasip = 0;
+       }
+  });
+
+  function kriteria() {
+    if ($('input[name="flight-type"]:checked').val() == "jual") {
+      $("#statusTabActive").text("Dijual");
+    } else {
+      $("#statusTabActive").text("Disewakan");
+    }
+
+    instance.open();
+  }
+
+  function closeRekomendasi() {
+    if ($("#formKriteria").css('display') == "none") {
+      $("#formKriteria").css("display", "");
+      $("#formPrioritas").css("display", "none");
+      $("#btnSubmitModal").attr("onclick", "submitKriteria()")
+      $("#btnCloseModal").text("Tutup");
+      $("#btnSubmitModal").text("Lanjutkan");
+      $("#statusTabStatus").text("Kriteria");
+    } else {
+      $('#formKriteria')[0].reset();
+      $('#formPrioritas')[0].reset();
+      lokasip = 0;
+      hargap = 0;
+      kmp = 0;
+      ktp = 0;
+      ltp = 0;
+      lbp = 0;
+      tembokp = 0;
+      atapp = 0;
+      pondasip = 0;
+      instance.close();
+    }
+  }
+
+  function submitKriteria() {
+    var form = document.getElementById("formKriteria");
+    var inputs = form.getElementsByTagName("input"), input = null, flag = true;
+    var selects = form.getElementsByTagName("select"), select = null, flag = true;
+    for(var i = 0, len = inputs.length; i < len; i++) {
+        input = inputs[i];
+        if(!input.value) {
+            flag = false;
+            input.focus();
+            M.toast({html: 'Silahkan isi semua kriteria!', classes: 'rounded'});
+            return false;
+        }
+    }
+
+    for(var i = 0, len = selects.length; i < len; i++) {
+        select = selects[i];
+        if(!select.value) {
+            flag = false;
+            select.focus();
+            M.toast({html: 'Silahkan isi semua kriteria!', classes: 'rounded'});
+            return false;
+        }
+    }
+
+    $("#formPrioritas").css("display", "");
+    $("#formKriteria").css("display", "none");
+    $("#btnSubmitModal").attr("onclick", "submitPrioritas()")
+    $("#btnCloseModal").text("Kembali");
+    $("#btnSubmitModal").text("Proses");
+    $("#statusTabStatus").text("Prioritas");
+  }
+
+  function submitPrioritas() {
+    var form = document.getElementById("formPrioritas");
+    var inputs = form.getElementsByTagName("input"), input = null, flag = true;
+    for(var i = 0, len = inputs.length; i < len; i++) {
+        input = inputs[i];
+        if(!input.value) {
+            flag = false;
+            input.focus();
+            M.toast({html: 'Silahkan isi semua Prioritas!', classes: 'rounded'});
+            return false;
+        }
+    }
+
+    vue.getRekomendasi()
+  }
+
+  loadNav();
+
+  async function loadNav() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status != 200) return;
+
+      // Muat daftar tautan menu
+      document.querySelectorAll(".topnav, .bottomnav").forEach(function(elm) {
+        elm.innerHTML = xhttp.responseText;
+        //set active
+        //Add class active
+        $("#propertymenu").addClass("active");
+      });
+    }
+  };
+  xhttp.open("GET", "nav.html", true);
+  xhttp.send();
+}
+
+Vue.component('data-list', {
+  template: '<div class="cards-wrapper">'+
+             '<div class="cards cards-right" v-for="todo in data">'+
+               '<div class="card card-2" onclick="clickDiv(this)" v-bind:data-id="todo.id">'+
+               '<div class="image-wrapper">'+
+                 '<img v-bind:src="todo.image" />'+
+               '</div>'+
+               '<div class="content-wrapper">'+
+                 '<div class="card-title">'+
+                 '<b>{{todo.nama}}</b>'+
+                 '</div>'+
+                 '<span class="badges badge--info">{{todo.transaksi}}</span>'+
+                 '<div class="card-description">'+
+                   '{{todo.alamat}}'+
+                 '</div>'+
+                 '<div class="card-price">'+
+                   'Rp. {{todo.harga}}'+
+                 '</div>'+
+                 '<div class="card-info">'+
+                   '<span class="fa fa-retweet card-info-item"> <b class="card-info-item-font"> {{todo.lt}} m2 </b> </span>'+
+                   '<span class="fa fa-home card-info-item"> <b class="card-info-item-font"> {{todo.lb}} m2 </b> </span>'+
+                   '<span class="fa fa-bed card-info-item"> <b class="card-info-item-font"> {{todo.kt}} </b> </span> <span class="fa fa-bath card-info-item"> <b class="card-info-item-font"> {{todo.km}} </b> </span>'+
+                 '</div>'+
+                 '</div>'+
+               '</div>'+
+           '</div>'+
+         '</div>',
+  props: ['data']
+});
+
+Vue.component('data-penjual', {
+  template: '<div class="cards-wrapper">'+
+             '<div class="cards cards-right" v-for="todo in data">'+
+               '<div class="card card-2" onclick="clickDiv(this)" v-bind:data-id="todo.id">'+
+                 '<div class="image-wrapper">'+
+                   '<img v-bind:src="todo.image" />'+
+                 '</div>'+
+                 '<div class="content-wrapper">'+
+                   '<div class="card-title">'+
+                   '<b>{{todo.nama}}</b>'+
+                   '</div>'+
+                   '<span class="badges badge--info">{{todo.transaksi}}</span>'+
+                   '<br>'+
+                   '<div class="card-description">'+
+                     '{{todo.alamat}}'+
+                   '</div>'+
+                   '<div class="card-price">'+
+                     'Rp. {{todo.harga}}'+
+                   '</div>'+
+                   '<div class="card-info">'+
+                     '<span class="fa fa-retweet card-info-item"> <b class="card-info-item-font"> {{todo.lt}} m2 </b> </span>'+
+                     '<span class="fa fa-home card-info-item"> <b class="card-info-item-font"> {{todo.lb}} m2 </b> </span>'+
+                     '<span class="fa fa-bed card-info-item"> <b class="card-info-item-font"> {{todo.kt}} </b> </span> <span class="fa fa-bath card-info-item"> <b class="card-info-item-font"> {{todo.km}} </b> </span>'+
+                   '</div>'+
+                 '</div>'+
+               '</div>'+
+               '<div class="card-action">'+
+                 '<a onclick="editdata(this)" v-bind:data-id="todo.id_properti" class="waves-effect waves-light btn" style="width: 43.5%; margin-right: 1.5%; height: 35px;">Edit</a>'+
+                 '<a onclick="deletedata(this)" v-bind:data-id="todo.id_properti" class="waves-effect waves-light btn" style="width: 43.5%; margin-left: 1.5%; height: 35px;">Hapus</a>'+
+               '</div>'+
+           '</div>'+
+         '</div>',
+  props: ['data']
+});
+
+  Vue.component('img-notfound', {
+    template: '<center> <img src="logo.png" alt="Data not found" style="margin-top:25%;"" width="50%"><br>Maaf, Data tidak ditemukan :( </center>',
+  });
+  vue = new Vue({
+     el: '#app',
+     data: {
+       data: [],
+       search: "",
+       transaksi: "jual",
+       status: "",
+     },
+     mounted() {
+       if (localStorage['menu'] == '#property') {
+         setTimeout(function () {
+           vue.getdata();
+         }, 1);
+       }
+     },
+     methods: {
+       getdata: function(){
+         $.LoadingOverlay("show", {
+           imageColor: "#44C4DC",
+           background: "white"
+         });
+         axios.get('/pwa/php/show.php')
+          .then(function (response) {
+            vue.data = response.data;
+            $.LoadingOverlay("hide");
+          })
+          .catch(function (error) {
+            $.LoadingOverlay("hide");
+          })
+       },
+       getsearch : function(){
+         $.LoadingOverlay("show", {
+             imageColor: "#44C4DC",
+             background: "white"
+         });
+         axios.get('/pwa/php/search.php?search='+vue.search+'&transaksi='+vue.transaksi)
+          .then(function (response) {
+            vue.data = response.data;
+            $.LoadingOverlay("hide");
+          })
+          .catch(function (error) {
+            $.LoadingOverlay("hide");
+            console.log(error);
+          })
+       },
+       getRekomendasi : function(){
+         var dataString = $("#formPrioritas, #formKriteria").serialize();
+
+         var dataVue = vue.data;
+
+         $.LoadingOverlay("show", {
+           imageColor: "#44C4DC",
+           background: "white"
+         });
+         M.Toast.dismissAll();
+         $.ajax({
+           type: 'POST',
+           data: {data: dataVue},
+           dataType: 'json',
+           url: '/pwa/php/rekomendasi.php?'+dataString,
+           success : function(response){
+
+             vue.data = response;
+
+             closeRekomendasi();
+             closeRekomendasi();
+             instance.close();
+
+             $.LoadingOverlay("hide");
+           }.bind(this),
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+             $.LoadingOverlay("hide");
+           }
+         });
+       },
+     },
+     computed: {
+
+     }
+  });
+
+  (function () {
+      window.onpageshow = function(event) {
+          if (event.persisted) {
+              window.location.href = window.location.origin + '/pwa';
+          }
+      };
+  })();
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage['login'] != true && localStorage['login'] != undefined) {
+    } else {
+      window.location.href = window.location.origin +"/pwa";
+    }
+  });
+
+  if (localStorage['menu'] == '#property') {
+    $('#titlePage').text("List Properti");
+    if (localStorage['role'] == "pembeli") {
+      $('#redirectRekomendasi').css("display", '');
+      // loadDataPropertyPembeli();
+      vue.status = "pembeli"
+      $('#addProperty').css("display", "none");
+    } else {
+      $('#redirectRekomendasi').css("display", 'none');
+      // loadDataPropertyPenjual();
+      vue.status = "penjual"
+      $('#addProperty').css("display", "");
+    }
+  } else {
+    $('#titlePage').text(localStorage['menu'].substr(1).capitalize());
+    $('#redirectRekomendasi').css("display", 'none');
+  }
+
+  function clickDiv(elm) {
+    let id = $(elm).data("id");
+    window.location.href =  window.location.origin + '/pwa/detailproperti.php?id='+id
+  }
+
+  </script>
+  <script type="text/javascript">
+  if (localStorage['role'] == 'penjual') {
+    $(".bottomnav").css("display","");
+    $('#addProperty').css("display", "");
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      var _originalSize = $(window).width() + $(window).height()
+      $(window).resize(function(){
+        if (localStorage['role'] == 'penjual') {
+          if($(window).width() + $(window).height() != _originalSize){
+            console.log("keyboard show up");
+            $(".bottomnav").css("display","none");
+            $('#addProperty').css("display", "none");
+          }else{
+            console.log("keyboard closed");
+            $(".bottomnav").css("display","");
+            $('#addProperty').css("display", "");
+          }
+        }
+      });
+    }, 100);
+});
+
+  function addproperty() {
+    window.location.href = window.location.origin +"/pwa/forminput.html";
+  }
+
+  </script>
+  <script type="text/javascript">
+    function deletedata(parm) {
+      var id = $(parm).data('id');
+      var toastHTML = '<span>Ingin menghapus data?</span><button class="btn-flat toast-action" onclick="dismissAllToast()">No</button><button onclick="deleteaction('+id+')" class="btn-flat toast-action">Yes</button>';
+      M.toast({html: toastHTML});
+    }
+
+    function deleteaction(id){
+      $.LoadingOverlay("show", {
+        imageColor: "#44C4DC",
+        background: "white"
+      });
+      M.Toast.dismissAll();
+      $.ajax({
+        type: 'POST',
+        data: {id:id},
+        dataType: 'json',
+        url: '/pwa/php/delete.php',
+        success : function(response){
+          $.LoadingOverlay("hide");
+          if(response == 'sukses') {
+            M.toast({html: 'Data Berhasil Dihapus!', classes: 'rounded'});
+            setTimeout(function() {
+              window.location.href = window.location.origin + '/pwa'
+            }, 1000);
+          }
+        }
+      });
+    }
+
+    function editdata(parm){
+      var id = $(parm).data('id');
+      window.location.href = window.location.origin + '/pwa/editinput.php?id='+id;
+    }
+
+    $(document).ajaxStart(function() {
+        $.LoadingOverlay("show");
+    });
+
+    $(document).ajaxStop(function() {
+        $.LoadingOverlay("hide");
+    });
+  </script>
+</body>
+</html>

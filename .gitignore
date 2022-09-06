@@ -1,0 +1,10 @@
+
+/vendor
+/node_modules
+/images
+
+.env.*.php
+.env.php
+.env
+Homestead.yaml
+Homestead.json
