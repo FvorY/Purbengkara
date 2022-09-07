@@ -22,6 +22,13 @@ use Yajra\Datatables\Datatables;
 
 class SosmedController extends Controller
 {
+    public static function getSosmed() {
+      $data = DB::table("sosmed")
+        ->get()->toArray();
+
+       return $data;
+    }
+
     public function index() {
       $data = SettingController::getSetting();
 

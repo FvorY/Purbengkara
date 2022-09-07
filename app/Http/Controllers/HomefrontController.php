@@ -9,11 +9,9 @@ use DB;
 class HomefrontController extends Controller
 {
     public function index() {
-      $data = DB::table("setting")
-        ->where('id', 1)->first();
+      $data = SettingController::getSetting();
 
-      $sosmed = DB::table("sosmed")
-        ->get();
+      $sosmed = SosmedController::getSosmed();
 
       return view("home_front", compact('data', 'sosmed'));
     }

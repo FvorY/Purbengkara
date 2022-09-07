@@ -36,10 +36,18 @@ Route::get('logout', 'HomeController@logout')->name('logout');
 Route::get('/setting', 'SettingController@index');
 Route::post('/setting/save', 'SettingController@save');
 
+//Sosial Media
 Route::get('/sosmed', 'SosmedController@index');
 Route::get('/sosmedtable', 'SosmedController@datatable');
 Route::post('/simpansosmed', 'SosmedController@simpan');
 Route::get('/editsosmed', 'SosmedController@edit');
 Route::get('/hapussosmed', 'SosmedController@hapus');
+
+//Manage User
+Route::get('/user', 'UserController@index');
+Route::get('/usertable', 'UserController@datatable');
+Route::post('/simpanuser', 'UserController@simpan');
+Route::get('/edituser', 'UserController@edit');
+Route::get('/hapususer', 'UserController@hapus');
 
 }); // End Route Groub middleware auth
