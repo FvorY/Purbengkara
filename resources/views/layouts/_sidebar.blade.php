@@ -134,6 +134,13 @@
               </a>
             </li>
 
+            <li class="nav-item {{Request::is('user') ? 'active' : '' || Request::is('user/*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{url('/user')}}">
+                <span class="menu-title">Manage User</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+              </a>
+            </li>
+
             <li class="nav-item {{Request::is('slideimage') ? 'active' : '' || Request::is('slideimage/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/slideimage')}}">
                 <span class="menu-title">Slide Image</span>

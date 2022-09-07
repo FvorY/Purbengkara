@@ -30,38 +30,16 @@
 							<div class="col-lg-4 col-12">
 								<h6 class="brk-white-font-color font__family-montserrat font__weight-semibold text-uppercase letter-spacing-100 font__size-21 line__height-28 mb-40 mt-30">Follow Kami</h6>
 								<ul class="brk-social-links-wide mb-25 brk-library-rendered" data-brk-library="component__social_links">
+									@foreach ($sosmed as $key => $value)
 									<li class="brk-social-links-wide__item brk-dark-font-color mb-15">
-										<a href="#" class="brk-social-links-wide__link">
+										<a href="{{$value->url}}" class="brk-social-links-wide__link">
 											<div class="brk-social-links-wide__icon-container font__size-14">
-												<i class="fab fa-twitter" aria-hidden="true"></i>
+												<img src="{{url('/')}}/{{$value->icon}}" alt="purbengkara social media" width="14" height="14">
 											</div>
-											<p class="font__size-14 font__weight-normal line__height-16">Follow Us on Twitter</p>
+											<p class="font__size-14 font__weight-normal line__height-16">{{$value->name}}</p>
 										</a>
 									</li>
-									<li class="brk-social-links-wide__item brk-dark-font-color mb-15">
-										<a href="#" class="brk-social-links-wide__link">
-											<div class="brk-social-links-wide__icon-container font__size-14">
-												<i class="fab fa-instagram" aria-hidden="true"></i>
-											</div>
-											<p class="font__size-14 font__weight-normal line__height-16">Subscribe on Instagram</p>
-										</a>
-									</li>
-									<li class="brk-social-links-wide__item brk-dark-font-color mb-15">
-										<a href="#" class="brk-social-links-wide__link">
-											<div class="brk-social-links-wide__icon-container font__size-14">
-												<i class="fab fa-google-plus-g" aria-hidden="true"></i>
-											</div>
-											<p class="font__size-14 font__weight-normal line__height-16">Find us on Google Plus</p>
-										</a>
-									</li>
-									<li class="brk-social-links-wide__item brk-dark-font-color mb-15">
-										<a href="#" class="brk-social-links-wide__link">
-											<div class="brk-social-links-wide__icon-container font__size-14">
-												<i class="fab fa-youtube" aria-hidden="true"></i>
-											</div>
-											<p class="font__size-14 font__weight-normal line__height-16">Watch about us on YouTube</p>
-										</a>
-									</li>
+									@endforeach
 								</ul>
 							</div>
 						</div>

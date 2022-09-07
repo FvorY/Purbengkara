@@ -23,6 +23,13 @@ use File;
 class SettingController extends Controller
 {
 
+     public static function getSetting() {
+       $data = DB::table("setting")
+         ->where('id', 1)->first();
+
+        return $data;
+     }
+
      public function index() {
 
        $data = DB::table("setting")

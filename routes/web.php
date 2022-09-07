@@ -36,4 +36,10 @@ Route::get('logout', 'HomeController@logout')->name('logout');
 Route::get('/setting', 'SettingController@index');
 Route::post('/setting/save', 'SettingController@save');
 
+Route::get('/sosmed', 'SosmedController@index');
+Route::get('/sosmedtable', 'SosmedController@datatable');
+Route::post('/simpansosmed', 'SosmedController@simpan');
+Route::get('/editsosmed', 'SosmedController@edit');
+Route::get('/hapussosmed', 'SosmedController@hapus');
+
 }); // End Route Groub middleware auth

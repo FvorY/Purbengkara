@@ -12,6 +12,9 @@ class HomefrontController extends Controller
       $data = DB::table("setting")
         ->where('id', 1)->first();
 
-      return view("home_front", compact('data'));
+      $sosmed = DB::table("sosmed")
+        ->get();
+
+      return view("home_front", compact('data', 'sosmed'));
     }
 }
