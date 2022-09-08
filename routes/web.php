@@ -47,4 +47,11 @@ Route::post('/simpanuser', 'UserController@simpan');
 Route::get('/edituser', 'UserController@edit');
 Route::get('/hapususer', 'UserController@hapus');
 
+//Slide Image
+Route::get('/slideimage', 'SlideimageController@index');
+Route::get('/slideimagetable', 'SlideimageController@datatable');
+Route::post('/simpanslideimage', 'SlideimageController@simpan');
+Route::get('/editslideimage', 'SlideimageController@edit');
+Route::get('/hapusslideimage', 'SlideimageController@hapus');
+
 }); // End Route Groub middleware auth

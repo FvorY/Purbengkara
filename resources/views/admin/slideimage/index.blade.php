@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-@include('admin.sosmed.tambah')
+@include('admin.slideimage.tambah')
 <style type="text/css">
 
 </style>
@@ -12,14 +12,14 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Social Media</li>
+          <li class="breadcrumb-item active" aria-current="page">Slide Image</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Social Media</h4>
+                    <h4 class="card-title">Slide Image</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
@@ -29,8 +29,6 @@
                               <tr>
                                 <th>No</th>
                                 <th>Image</th>
-                                <th>Name</th>
-                                <th>URL</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -64,7 +62,7 @@ var table = $('#table-data').DataTable({
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         ajax: {
-            url:'{{ url('/sosmedtable') }}',
+            url:'{{ url('/slideimagetable') }}',
         },
         columnDefs: [
 
@@ -80,16 +78,10 @@ var table = $('#table-data').DataTable({
                  targets: 2,
                  className: 'center'
               },
-              {
-                 targets: 3,
-                 className: 'center'
-              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
           {data: 'image', name: 'image'},
-          {data: 'name', name: 'name'},
-          {data: 'url', name: 'url'},
           {data: 'aksi', name: 'aksi'},
 
         ]
@@ -100,18 +92,16 @@ var table = $('#table-data').DataTable({
   function edit(id) {
     // body...
     $.ajax({
-      url:baseUrl + '/editsosmed',
+      url:baseUrl + '/editslideimage',
       data:{id},
       dataType:'json',
       success:function(data){
-        $('.id').val(data.id_sosmed);
-        $('.name').val(data.name);
-        $('.url').val(data.url);
+        $('.id').val(data.id);
 
             var image_holder = $(".image-holder");
             image_holder.empty();
             $("<img />", {
-                "src": data.icon,
+                "src": data.image,
                 "class": "thumb-image img-responsive",
                 "style": "height: 100px; width:100px; border-radius: 0px;",
             }).appendTo(image_holder);
@@ -129,7 +119,7 @@ var table = $('#table-data').DataTable({
 
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpansosmed?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpanslideimage?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
       data: formdata,
       processData: false, //important
       contentType: false,
@@ -175,7 +165,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapussosmed',
+            url:baseUrl + '/hapusslideimage',
             data:{id},
             dataType:'json',
             success:function(data){
