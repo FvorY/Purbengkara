@@ -22,9 +22,6 @@ Route::group(['middleware' => 'guest'], function () {
     })->name('admin');
 
     Route::get('login', 'loginController@authenticate')->name('login');
-
-    Route::get('register', 'RegisterController@index')->name('register');
-    Route::post('doregister', 'RegisterController@doregister')->name('doregister');
 });
 
 

@@ -135,7 +135,7 @@
             </li>
 
             @if(Auth::user()->role == "admin")
-            <li class="nav-item {{Request::is('user') ? 'active' : '' || Request::is('user/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('user') ? 'active' : ''}} || {{Request::is('user/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/user')}}">
                 <span class="menu-title">Manage User</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
@@ -143,42 +143,42 @@
             </li>
             @endif
 
-            <li class="nav-item {{Request::is('slideimage') ? 'active' : '' || Request::is('slideimage/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('slideimage') ? 'active' : ''}} || {{Request::is('slideimage/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/slideimage')}}">
                 <span class="menu-title">Slide Image</span>
                 <i class="mdi mdi-image-album menu-icon"></i>
               </a>
             </li>
 
-            <li class="nav-item {{Request::is('category') ? 'active' : '' || Request::is('category/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('category') ? 'active' : ''}} || {{Request::is('category/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/category')}}">
                 <span class="menu-title">Master Category</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
 
-            <li class="nav-item {{Request::is('product') ? 'active' : '' || Request::is('product/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('product') ? 'active' : ''}} || {{Request::is('product/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/product')}}">
                 <span class="menu-title">Product</span>
                 <i class="mdi mdi-cart menu-icon"></i>
               </a>
             </li>
 
-            <li class="nav-item {{Request::is('specialprice') ? 'active' : '' || Request::is('specialprice/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('specialprice') ? 'active' : ''}} || {{Request::is('specialprice/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/specialprice')}}">
                 <span class="menu-title">Special Price</span>
                 <i class="mdi mdi-sale menu-icon"></i>
               </a>
             </li>
 
-            <li class="nav-item {{Request::is('sosmed') ? 'active' : '' || Request::is('sosmed/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('sosmed') ? 'active' : ''}} || {{Request::is('sosmed/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/sosmed')}}">
                 <span class="menu-title">Sosial Media</span>
                 <i class="mdi mdi-telegram menu-icon"></i>
               </a>
             </li>
 
-            <li class="nav-item {{Request::is('setting') ? 'active' : '' || Request::is('setting/*') ? 'active' : '' }}">
+            <li class="nav-item {{Request::is('setting') ? 'active' : ''}} || {{Request::is('setting/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/setting')}}">
                 <span class="menu-title">Setting Website</span>
                 <i class="mdi mdi-settings menu-icon mdi-spin"></i>
