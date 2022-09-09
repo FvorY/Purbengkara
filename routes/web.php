@@ -27,31 +27,37 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/home', 'HomeController@index')->name('index');
-Route::get('logout', 'HomeController@logout')->name('logout');
+    Route::get('/home', 'HomeController@index')->name('index');
+    Route::get('logout', 'HomeController@logout')->name('logout');
 
-Route::get('/setting', 'SettingController@index');
-Route::post('/setting/save', 'SettingController@save');
+    Route::get('/setting', 'SettingController@index');
+    Route::post('/setting/save', 'SettingController@save');
 
-//Sosial Media
-Route::get('/sosmed', 'SosmedController@index');
-Route::get('/sosmedtable', 'SosmedController@datatable');
-Route::post('/simpansosmed', 'SosmedController@simpan');
-Route::get('/editsosmed', 'SosmedController@edit');
-Route::get('/hapussosmed', 'SosmedController@hapus');
+    //Sosial Media
+    Route::get('/sosmed', 'SosmedController@index');
+    Route::get('/sosmedtable', 'SosmedController@datatable');
+    Route::post('/simpansosmed', 'SosmedController@simpan');
+    Route::get('/editsosmed', 'SosmedController@edit');
+    Route::get('/hapussosmed', 'SosmedController@hapus');
 
-//Manage User
-Route::get('/user', 'UserController@index');
-Route::get('/usertable', 'UserController@datatable');
-Route::post('/simpanuser', 'UserController@simpan');
-Route::get('/edituser', 'UserController@edit');
-Route::get('/hapususer', 'UserController@hapus');
+    //Manage User
+    Route::get('/user', 'UserController@index');
+    Route::get('/usertable', 'UserController@datatable');
+    Route::post('/simpanuser', 'UserController@simpan');
+    Route::get('/edituser', 'UserController@edit');
+    Route::get('/hapususer', 'UserController@hapus');
 
-//Slide Image
-Route::get('/slideimage', 'SlideimageController@index');
-Route::get('/slideimagetable', 'SlideimageController@datatable');
-Route::post('/simpanslideimage', 'SlideimageController@simpan');
-Route::get('/editslideimage', 'SlideimageController@edit');
-Route::get('/hapusslideimage', 'SlideimageController@hapus');
+    //Slide Image
+    Route::get('/slideimage', 'SlideimageController@index');
+    Route::get('/slideimagetable', 'SlideimageController@datatable');
+    Route::post('/simpanslideimage', 'SlideimageController@simpan');
+    Route::get('/editslideimage', 'SlideimageController@edit');
+    Route::get('/hapusslideimage', 'SlideimageController@hapus');
 
+    //Category
+    Route::get('/category', 'CategoryController@index');
+    Route::get('/categorytable', 'CategoryController@datatable');
+    Route::post('/simpancategory', 'CategoryController@simpan');
+    Route::get('/editcategory', 'CategoryController@edit');
+    Route::get('/hapuscategory', 'CategoryController@hapus');
 }); // End Route Groub middleware auth
