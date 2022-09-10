@@ -8,11 +8,15 @@ use DB;
 
 class HomefrontController extends Controller
 {
-    public function index() {
-      $data = SettingController::getSetting();
+  public function index()
+  {
+    $data = SettingController::getSetting();
 
-      $sosmed = SosmedController::getSosmed();
+    $sosmed = SosmedController::getSosmed();
 
-      return view("home_front", compact('data', 'sosmed'));
-    }
+    $category = CategoryController::getCategory();
+
+
+    return view("home_front", compact('data', 'sosmed', 'category'));
+  }
 }

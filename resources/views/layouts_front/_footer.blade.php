@@ -19,11 +19,9 @@
 								<div class="brk-footer__bordered-col h-100 pt-40 pt-lg-30 pr-lg-30">
 									<h6 class="brk-white-font-color font__family-montserrat font__weight-semibold text-uppercase letter-spacing-100 font__size-21 line__height-28 mb-30">Kategori</h6>
 									<ul class="brk-tags brk-tags_solid font__family-montserrat brk-tags_transparent brk-tags_gray mb-20 brk-library-rendered" data-brk-library="component__tags">
-										<li><a href="#" rel="tag">Network</a></li>
-										<li><a href="#" rel="tag">Development</a></li>
-										<li><a href="#" rel="tag">Bussines</a></li>
-										<li><a href="#" rel="tag">Beauty</a></li>
-										<li><a href="#" rel="tag">WordPress</a></li>
+										@foreach ($category as $item)
+											<li><a href="#" rel="tag">{{ $item->name }}</a></li>	
+										@endforeach
 									</ul>
 								</div>
 							</div>

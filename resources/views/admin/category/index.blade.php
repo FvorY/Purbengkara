@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-@include('admin.user.tambah')
+@include('admin.category.tambah')
 <style type="text/css">
 
 </style>
@@ -12,14 +12,14 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Manage User</li>
+          <li class="breadcrumb-item active" aria-current="page">Category</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Manage User</h4>
+                    <h4 class="card-title">Category</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
                     	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
@@ -91,16 +91,12 @@ var table = $('#table-data').DataTable({
   function edit(id) {
     // body...
     $.ajax({
-      url:baseUrl + '/edituser',
+      url:baseUrl + '/editcategory',
       data:{id},
       dataType:'json',
       success:function(data){
-        $('.id').val(data.id_user);
+        $('.id').val(data.id_category);
         $('.name').val(data.name);
-        $('.username').val(data.username);
-        $('.password').val(data.password);
-        $(".role").val(data.role).change();
-
         $('#tambah').modal('show');
       }
     });
@@ -110,7 +106,7 @@ var table = $('#table-data').DataTable({
   $('#simpan').click(function(){
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpanuser?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpancategory?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
       processData: false, //important
       contentType: false,
       cache: false,
@@ -155,7 +151,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapususer',
+            url:baseUrl + '/hapuscategory',
             data:{id},
             dataType:'json',
             success:function(data){
