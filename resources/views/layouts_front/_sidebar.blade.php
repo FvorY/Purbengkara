@@ -143,19 +143,23 @@
         <div class="col-lg align-self-lg-stretch text-lg-center">
           <nav class="brk-nav brk-header__item">
             <ul class="brk-nav__menu">
+              @foreach ($category as $cat)
               <li class="brk-nav__children brk-nav__drop-down-effect">
                 <a href="#">
-                  <span>Shop</span>
+                  <span>{{$cat->name}}</span>
                 </a>
+                <?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
+                @if(count($product) != 0)
                 <ul class="brk-nav__sub-menu brk-nav-drop-down font__family-montserrat">
+                  @foreach ($product as $pro)
                   <li class="dd-effect">
-                    <a href="shop-components-flip.html">Shop flip</a>
+                    <a href="{{url('/')}}/product/{{$pro->url_segment}}">{{$pro->name}}</a>
                   </li>
-                  <li class="dd-effect">
-                    <a href="shop-components-grid.html">Shop grid</a>
-                  </li>
+                  @endforeach
                 </ul>
+                @endif
               </li>
+              @endforeach
             </ul>
           </nav>
         </div>

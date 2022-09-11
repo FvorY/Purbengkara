@@ -16,7 +16,8 @@ class HomefrontController extends Controller
 
     $category = CategoryController::getCategory();
 
+    $featured = FeaturedController::getFeatured();
 
-    return view("home_front", compact('data', 'sosmed', 'category'));
+    return view("home_front", compact('data', 'sosmed', 'category', 'featured'));
   }
 }

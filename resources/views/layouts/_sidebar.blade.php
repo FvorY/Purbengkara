@@ -150,6 +150,13 @@
               </a>
             </li>
 
+            <li class="nav-item {{Request::is('featured') ? 'active' : ''}} || {{Request::is('featured/*') ? 'active' : '' }}">
+              <a class="nav-link" href="{{url('/featured')}}">
+                <span class="menu-title">Master Featured</span>
+                <i class="mdi mdi-rocket menu-icon"></i>
+              </a>
+            </li>
+
             <li class="nav-item {{Request::is('category') ? 'active' : ''}} || {{Request::is('category/*') ? 'active' : '' }}">
               <a class="nav-link" href="{{url('/category')}}">
                 <span class="menu-title">Master Category</span>

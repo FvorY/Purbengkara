@@ -24,39 +24,20 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-4">
+          @foreach ($featured as $feature)
+					<div class="col-lg-3">
 						<div class="services-architecture">
 							<div class="services-architecture__icon">
-								<i class="fas fa-car"></i>
+								<!-- <i class="fas fa-car"></i> -->
+                <img src="{{url('/')}}/{{$feature->icon}}" alt="{{$feature->name}}" width="68" height="68">
 							</div>
 							<div class="services-architecture__container">
-								<h4 class="font__size-21 line__height-24 text-uppercase font__weight-bold pb-10">Cargo delivery</h4>
-								<span class="font__size-14 line__height-24 brk-dark-blur-font-color">Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent</span>
+								<h4 class="font__size-21 line__height-24 text-uppercase font__weight-bold pb-10">{{$feature->name}}</h4>
+								<span class="font__size-14 line__height-24 brk-dark-blur-font-color">{{$feature->description}}</span>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
-						<div class="services-architecture">
-							<div class="services-architecture__icon">
-								<i class="fas fa-briefcase"></i>
-							</div>
-							<div class="services-architecture__container">
-								<h4 class="font__size-21 line__height-24 text-uppercase font__weight-bold pb-10">Builing Programs</h4>
-								<span class="font__size-14 line__height-24 brk-dark-blur-font-color">Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="services-architecture">
-							<div class="services-architecture__icon">
-								<i class="far fa-map"></i>
-							</div>
-							<div class="services-architecture__container">
-								<h4 class="font__size-21 line__height-24 text-uppercase font__weight-bold pb-10">House plans</h4>
-								<span class="font__size-14 line__height-24 brk-dark-blur-font-color">Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent</span>
-							</div>
-						</div>
-					</div>
+          @endforeach
 				</div>
 			</div>
 		</div>

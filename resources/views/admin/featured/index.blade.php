@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-@include('admin.category.tambah')
+@include('admin.featured.tambah')
 <style type="text/css">
 
 </style>
@@ -12,23 +12,25 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Master Category</li>
+          <li class="breadcrumb-item active" aria-current="page">Master Featured</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Master Category</h4>
+                    <h4 class="card-title">Master Featured</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
-                    	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
                     <div class="table-responsive">
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
                                 <th>No</th>
+                                <th>Image</th>
                                 <th>Name</th>
+                                <th>Description</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -36,6 +38,8 @@
                             <tbody>
 
                             </tbody>
+
+
                         </table>
                     </div>
                   </div>
@@ -60,7 +64,7 @@ var table = $('#table-data').DataTable({
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         ajax: {
-            url:'{{ url('/categorytable') }}',
+            url:'{{ url('/featuredtable') }}',
         },
         columnDefs: [
 
@@ -76,11 +80,16 @@ var table = $('#table-data').DataTable({
                  targets: 2,
                  className: 'center'
               },
-
+              {
+                 targets: 3,
+                 className: 'center'
+              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
+          {data: 'image', name: 'image'},
           {data: 'name', name: 'name'},
+          {data: 'description', name: 'description'},
           {data: 'aksi', name: 'aksi'},
 
         ]
@@ -89,14 +98,23 @@ var table = $('#table-data').DataTable({
 
 
   function edit(id) {
-    // body...
     $.ajax({
-      url:baseUrl + '/editcategory',
+      url:baseUrl + '/editfeatured',
       data:{id},
       dataType:'json',
       success:function(data){
-        $('.id').val(data.id_category);
+        $('.id').val(data.id_featured);
         $('.name').val(data.name);
+        $('.description').val(data.description);
+
+            var image_holder = $(".image-holder");
+            image_holder.empty();
+            $("<img />", {
+                "src": data.icon,
+                "class": "thumb-image img-responsive",
+                "style": "height: 100px; width:100px; border-radius: 0px;",
+            }).appendTo(image_holder);
+
         $('#tambah').modal('show');
       }
     });
@@ -104,9 +122,14 @@ var table = $('#table-data').DataTable({
   }
 
   $('#simpan').click(function(){
+
+    var formdata = new FormData();
+    formdata.append('image', $('.uploadGambar')[0].files[0]);
+
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpancategory?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpanfeatured?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      data: formdata,
       processData: false, //important
       contentType: false,
       cache: false,
@@ -151,29 +174,16 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapuscategory',
+            url:baseUrl + '/hapusfeatured',
             data:{id},
             dataType:'json',
             success:function(data){
+              iziToast.success({
+                  icon: 'fa fa-trash',
+                  message: 'Data Berhasil Dihapus!',
+              });
 
-              if (data.status == 5) {
-                iziToast.success({
-                    icon: 'fa fa-trash',
-                    message: 'Data Berhasil Dihapus!',
-                });
-                reloadall();
-              }else if(data.status == 6){
-                iziToast.warning({
-                    icon: 'fa fa-info',
-                    message: 'Data Gagal disimpan!',
-                });
-              } else if(data.status == 7){
-                iziToast.warning({
-                    icon: 'fa fa-info',
-                    message: data.message,
-                });
-              }
-
+              reloadall();
             }
           });
   			}, true],
@@ -186,23 +196,39 @@ var table = $('#table-data').DataTable({
 
   function reloadall() {
     $('.table_modal :input').val("");
+    $('.image-holder').empty();
     $('#tambah').modal('hide');
     table.ajax.reload();
   }
 
-  $(document).ready(function() {
-      $("#show_hide_password a").on('click', function(event) {
-          event.preventDefault();
-          if($('#show_hide_password input').attr("type") == "text"){
-              $('#show_hide_password input').attr('type', 'password');
-              $('#show_hide_password i').addClass( "fa-eye-slash" );
-              $('#show_hide_password i').removeClass( "fa-eye" );
-          }else if($('#show_hide_password input').attr("type") == "password"){
-              $('#show_hide_password input').attr('type', 'text');
-              $('#show_hide_password i').removeClass( "fa-eye-slash" );
-              $('#show_hide_password i').addClass( "fa-eye" );
-          }
-      });
-  });
+  $(".uploadGambar").on('change', function () {
+          $('.save').attr('disabled', false);
+          // waitingDialog.show();
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $(".image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                image_holder.html('<img src="{{ asset('assets/demo/images/loading.gif') }}" class="img-responsive">');
+                $('.save').attr('disabled', true);
+                setTimeout(function(){
+                    image_holder.empty();
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image img-responsive",
+                        "style": "height: 100px; width:100px; border-radius: 0px;",
+                    }).appendTo(image_holder);
+                    $('.save').attr('disabled', false);
+                }, 2000)
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+
+            // waitingDialog.hide();
+        } else {
+            // waitingDialog.hide();
+            alert("This browser does not support FileReader.");
+        }
+    });
 </script>
 @endsection
