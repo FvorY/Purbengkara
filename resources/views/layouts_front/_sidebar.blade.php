@@ -4,8 +4,8 @@
   </div>
   <div class="brk-header-mobile__logo">
     <a href="{{url('/')}}">
-      <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 24px">
-      <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 24px">
+      <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 50px; object-fit : contain">
+      <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 50px; object-fit : contain">
     </a>
   </div>
 </div>
@@ -129,15 +129,15 @@
   <div class="brk-header__main-bar brk-header_border-top-dark order-lg-2 order-1" style="height: 72px;">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="col-lg-3 align-self-lg-center d-none d-lg-flex ml-10">
+        <div class="col-lg-3 align-self-lg-center d-none d-lg-flex ml-10" style="display:flex;flex-direction: row;align-items:center;">
           <div class="brk-open-top-bar brk-header__item">
             <div class="brk-open-top-bar__circle"></div>
             <div class="brk-open-top-bar__circle"></div>
             <div class="brk-open-top-bar__circle"></div>
           </div>
           <a href="/" class="brk-header__logo brk-header__item @@modifier">
-            <img class="brk-header__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 26px">
-            <img class="brk-header__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 26px">
+            <img class="brk-header__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 50px;object-fit:contain;">
+            <img class="brk-header__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 50px;object-fit:contain;">
           </a>
         </div>
         <div class="col-lg align-self-lg-stretch text-lg-center">

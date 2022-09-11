@@ -10,13 +10,11 @@ use App\mMember;
 
 use App\Authentication;
 
-use Auth;
-
 use Carbon\Carbon;
 
-use Session;
-
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {

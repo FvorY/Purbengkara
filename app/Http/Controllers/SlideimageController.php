@@ -14,9 +14,10 @@ use Carbon\Carbon;
 
 use Session;
 
-use DB;
-
-use File;
+// use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+// use File;
 
 use Yajra\Datatables\Datatables;
 

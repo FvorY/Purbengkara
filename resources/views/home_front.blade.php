@@ -83,7 +83,15 @@
                 </div>
                 <span class="before brk-base-bg-gradient-14"></span>
               </li>
+              @foreach($category as $kategori)
               <li data-filter=".bags">
+                <div class="brk-shop-grid-filter__button-text">
+                  {{$kategori->name}}
+                </div>
+                <span class="before brk-base-bg-gradient-14"></span>
+              </li>
+              @endforeach
+              <!-- <li data-filter=".bags">
                 <div class="brk-shop-grid-filter__button-text">
                   Bags
                 </div>
@@ -106,7 +114,7 @@
                   Shirts
                 </div>
                 <span class="before brk-base-bg-gradient-14"></span>
-              </li>
+              </li> -->
             </ul>
             <div class="brk-shop-grid-filter__items row">
               <div class="col-xl-3 col-md-6 brk-shop-grid-filter__item bags shoes">
@@ -145,147 +153,15 @@
                       </div>
                       <div class="text-center pt-35">
                         <div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
+                          <a class="brk-bg-color">&nbsp;</a>
                           <a href="#" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
-                          <a href="#" class="add-wishlist brk-bg-color"><i class="fal fa-star brk-white-font-color"></i></a>
-                          <a href="#" class="add-compare brk-bg-color"><i class="fas fa-exchange-alt brk-white-font-color"></i></a>
+                          <a class="brk-bg-color">&nbsp;</a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-3 col-md-6 brk-shop-grid-filter__item bags shoes">
-                  <div class="brk-shop-grid-filter-strict">
-                    <div class="brk-shop-grid-filter-strict__thumb">
-                      <img src="img/sh-flip-3.png" alt="alt">
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                      <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                      <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                        <span class="old-price brk-dark-font-color">$26.00</span>
-                        <span class="font__weight-bold">$16.30</span>
-                      </div>
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__stick brk-white-font-color font__family-montserrat font__weight-bold">New</div>
-                    <div class="before brk-sc-tiles-split-gradient"></div>
-                    <div class="brk-shop-grid-filter-strict__back">
-                      <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                        <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                        <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                          <span class="old-price brk-dark-font-color">$26.00</span>
-                          <span class="font__weight-bold">$16.30</span>
-                        </div>
-                      </div>
-                      <div class="brk-shop-grid-filter-strict__list pt-20 pb-20">
-                        <ul class="font__size-15 line__height-20 font__weight-light text-left letter-spacing-60">
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                        </ul>
-                      </div>
-                      <div class="text-center pt-35">
-                        <div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
-                          <a href="#" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
-                          <a href="#" class="add-wishlist brk-bg-color"><i class="fal fa-star brk-white-font-color"></i></a>
-                          <a href="#" class="add-compare brk-bg-color"><i class="fas fa-exchange-alt brk-white-font-color"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6 brk-shop-grid-filter__item bags shoes">
-                  <div class="brk-shop-grid-filter-strict">
-                    <div class="brk-shop-grid-filter-strict__thumb">
-                      <img src="img/sh-flip-3.png" alt="alt">
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                      <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                      <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                        <span class="old-price brk-dark-font-color">$26.00</span>
-                        <span class="font__weight-bold">$16.30</span>
-                      </div>
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__stick brk-white-font-color font__family-montserrat font__weight-bold">New</div>
-                    <div class="before brk-sc-tiles-split-gradient"></div>
-                    <div class="brk-shop-grid-filter-strict__back">
-                      <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                        <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                        <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                          <span class="old-price brk-dark-font-color">$26.00</span>
-                          <span class="font__weight-bold">$16.30</span>
-                        </div>
-                      </div>
-                      <div class="brk-shop-grid-filter-strict__list pt-20 pb-20">
-                        <ul class="font__size-15 line__height-20 font__weight-light text-left letter-spacing-60">
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                        </ul>
-                      </div>
-                      <div class="text-center pt-35">
-                        <div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
-                          <a href="#" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
-                          <a href="#" class="add-wishlist brk-bg-color"><i class="fal fa-star brk-white-font-color"></i></a>
-                          <a href="#" class="add-compare brk-bg-color"><i class="fas fa-exchange-alt brk-white-font-color"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-xl-3 col-md-6 brk-shop-grid-filter__item bags shoes">
-                  <div class="brk-shop-grid-filter-strict">
-                    <div class="brk-shop-grid-filter-strict__thumb">
-                      <img src="img/sh-flip-3.png" alt="alt">
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                      <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                      <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                        <span class="old-price brk-dark-font-color">$26.00</span>
-                        <span class="font__weight-bold">$16.30</span>
-                      </div>
-                    </div>
-                    <div class="brk-shop-grid-filter-strict__stick brk-white-font-color font__family-montserrat font__weight-bold">New</div>
-                    <div class="before brk-sc-tiles-split-gradient"></div>
-                    <div class="brk-shop-grid-filter-strict__back">
-                      <div class="brk-shop-grid-filter-strict__inform text-center d-flex flex-column align-content-center justify-content-center">
-                        <h4 class="font__family-montserrat font__weight-bold font__size-18">Some shop item</h4>
-                        <div class="price brk-base-font-color font__family-montserrat font__size-15 line__height-22 font__weight-medium">
-                          <span class="old-price brk-dark-font-color">$26.00</span>
-                          <span class="font__weight-bold">$16.30</span>
-                        </div>
-                      </div>
-                      <div class="brk-shop-grid-filter-strict__list pt-20 pb-20">
-                        <ul class="font__size-15 line__height-20 font__weight-light text-left letter-spacing-60">
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis Pellentesque ut neque</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Fellentesque habitant morbi</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Maecenas vestibulum mollis</span></li>
-                          <li class="d-flex"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">Pellentesque ut neque</span></li>
-                        </ul>
-                      </div>
-                      <div class="text-center pt-35">
-                        <div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
-                          <a href="#" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
-                          <a href="#" class="add-wishlist brk-bg-color"><i class="fal fa-star brk-white-font-color"></i></a>
-                          <a href="#" class="add-compare brk-bg-color"><i class="fas fa-exchange-alt brk-white-font-color"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
             </div>
           </div>
         </div>

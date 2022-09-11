@@ -27,7 +27,7 @@
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
-                                <th>No</th>
+                                <th style="width:15px">No</th>
                                 <th>Name</th>
                                 <th>Action</th>
                               </tr>
