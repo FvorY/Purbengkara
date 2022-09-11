@@ -20,14 +20,14 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Slide Image</h4>
-                    <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 15px;text-align:right">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
                     <div class="table-responsive">
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
-                                <th>No</th>
+                                <th style="width:15px">No</th>
                                 <th>Image</th>
                                 <th>Action</th>
                               </tr>

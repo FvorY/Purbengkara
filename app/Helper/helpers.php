@@ -12,7 +12,6 @@ function FormatRupiahFront($angka) {
   return $number;
 }
 
-
 function getsingkatan($s) {
   if(preg_match_all('/\b(\w)/',strtoupper($s),$m)) {
       $v = implode('',$m[1]); // $v is now SOQTU

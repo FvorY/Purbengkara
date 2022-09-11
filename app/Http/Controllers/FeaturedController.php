@@ -75,7 +75,7 @@ class FeaturedController extends Controller
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/featured' . $max;
+        $dir = 'image/uploads/featured/' . $max;
         $childPath = $dir . '/';
         $path = $childPath;
 
@@ -117,7 +117,7 @@ class FeaturedController extends Controller
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/featured' . $req->id;
+        $dir = 'image/uploads/featured/' . $req->id;
         $childPath = $dir . '/';
         $path = $childPath;
 

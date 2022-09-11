@@ -14,9 +14,8 @@ use Carbon\Carbon;
 
 use Session;
 
-use DB;
-
-use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 use Yajra\Datatables\Datatables;
 
@@ -75,7 +74,7 @@ class SosmedController extends Controller
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/sosmed' . $max;
+        $dir = 'image/uploads/sosmed/' . $max;
         $childPath = $dir . '/';
         $path = $childPath;
 
@@ -117,7 +116,7 @@ class SosmedController extends Controller
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/sosmed' . $req->id;
+        $dir = 'image/uploads/sosmed/' . $req->id;
         $childPath = $dir . '/';
         $path = $childPath;
 

@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\mMember;
 use App\d_comp_coa;
 use App\d_comp_trans;
 use App\cabang;
-use Validator;
 use Carbon\Carbon;
-use Session;
-use DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\logController;
 
 class loginController extends Controller
