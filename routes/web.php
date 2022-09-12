@@ -61,7 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/editcategory', 'CategoryController@edit');
     Route::get('/hapuscategory', 'CategoryController@hapus');
 
-<<<<<<< HEAD
     //Product
     Route::get('/product', 'ProductController@index');
     Route::get('/tambahproduct', 'ProductController@tambahproduct');
@@ -69,12 +68,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/simpanproduct', 'ProductController@simpan');
     Route::get('/editproduct', 'ProductController@edit');
     Route::get('/hapusproduct', 'ProductController@hapus');
-=======
+
     //Featured
     Route::get('/featured', 'FeaturedController@index');
     Route::get('/featuredtable', 'FeaturedController@datatable');
     Route::post('/simpanfeatured', 'FeaturedController@simpan');
     Route::get('/editfeatured', 'FeaturedController@edit');
     Route::get('/hapusfeatured', 'FeaturedController@hapus');
->>>>>>> 119f1b26b8dbb03099a4a8d5b31b703d9515a9a1
 }); // End Route Groub middleware auth

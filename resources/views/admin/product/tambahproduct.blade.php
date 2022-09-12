@@ -39,42 +39,87 @@
                         <div class="row">
                           
                           <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>SEO Title</label>
+                            <label>Name</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm" name="seo_title" value="{{$data->seo_title}}">
+                              <input type="text" class="form-control form-control-sm" name="name" value=" ">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                            <label>URL Segment</label>
+                          </div>
+                          <div class="col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" name="url_segment" value=" ">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                            <label>Price Min</label>
+                          </div>
+                          <div class="col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" name="priceMin" value=" ">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                            <label>Price Max</label>
+                          </div>
+                          <div class="col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" name="priceMax" value=" ">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                            <label>Spek</label>
+                          </div>
+                          <div class="col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" name="spek" value=" ">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                            <label>Category ID</label>
+                          </div>
+                          <div class="col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" name="category_id" value=" ">
                             </div>
                           </div>
                           
                           <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>Alamat</label>
+                            <label>Image</label>
                           </div>
-                          <div class="col-md-8 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                              <textarea class="form-control" name="address" rows="8" cols="80">{{$data->address}}</textarea>
-                            </div>
-                          </div>
-                          
-                          <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>Logo Website</label>
-                          </div>
-                          <div class="col-md-8 col-sm-6 col-xs-12">
+                          <div class="col-md-4 col-sm-3 col-xs-12">
                             <div class="form-group">
                               <input type="file" class="form-control form-control-sm uploadGambar" name="image" accept="image/*">
                             </div>
                           </div>
 
+                          <div class="col-md-4 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                              <button class="btn btn-info"><i class="mdi mdi-plus menu-icon"></i></button>
+                              <button class="btn btn-danger"><i class="mdi mdi-minus menu-icon"></i></button>
+                            </div>
+                          </div>
+
+                          
                           <center>
                             <div class="col-md-8 col-sm-6 col-xs-12 image-holder" id="image-holder" style="margin-left:10%; ">
-
-                            @if(isset($data))
-
+                              
+                              @if(isset($data))
+                              
                               <img src="{{url('/')}}/{{$data->logo_website}}" class="thumb-image img-responsive" height="100px" alt="image">
-
-                            @endif
-
-                          </div>
+                              
+                              @endif
+                              
+                            </div>
+                            
 
 
                         </div>
@@ -97,6 +142,8 @@
 @section('extra_script')
 <script>
 
+
+//upload gambar
 $(".uploadGambar").on('change', function () {
         $('.save').attr('disabled', false);
         // waitingDialog.show();
