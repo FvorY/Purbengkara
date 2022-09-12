@@ -4,12 +4,12 @@
   </div>
   <div class="brk-header-mobile__logo">
     <a href="{{url('/')}}">
-      <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 24px">
-      <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 24px">
+      <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 50px; object-fit : contain">
+      <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 130px; height: 50px; object-fit : contain">
     </a>
   </div>
 </div>
-<header class="brk-header brk-header_style-1 brk-header_skin-1 position-fixed d-lg-flex flex-column brk-header_color-dark position-fixed" style="display: none;" data-logo-src="{{url('/')}}/{{$data->logo_website}}" data-bg-mobile="" data-brk-library="component__header">
+<header class="brk-header brk-header_style-1 brk-header_skin-1 position-fixed d-lg-flex flex-column brk-header_color-dark position-fixed" style="display: none; object-fit : contain" data-logo-src="{{url('/')}}/{{$data->logo_website}}" data-bg-mobile="" data-brk-library="component__header">
   <div class="brk-header__top-bar order-lg-1 order-2 font__family-montserrat brk-header__top-bar_scroll" style="height: 46px;">
     <div class="brk-header__title font__family-montserrat font__weight-bold">Contact Us</div>
     <div class="container-fluid">
@@ -129,33 +129,37 @@
   <div class="brk-header__main-bar brk-header_border-top-dark order-lg-2 order-1" style="height: 72px;">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="col-lg-3 align-self-lg-center d-none d-lg-flex ml-10">
+        <div class="col-lg-3 align-self-lg-center d-none d-lg-flex ml-10" style="display:flex;flex-direction: row;align-items:center;">
           <div class="brk-open-top-bar brk-header__item">
             <div class="brk-open-top-bar__circle"></div>
             <div class="brk-open-top-bar__circle"></div>
             <div class="brk-open-top-bar__circle"></div>
           </div>
           <a href="/" class="brk-header__logo brk-header__item @@modifier">
-            <img class="brk-header__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 26px">
-            <img class="brk-header__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 26px">
+            <img class="brk-header__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 50px;object-fit:contain;">
+            <img class="brk-header__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="width: 142px; height: 50px;object-fit:contain;">
           </a>
         </div>
         <div class="col-lg align-self-lg-stretch text-lg-center">
           <nav class="brk-nav brk-header__item">
             <ul class="brk-nav__menu">
+              @foreach ($category as $cat)
               <li class="brk-nav__children brk-nav__drop-down-effect">
                 <a href="#">
-                  <span>Shop</span>
+                  <span>{{$cat->name}}</span>
                 </a>
+                <?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
+                @if(count($product) != 0)
                 <ul class="brk-nav__sub-menu brk-nav-drop-down font__family-montserrat">
+                  @foreach ($product as $pro)
                   <li class="dd-effect">
-                    <a href="shop-components-flip.html">Shop flip</a>
+                    <a href="{{url('/')}}/product/{{$pro->url_segment}}">{{$pro->name}}</a>
                   </li>
-                  <li class="dd-effect">
-                    <a href="shop-components-grid.html">Shop grid</a>
-                  </li>
+                  @endforeach
                 </ul>
+                @endif
               </li>
+              @endforeach
             </ul>
           </nav>
         </div>

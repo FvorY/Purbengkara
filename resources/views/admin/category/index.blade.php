@@ -12,14 +12,14 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Category</li>
+          <li class="breadcrumb-item active" aria-current="page">Master Category</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Category</h4>
+                    <h4 class="card-title">Master Category</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
                     	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
@@ -27,7 +27,7 @@
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
-                                <th>No</th>
+                                <th style="width:15px">No</th>
                                 <th>Name</th>
                                 <th>Action</th>
                               </tr>

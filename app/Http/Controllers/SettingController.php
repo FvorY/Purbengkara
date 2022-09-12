@@ -9,16 +9,11 @@ use App\Http\Requests;
 use App\mMember;
 
 use App\Authentication;
-
-use Auth;
-
 use Carbon\Carbon;
 
-use Session;
-
-use DB;
-
-use File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {

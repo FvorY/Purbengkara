@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-@include('admin.slideimage.tambah')
+@include('admin.featured.tambah')
 <style type="text/css">
 
 </style>
@@ -12,23 +12,25 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Slide Image</li>
+          <li class="breadcrumb-item active" aria-current="page">Master Featured</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Slide Image</h4>
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 15px;text-align:right">
+                    <h4 class="card-title">Master Featured</h4>
+                    <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
                     </div>
                     <div class="table-responsive">
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
-                                <th style="width:15px">No</th>
+                                <th>No</th>
                                 <th>Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -62,7 +64,7 @@ var table = $('#table-data').DataTable({
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         ajax: {
-            url:'{{ url('/slideimagetable') }}',
+            url:'{{ url('/featuredtable') }}',
         },
         columnDefs: [
 
@@ -78,10 +80,16 @@ var table = $('#table-data').DataTable({
                  targets: 2,
                  className: 'center'
               },
+              {
+                 targets: 3,
+                 className: 'center'
+              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
           {data: 'image', name: 'image'},
+          {data: 'name', name: 'name'},
+          {data: 'description', name: 'description'},
           {data: 'aksi', name: 'aksi'},
 
         ]
@@ -90,18 +98,19 @@ var table = $('#table-data').DataTable({
 
 
   function edit(id) {
-    // body...
     $.ajax({
-      url:baseUrl + '/editslideimage',
+      url:baseUrl + '/editfeatured',
       data:{id},
       dataType:'json',
       success:function(data){
-        $('.id').val(data.id);
+        $('.id').val(data.id_featured);
+        $('.name').val(data.name);
+        $('.description').val(data.description);
 
             var image_holder = $(".image-holder");
             image_holder.empty();
             $("<img />", {
-                "src": data.image,
+                "src": data.icon,
                 "class": "thumb-image img-responsive",
                 "style": "height: 100px; width:100px; border-radius: 0px;",
             }).appendTo(image_holder);
@@ -119,7 +128,7 @@ var table = $('#table-data').DataTable({
 
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpanslideimage?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpanfeatured?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
       data: formdata,
       processData: false, //important
       contentType: false,
@@ -165,7 +174,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapusslideimage',
+            url:baseUrl + '/hapusfeatured',
             data:{id},
             dataType:'json',
             success:function(data){

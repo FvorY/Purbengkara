@@ -14,16 +14,17 @@ use Carbon\Carbon;
 
 use Session;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use DB;
+
+use File;
 
 use Yajra\Datatables\Datatables;
 
-class SosmedController extends Controller
+class FeaturedController extends Controller
 {
-  public static function getSosmed()
+  public static function getFeatured()
   {
-    $data = DB::table("sosmed")
+    $data = DB::table("featured")
       ->get()->toArray();
 
     return $data;
@@ -32,12 +33,12 @@ class SosmedController extends Controller
   public function index()
   {
     $data = SettingController::getSetting();
-    return view('admin.sosmed.index', compact('data'));
+    return view('admin.featured.index', compact('data'));
   }
 
   public function datatable()
   {
-    $data = DB::table('sosmed')
+    $data = DB::table('featured')
       ->get()->toArray();
 
 
@@ -51,9 +52,9 @@ class SosmedController extends Controller
       })
       ->addColumn('aksi', function ($data) {
         return  '<div class="btn-group">' .
-          '<button type="button" onclick="edit(' . $data->id_sosmed . ')" class="btn btn-info btn-lg" title="edit">' .
+          '<button type="button" onclick="edit(' . $data->id_featured . ')" class="btn btn-info btn-lg" title="edit">' .
           '<label class="fa fa-pencil-alt"></label></button>' .
-          '<button type="button" onclick="hapus(' . $data->id_sosmed . ')" class="btn btn-danger btn-lg" title="hapus">' .
+          '<button type="button" onclick="hapus(' . $data->id_featured . ')" class="btn btn-danger btn-lg" title="hapus">' .
           '<label class="fa fa-trash"></label></button>' .
           '</div>';
       })
@@ -69,12 +70,12 @@ class SosmedController extends Controller
       DB::beginTransaction();
       try {
 
-        $max = DB::table("sosmed")->max('id_sosmed') + 1;
+        $max = DB::table("featured")->max('id_featured') + 1;
 
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/sosmed/' . $max;
+        $dir = 'image/uploads/featured/' . $max;
         $childPath = $dir . '/';
         $path = $childPath;
 
@@ -95,12 +96,12 @@ class SosmedController extends Controller
           }
         }
 
-        DB::table("sosmed")
+        DB::table("featured")
           ->insert([
-            "id_sosmed" => $max,
+            "id_featured" => $max,
             "name" => $req->name,
+            "description" => $req->description,
             "icon" => $imgPath,
-            "url" => $req->url,
           ]);
 
         DB::commit();
@@ -116,7 +117,7 @@ class SosmedController extends Controller
         $imgPath = null;
         $tgl = carbon::now('Asia/Jakarta');
         $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-        $dir = 'image/uploads/sosmed/' . $req->id;
+        $dir = 'image/uploads/featured/' . $req->id;
         $childPath = $dir . '/';
         $path = $childPath;
 
@@ -138,19 +139,19 @@ class SosmedController extends Controller
         }
 
         if ($imgPath == null) {
-          DB::table("sosmed")
-            ->where('id_sosmed', $req->id)
+          DB::table("featured")
+            ->where('id_featured', $req->id)
             ->update([
               "name" => $req->name,
-              "url" => $req->url,
+              "description" => $req->description,
             ]);
         } else {
-          DB::table("sosmed")
-            ->where('id_sosmed', $req->id)
+          DB::table("featured")
+            ->where('id_featured', $req->id)
             ->update([
               "name" => $req->name,
+              "description" => $req->description,
               "icon" => $imgPath,
-              "url" => $req->url,
             ]);
         }
 
@@ -168,8 +169,8 @@ class SosmedController extends Controller
     DB::beginTransaction();
     try {
 
-      DB::table("sosmed")
-        ->where("id_sosmed", $req->id)
+      DB::table("featured")
+        ->where("id_featured", $req->id)
         ->delete();
 
       DB::commit();
@@ -182,8 +183,8 @@ class SosmedController extends Controller
 
   public function edit(Request $req)
   {
-    $data = DB::table("sosmed")
-      ->where("id_sosmed", $req->id)
+    $data = DB::table("featured")
+      ->where("id_featured", $req->id)
       ->first();
 
     return response()->json($data);

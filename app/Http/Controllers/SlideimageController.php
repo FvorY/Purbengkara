@@ -14,15 +14,16 @@ use Carbon\Carbon;
 
 use Session;
 
-use DB;
-
-use File;
+// use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+// use File;
 
 use Yajra\Datatables\Datatables;
 
 class SlideimageController extends Controller
 {
-    public static function getSosmed() {
+    public static function getSlideImage() {
       $data = DB::table("backgroundheader")
         ->get()->toArray();
 
@@ -72,7 +73,7 @@ class SlideimageController extends Controller
           $imgPath = null;
           $tgl = carbon::now('Asia/Jakarta');
           $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-          $dir = 'image/uploads/slideimage' . $max;
+          $dir = 'image/uploads/slideimage/' . $max;
           $childPath = $dir . '/';
           $path = $childPath;
 
@@ -113,7 +114,7 @@ class SlideimageController extends Controller
           $imgPath = null;
           $tgl = carbon::now('Asia/Jakarta');
           $folder = $tgl->year . $tgl->month . $tgl->timestamp;
-          $dir = 'image/uploads/slideimage' . $req->id;
+          $dir = 'image/uploads/slideimage/' . $req->id;
           $childPath = $dir . '/';
           $path = $childPath;
 
