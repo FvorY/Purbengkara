@@ -61,6 +61,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/editcategory', 'CategoryController@edit');
     Route::get('/hapuscategory', 'CategoryController@hapus');
 
+    //Product
+    Route::get('/product', 'ProductController@index');
+    Route::get('/tambahproduct', 'ProductController@tambahproduct');
+    Route::get('/producttable', 'ProductController@datatable');
+    Route::post('/simpanproduct', 'ProductController@simpan');
+    Route::get('/editproduct', 'ProductController@edit');
+    Route::get('/hapusproduct', 'ProductController@hapus');
+
     //Featured
     Route::get('/featured', 'FeaturedController@index');
     Route::get('/featuredtable', 'FeaturedController@datatable');
