@@ -139,11 +139,11 @@
                           </div>
 
                           <center>
-                            <div class="col-md-8 col-sm-6 col-xs-12 image-holder" id="image-holder" style="margin-left:10%; ">
+                            <div class="col-md-8 col-sm-6 col-xs-12 image-holder" id="image-holder">
 
                             @if(isset($data))
 
-                              <img src="{{url('/')}}/{{$data->logo_website}}" class="thumb-image img-responsive" height="100px" alt="image">
+                              <img src="{{url('/')}}/{{$data->logo_website}}" class="thumb-image img-responsive" width="100%" alt="image">
 
                             @endif
 

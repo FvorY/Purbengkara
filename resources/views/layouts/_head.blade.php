@@ -17,7 +17,7 @@
   <!-- End plugin css for this page -->
   <!-- plugins:css -->
 
-  <link rel="shortcut icon" href="{{url('/')}}/{{$data->logo_website}}">
+  <link rel="shortcut icon" href="{{url('/')}}/image/icon.png">
 
   <link rel="stylesheet" href="{{asset('assets/node_modules/icheck/skins/all.css')}}" tppabs="http://www.bootstrapdash.com/demo/purple/node_modules/icheck/skins/all.css">
   <link href="{{ asset('assets/autocomplete/autocomplete.css') }}" rel="stylesheet">
