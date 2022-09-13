@@ -18,15 +18,15 @@
     <meta http-equiv="Cache-control" content="public">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="apple-touch-icon" href="{{url('/')}}/{{$data->logo_website}}">
-    <link rel="android-touch-icon" href="{{url('/')}}/{{$data->logo_website}}" />
-    <link rel="windows-touch-icon" href="{{url('/')}}/{{$data->logo_website}}" />
+    <link rel="apple-touch-icon" href="{{url('/')}}/image/icon.png">
+    <link rel="android-touch-icon" href="{{url('/')}}/image/icon.png" />
+    <link rel="windows-touch-icon" href="{{url('/')}}/image/icon.png" />
 
     <!-- For Facebook -->
-    <meta property="og:image" content="{{url('/')}}/{{$data->logo_website}}" />
+    <meta property="og:image" content="{{url('/')}}/image/icon.png" />
 
     <!-- For Twitter -->
-    <meta name="twitter:image" content="{{url('/')}}/{{$data->logo_website}}" />
+    <meta name="twitter:image" content="{{url('/')}}/image/icon.png" />
 
     <meta name="author" content="{{config('app.name')}}">
     <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
@@ -38,10 +38,10 @@
     <meta property="og:url" content="{{url('/')}}" />
     <meta property="og:site_name" content="{{config('app.name')}}" />
 
-    <meta  property="og:image" itemprop="image" content="{{url('/')}}/{{$data->logo_website}}"/>
+    <meta  property="og:image" itemprop="image" content="{{url('/')}}/image/icon.png"/>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{url('/')}}/{{$data->logo_website}}">
+    <link rel="shortcut icon" href="{{url('/')}}/image/icon.png">
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" type="text/css">
 
