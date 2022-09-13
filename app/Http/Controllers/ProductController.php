@@ -38,8 +38,12 @@ class ProductController extends Controller
     }
     public function tambahproduct()
     {
-        $data = SettingController::getSetting();
+        $data_setting = SettingController::getSetting();
+        $data_category = categoryController::getCategory();
 
-        return view('admin.product.tambahproduct', compact('data'));
+        return view('admin.product.tambahproduct', [
+            'data' => $data_setting,
+            'data2' => $data_category
+        ]);
     }
 }

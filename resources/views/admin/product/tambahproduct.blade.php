@@ -48,15 +48,6 @@
                           </div>
 
                           <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>URL Segment</label>
-                          </div>
-                          <div class="col-md-8 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                              <input type="text" class="form-control form-control-sm" name="url_segment" value=" ">
-                            </div>
-                          </div>
-
-                          <div class="col-md-4 col-sm-6 col-xs-12">
                             <label>Price Min</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
@@ -79,46 +70,59 @@
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm" name="spek" value=" ">
+                              <textarea class="form-control form-control-sm" name="spek" value=" ">
+                              </textarea>
                             </div>
                           </div>
 
                           <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>Category ID</label>
+                            <label>Category</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm" name="category_id" value=" ">
+                              <select class="form-select" id="">
+                                <option selected>Pilih Category</option>
+                                @foreach ($data2 as $item)    
+                                  <option value="{{ $item->id_category }}">{{ $item->name }}</option>
+                                @endforeach
+                              </select>
                             </div>
                           </div>
                           
-                          <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>Image</label>
-                          </div>
-                          <div class="col-md-4 col-sm-3 col-xs-12">
-                            <div class="form-group">
-                              <input type="file" class="form-control form-control-sm uploadGambar" name="image" accept="image/*">
+                          <div id="pembungkus_image">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                              <label>Image</label>
                             </div>
-                          </div>
-
-                          <div class="col-md-4 col-sm-3 col-xs-12">
-                            <div class="form-group">
-                              <button class="btn btn-info"><i class="mdi mdi-plus menu-icon"></i></button>
-                              <button class="btn btn-danger"><i class="mdi mdi-minus menu-icon"></i></button>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                              <div class="form-group">
+                                <input type="file" class="form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" name="image0" accept="image/*">
+                              </div>
                             </div>
-                          </div>
 
-                          
-                          <center>
-                            <div class="col-md-8 col-sm-6 col-xs-12 image-holder" id="image-holder" style="margin-left:10%; ">
+                            <center>
+                            <div class="col-md-8 col-sm-6 col-xs-12 image-holder0" id="image-holder" style="margin-left:10%; ">
+                              
                               
                               @if(isset($data))
-                              
                               <img src="{{url('/')}}/{{$data->logo_website}}" class="thumb-image img-responsive" height="100px" alt="image">
                               
                               @endif
                               
                             </div>
+                          </center>
+                          <br>
+                          </div>
+
+                          <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <button type="button" onclick="increment()" class="btn btn-success" style="color: white; border-radius: 18px"><i class="mdi mdi-plus menu-icon"></i></button>
+                              
+                              <button type="button" onclick="decrement()" class="btn btn-danger" style="border-radius: 18px"><i class="mdi mdi-minus menu-icon"></i></button>
+                            </div>
+                          </div>
+
+                          
+                          
                             
 
 
@@ -142,13 +146,52 @@
 @section('extra_script')
 <script>
 
+var index = 0;
 
-//upload gambar
-$(".uploadGambar").on('change', function () {
-        $('.save').attr('disabled', false);
+		function increment(){
+			
+      index++;
+			var pembungkus = $("#pembungkus_image");
+
+      var tambah_form = '<div id="hapus_baris_'+index+'"><div class="col-md-12 col-sm-12 col-xs-12">'
+        +'<label>Image</label>'
+         +'</div>'
+        +'<div class="col-md-12 col-sm-12 col-xs-12">'
+          +'<div class="form-group">'
+            +'<input type="file" name="image'+index+'" onchange="previewImage(this)" data-index="'+index+'" id="image_'+index+'" class="form-control form-control-sm uploadGambar" accept="image/*">'
+            +'</div>'
+            +'</div>'
+            +'<center>'
+                  +'<div class="col-md-8 col-sm-6 col-xs-12 image-holder'+index+'" id="image-holder" style="margin-left:10%; ">'
+                    +'<img style="display:none;" class="thumb-image img-responsive" height="100px" alt="image">'
+                  +'</div>'
+                +'</center>'
+                +'<br>'
+            +'</div>';
+            
+            $(pembungkus).append(tambah_form);
+            
+          }
+
+		function decrement(){
+
+			var konfirmasi = confirm("Apakah anda yakin ingin menghapus baris ini?");
+			if (konfirmasi) {
+				$("#hapus_baris_"+index).remove();
+			}else{
+				return;
+			}
+
+			
+		}
+
+function previewImage(elm) {
+  let indexElm = $(elm).data("index");
+
+  $('.save').attr('disabled', false);
         // waitingDialog.show();
       if (typeof (FileReader) != "undefined") {
-          var image_holder = $(".image-holder");
+          var image_holder = $(".image-holder"+indexElm);
           image_holder.empty();
           var reader = new FileReader();
           reader.onload = function (e) {
@@ -164,14 +207,15 @@ $(".uploadGambar").on('change', function () {
               }, 2000)
           }
           image_holder.show();
-          reader.readAsDataURL($(this)[0].files[0]);
+          reader.readAsDataURL($(elm)[0].files[0]);
+          image_holder.css("display", '');
 
           // waitingDialog.hide();
       } else {
           // waitingDialog.hide();
           alert("This browser does not support FileReader.");
       }
-  });
+}
 
 </script>
 @endsection
