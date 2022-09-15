@@ -30,12 +30,16 @@
                               <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Action</th>
+                                <th>Price Min</th>
+                                <th>Price Max</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
 
                             <tbody>
-
+                          
                             </tbody>
                         </table>
                     </div>
@@ -61,7 +65,7 @@ var table = $('#table-data').DataTable({
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         ajax: {
-            url:'{{ url('/categorytable') }}',
+            url:'{{ url('/producttable') }}',
         },
         columnDefs: [
 
@@ -77,11 +81,30 @@ var table = $('#table-data').DataTable({
                  targets: 2,
                  className: 'center'
               },
-
+              {
+                 targets: 3,
+                 className: 'center'
+              },
+              {
+                 targets: 4,
+                 className: 'center'
+              },
+              {
+                 targets: 5,
+                 className: 'center'
+              },
+              {
+                 targets: 6,
+                 className: 'center'
+              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
           {data: 'name', name: 'name'},
+          {data: 'priceMin', name: 'priceMin'},
+          {data: 'priceMax', name: 'priceMax'},
+          {data: 'categoryid', name: 'categoryid'},
+          {data2: 'image', name: 'image'},
           {data: 'aksi', name: 'aksi'},
 
         ]
@@ -92,11 +115,11 @@ var table = $('#table-data').DataTable({
   function edit(id) {
     // body...
     $.ajax({
-      url:baseUrl + '/editcategory',
+      url:baseUrl + '/editproduct',
       data:{id},
       dataType:'json',
       success:function(data){
-        $('.id').val(data.id_category);
+        $('.id').val(data.id_product);
         $('.name').val(data.name);
         $('#tambah').modal('show');
       }
@@ -107,7 +130,7 @@ var table = $('#table-data').DataTable({
   $('#simpan').click(function(){
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpancategory?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpanproduct?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
       processData: false, //important
       contentType: false,
       cache: false,
@@ -152,7 +175,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapuscategory',
+            url:baseUrl + '/hapusproduct',
             data:{id},
             dataType:'json',
             success:function(data){

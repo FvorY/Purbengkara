@@ -19,7 +19,7 @@
 
                     @if (session('sukses'))
                     <div class="alert alert-success" role="alert">
-                      Success, Setting Berhasil Disimpan
+                      Success, Product Berhasil Disimpan
                     </div>
                     @endif
 
@@ -30,7 +30,7 @@
                     @endif
 
                     <hr>
-                    <form method="POST" class="form-horizontal" action="{{ url('setting/save') }}" accept-charset="UTF-8" id="tambahpekerja" enctype="multipart/form-data">
+                    <form method="POST" class="form-horizontal" action="{{ url('/simpanproduct') }}" accept-charset="UTF-8" id="tambahproduct" enctype="multipart/form-data">
                       {{csrf_field()}}
                       <div class="row">
 
@@ -80,9 +80,9 @@
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <select class="form-select" id="">
+                              <select class="form-select" name="categoryid" id="categoryid">
                                 <option selected>Pilih Category</option>
-                                @foreach ($data2 as $item)    
+                                @foreach ($data2 as $item)   
                                   <option value="{{ $item->id_category }}">{{ $item->name }}</option>
                                 @endforeach
                               </select>
@@ -101,13 +101,7 @@
 
                             <center>
                             <div class="col-md-8 col-sm-6 col-xs-12 image-holder0" id="image-holder" style="margin-left:10%; ">
-                              
-                              
-                              @if(isset($data))
-                              <img src="{{url('/')}}/{{$data->logo_website}}" class="thumb-image img-responsive" height="100px" alt="image">
-                              
-                              @endif
-                              
+                
                             </div>
                           </center>
                           <br>
