@@ -57,8 +57,7 @@ class ProductController extends Controller
 
     public function datatable()
     {
-        $data = DB::table('product')
-            ->get()->toArray();
+        $data = ProductController::getProduct();
 
         // return $data;
         // $xyzab = collect($data);
@@ -93,19 +92,24 @@ class ProductController extends Controller
 
             ]);
 
-        if ($req->file('image0')) {
-            $imageproduct = $req->file('image0')->store('product-image');
+        // if ($req->file('image0')) {
+        //     $imageproduct = $req->file('image0')->store('product-image');
+        // }
+
+        if (count($req->file())) {
+            for ($i = 0; $i < count($req->file()); $i++) {
+
+                $idimage = DB::table("productimage")->max('id_productImage') + 1;
+                $imageproduct = $req->file('image' . $i)->store('product-image');
+                $insert = [
+                    "id_productImage" => $idimage,
+                    "productid" => $idproduct,
+                    "image" => $imageproduct,
+                ];
+                DB::table("productimage")
+                    ->insert($insert);
+            }
         }
-
-        $idimage = DB::table("productimage")->max('id_productImage') + 1;
-        DB::table("productimage")
-            ->insert([
-                "id_productImage" => $idimage,
-                "productid" => $idproduct,
-                "image" => $imageproduct,
-
-            ]);
-
 
         return redirect('tambahproduct')->with('sukses', 'sukses');
     }
