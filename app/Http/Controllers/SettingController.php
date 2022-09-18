@@ -27,8 +27,7 @@ class SettingController extends Controller
 
      public function index() {
 
-       $data = DB::table("setting")
-         ->where('id', 1)->first();
+       $data = SettingController::getSetting();
 
        return view("admin.setting.index", compact("data"));
      }

@@ -29,8 +29,12 @@
                             <thead class="bg-gradient-info">
                               <tr>
                                 <th>No</th>
+                                <th>Image</th>
                                 <th>Name</th>
-                                <th>Action</th>
+                                <th>Price Min</th>
+                                <th>Price Max</th>
+                                <th>Category</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
 
@@ -61,7 +65,7 @@ var table = $('#table-data').DataTable({
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         ajax: {
-            url:'{{ url('/categorytable') }}',
+            url:'{{ url('/producttable') }}',
         },
         columnDefs: [
 
@@ -77,37 +81,44 @@ var table = $('#table-data').DataTable({
                  targets: 2,
                  className: 'center'
               },
-
+              {
+                 targets: 3,
+                 className: 'center'
+              },
+              {
+                 targets: 4,
+                 className: 'center'
+              },
+              {
+                 targets: 5,
+                 className: 'center'
+              },
+              {
+                 targets: 6,
+                 className: 'center'
+              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
+          {data: 'image', name: 'image'},
           {data: 'name', name: 'name'},
+          {data: 'priceMin', name: 'priceMin'},
+          {data: 'priceMax', name: 'priceMax'},
+          {data: 'categoryname', name: 'categoryname'},
           {data: 'aksi', name: 'aksi'},
-
         ]
   });
 
 
 
   function edit(id) {
-    // body...
-    $.ajax({
-      url:baseUrl + '/editcategory',
-      data:{id},
-      dataType:'json',
-      success:function(data){
-        $('.id').val(data.id_category);
-        $('.name').val(data.name);
-        $('#tambah').modal('show');
-      }
-    });
-
+    window.location.href = "{{url('/')}}/editproduct/"+id;
   }
 
   $('#simpan').click(function(){
     $.ajax({
       type: "post",
-      url: baseUrl + '/simpancategory?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
+      url: baseUrl + '/simpanproduct?_token='+"{{csrf_token()}}&"+$('.table_modal :input').serialize(),
       processData: false, //important
       contentType: false,
       cache: false,
@@ -152,7 +163,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapuscategory',
+            url:baseUrl + '/hapusproduct',
             data:{id},
             dataType:'json',
             success:function(data){
@@ -186,24 +197,7 @@ var table = $('#table-data').DataTable({
   }
 
   function reloadall() {
-    $('.table_modal :input').val("");
-    $('#tambah').modal('hide');
     table.ajax.reload();
   }
-
-  $(document).ready(function() {
-      $("#show_hide_password a").on('click', function(event) {
-          event.preventDefault();
-          if($('#show_hide_password input').attr("type") == "text"){
-              $('#show_hide_password input').attr('type', 'password');
-              $('#show_hide_password i').addClass( "fa-eye-slash" );
-              $('#show_hide_password i').removeClass( "fa-eye" );
-          }else if($('#show_hide_password input').attr("type") == "password"){
-              $('#show_hide_password input').attr('type', 'text');
-              $('#show_hide_password i').removeClass( "fa-eye-slash" );
-              $('#show_hide_password i').addClass( "fa-eye" );
-          }
-      });
-  });
 </script>
 @endsection

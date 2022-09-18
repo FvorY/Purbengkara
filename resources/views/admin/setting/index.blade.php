@@ -157,7 +157,6 @@
               <hr>
               <div class="text-right w-100">
                 <button class="btn btn-primary save" type="submit">Simpan</button>
-                <a href="" class="btn btn-secondary">Kembali</a>
               </div>
             </div>
           </div>
@@ -183,6 +182,7 @@ $(".uploadGambar").on('change', function () {
               setTimeout(function(){
                   image_holder.empty();
                   $("<img />", {
+                      "class": "thumb-image img-responsive",
                       "src": e.target.result,
                       "height": "100px",
                   }).appendTo(image_holder);

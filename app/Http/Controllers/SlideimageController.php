@@ -31,20 +31,12 @@ class SlideimageController extends Controller
     }
 
     public function index() {
-      $data = SettingController::getSetting();
-
-      return view('admin.slideimage.index', compact('data'));
+      return view('admin.slideimage.index');
     }
 
     public function datatable() {
-      $data = DB::table('backgroundheader')
-        ->get()->toArray();
+      $data = SlideimageController::getSlideImage();
 
-
-        // return $data;
-        // $xyzab = collect($data);
-        // return $xyzab;
-        // return $xyzab->i_price;
         return Datatables::of($data)
           ->addColumn("image", function($data) {
             return '<div> <img src="'.$data->image.'" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
@@ -167,6 +159,10 @@ class SlideimageController extends Controller
         DB::table("backgroundheader")
             ->where("id", $req->id)
             ->delete();
+
+        $dir = 'image/uploads/slideimage/' . $req->id;
+
+        $this->deleteDir($dir);
 
         DB::commit();
         return response()->json(["status" => 5]);

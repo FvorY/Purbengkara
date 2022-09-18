@@ -29,14 +29,8 @@ class CategoryController extends Controller
 
     public function datatable()
     {
-        $data = DB::table('category')
-            ->get()->toArray();
+        $data = CategoryController::getCategory();
 
-
-        // return $data;
-        // $xyzab = collect($data);
-        // return $xyzab;
-        // return $xyzab->i_price;
         return Datatables::of($data)
             ->addColumn('aksi', function ($data) {
                 return  '<div class="btn-group">' .
