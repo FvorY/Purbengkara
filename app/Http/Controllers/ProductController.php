@@ -18,6 +18,7 @@ use DB;
 
 use File;
 
+use Illuminate\Support\Str;
 use Yajra\Datatables\Datatables;
 
 class ProductController extends Controller
@@ -25,14 +26,7 @@ class ProductController extends Controller
     public static function getProduct()
     {
         $data = DB::table("product")
-            ->get()->toArray();
-
-        return $data;
-    }
-
-    public static function getProductImage()
-    {
-        $data = DB::table("productimage")
+            ->join('productimage', 'product.id_product', '=', 'productimage.productid',)
             ->get()->toArray();
 
         return $data;
@@ -63,7 +57,11 @@ class ProductController extends Controller
         // $xyzab = collect($data);
         // return $xyzab;
         // return $xyzab->i_price;
+
         return Datatables::of($data)
+            ->addColumn("image", function ($data) {
+                return '<div> <img src="' . $data->image . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
+            })
             ->addColumn('aksi', function ($data) {
                 return  '<div class="btn-group">' .
                     '<button type="button" onclick="edit(' . $data->id_product . ')" class="btn btn-info btn-lg" title="edit">' .
@@ -72,7 +70,7 @@ class ProductController extends Controller
                     '<label class="fa fa-trash"></label></button>' .
                     '</div>';
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi', 'image'])
             ->addIndexColumn()
             ->make(true);
     }
@@ -85,6 +83,7 @@ class ProductController extends Controller
             ->insert([
                 "id_product" => $idproduct,
                 "name" => $req->name,
+                "url_segment" => Str::slug($req->name, '-'),
                 "priceMin" => $req->priceMin,
                 "priceMax" => $req->priceMax,
                 "spek" => $req->spek,
@@ -97,10 +96,12 @@ class ProductController extends Controller
         // }
 
         if (count($req->file())) {
+
+            $dir = 'image/uploads/product/';
             for ($i = 0; $i < count($req->file()); $i++) {
 
                 $idimage = DB::table("productimage")->max('id_productImage') + 1;
-                $imageproduct = $req->file('image' . $i)->store('product-image');
+                $imageproduct = $req->file('image' . $i)->move($dir);
                 $insert = [
                     "id_productImage" => $idimage,
                     "productid" => $idproduct,

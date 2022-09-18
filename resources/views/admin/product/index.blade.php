@@ -104,9 +104,8 @@ var table = $('#table-data').DataTable({
           {data: 'priceMin', name: 'priceMin'},
           {data: 'priceMax', name: 'priceMax'},
           {data: 'categoryid', name: 'categoryid'},
-          {data2: 'image', name: 'image'},
+          {data: 'image', name: 'image'},
           {data: 'aksi', name: 'aksi'},
-
         ]
   });
 
