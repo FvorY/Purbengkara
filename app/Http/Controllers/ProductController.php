@@ -18,20 +18,8 @@ use DB;
 
 use File;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Crypt;
 
-=======
-use Illuminate\Support\Str;
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-use Illuminate\Support\Str;
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-use Illuminate\Support\Str;
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 use Yajra\Datatables\Datatables;
 
 class ProductController extends Controller
@@ -39,9 +27,6 @@ class ProductController extends Controller
     public static function getProduct()
     {
         $data = DB::table("product")
-            ->join('productimage', 'product.id_product', '=', 'productimage.productid',)
-<<<<<<< HEAD
-<<<<<<< HEAD
             ->get()->toArray();
 
         return $data;
@@ -50,10 +35,6 @@ class ProductController extends Controller
     public static function getProductImage()
     {
         $data = DB::table("productimage")
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             ->get()->toArray();
 
         return $data;
@@ -77,9 +58,6 @@ class ProductController extends Controller
 
     public function datatable()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         $data = DB::table("product")
                   ->select("product.*", "productimage.*", "category.name as categoryname")
                   ->join("category", "category.id_category", '=', 'product.categoryid')
@@ -92,40 +70,11 @@ class ProductController extends Controller
             ->addColumn('aksi', function ($data) {
                 return  '<div class="btn-group">' .
                     '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_product) . '\')" class="btn btn-info btn-lg" title="edit">' .
-=======
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-        $data = ProductController::getProduct();
-
-        // return $data;
-        // $xyzab = collect($data);
-        // return $xyzab;
-        // return $xyzab->i_price;
-
-        return Datatables::of($data)
-            ->addColumn("image", function ($data) {
-                return '<div> <img src="' . $data->image . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
-            })
-            ->addColumn('aksi', function ($data) {
-                return  '<div class="btn-group">' .
-                    '<button type="button" onclick="edit(' . $data->id_product . ')" class="btn btn-info btn-lg" title="edit">' .
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
                     '<label class="fa fa-pencil-alt"></label></button>' .
                     '<button type="button" onclick="hapus(' . $data->id_product . ')" class="btn btn-danger btn-lg" title="hapus">' .
                     '<label class="fa fa-trash"></label></button>' .
                     '</div>';
             })
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             ->addColumn('priceMax', function ($data) {
                 return  FormatRupiahFront($data->priceMax);
             })
@@ -135,12 +84,6 @@ class ProductController extends Controller
             ->addColumn("image", function ($data) {
               return '<div> <img src="' . $data->image . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
             })
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             ->rawColumns(['aksi', 'image'])
             ->addIndexColumn()
             ->make(true);
@@ -149,9 +92,6 @@ class ProductController extends Controller
     public function simpan(Request $req)
     {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       if ($req->id == null) {
         DB::beginTransaction();
         try {
@@ -380,53 +320,6 @@ class ProductController extends Controller
           return back()->with('gagal','gagal');
          }
       }
-=======
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-        $idproduct = DB::table("product")->max('id_product') + 1;
-        DB::table("product")
-            ->insert([
-                "id_product" => $idproduct,
-                "name" => $req->name,
-                "url_segment" => Str::slug($req->name, '-'),
-                "priceMin" => $req->priceMin,
-                "priceMax" => $req->priceMax,
-                "spek" => $req->spek,
-                "categoryid" => $req->categoryid,
-
-            ]);
-
-        // if ($req->file('image0')) {
-        //     $imageproduct = $req->file('image0')->store('product-image');
-        // }
-
-        if (count($req->file())) {
-
-            $dir = 'image/uploads/product/';
-            for ($i = 0; $i < count($req->file()); $i++) {
-
-                $idimage = DB::table("productimage")->max('id_productImage') + 1;
-                $imageproduct = $req->file('image' . $i)->move($dir);
-                $insert = [
-                    "id_productImage" => $idimage,
-                    "productid" => $idproduct,
-                    "image" => $imageproduct,
-                ];
-                DB::table("productimage")
-                    ->insert($insert);
-            }
-        }
-
-        return redirect('tambahproduct')->with('sukses', 'sukses');
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
     }
 
     public function hapus(Request $req)
@@ -438,9 +331,6 @@ class ProductController extends Controller
                 ->where("id_product", $req->id)
                 ->delete();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             DB::table("productimage")
                 ->where("productid", $req->id)
                 ->delete();
@@ -449,12 +339,6 @@ class ProductController extends Controller
 
             $this->deleteDir($dir);
 
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             DB::commit();
             return response()->json(["status" => 5]);
         } catch (\Exception $e) {
@@ -463,9 +347,6 @@ class ProductController extends Controller
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     public function edit($id)
     {
         $id = Crypt::decryptString($id);
@@ -485,25 +366,6 @@ class ProductController extends Controller
             'data2' => $data_category,
             'image' => $image
         ]);
-=======
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-    public function edit(Request $req)
-    {
-        $data = DB::table("product")
-            ->where("id_product", $req->id)
-            ->first();
-
-        return response()->json($data);
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
     }
 
     public function deleteDir($dirPath)

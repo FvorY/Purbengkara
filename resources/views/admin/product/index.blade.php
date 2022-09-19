@@ -34,24 +34,12 @@
                                 <th>Price Min</th>
                                 <th>Price Max</th>
                                 <th>Category</th>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                                <th>Image</th>
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-                                <th>Image</th>
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-                                <th>Image</th>
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
                                 <th>Aksi</th>
                               </tr>
                             </thead>
 
                             <tbody>
-                          
+
                             </tbody>
                         </table>
                     </div>
@@ -116,22 +104,7 @@ var table = $('#table-data').DataTable({
           {data: 'name', name: 'name'},
           {data: 'priceMin', name: 'priceMin'},
           {data: 'priceMax', name: 'priceMax'},
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
           {data: 'categoryname', name: 'categoryname'},
-=======
-          {data: 'categoryid', name: 'categoryid'},
-          {data: 'image', name: 'image'},
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-          {data: 'categoryid', name: 'categoryid'},
-          {data: 'image', name: 'image'},
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
-=======
-          {data: 'categoryid', name: 'categoryid'},
-          {data: 'image', name: 'image'},
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
           {data: 'aksi', name: 'aksi'},
         ]
   });
@@ -139,22 +112,7 @@ var table = $('#table-data').DataTable({
 
 
   function edit(id) {
-<<<<<<< HEAD
     window.location.href = "{{url('/')}}/editproduct/"+id;
-=======
-    // body...
-    $.ajax({
-      url:baseUrl + '/editproduct',
-      data:{id},
-      dataType:'json',
-      success:function(data){
-        $('.id').val(data.id_product);
-        $('.name').val(data.name);
-        $('#tambah').modal('show');
-      }
-    });
-
->>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
   }
 
   $('#simpan').click(function(){
