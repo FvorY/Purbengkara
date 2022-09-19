@@ -88,9 +88,12 @@
                                 <option selected>Pilih Category</option>
 <<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
 <<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
+<<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
                                 @foreach ($data2 as $item)
                                   <option value="{{ $item->id_category }}" @if(isset($data)) @if($item->id_category == $data->categoryid) selected @endif @endif>{{ $item->name }}</option>
 =======
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673:resources/views/admin/product/tambahproduct.blade.php
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673:resources/views/admin/product/tambahproduct.blade.php
                                 @foreach ($data2 as $item)   
@@ -152,6 +155,10 @@
                             <div class="col-md-8 col-sm-6 col-xs-12 image-holder0" id="image-holder" style="margin-left:10%; ">
 <<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
 <<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
+<<<<<<< HEAD:resources/views/admin/product/manageproduct.blade.php
+=======
+                
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673:resources/views/admin/product/tambahproduct.blade.php
 =======
                 
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673:resources/views/admin/product/tambahproduct.blade.php

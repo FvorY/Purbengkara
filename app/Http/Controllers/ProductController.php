@@ -20,8 +20,12 @@ use File;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Crypt;
 
+=======
+use Illuminate\Support\Str;
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 use Illuminate\Support\Str;
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
@@ -37,6 +41,7 @@ class ProductController extends Controller
         $data = DB::table("product")
             ->join('productimage', 'product.id_product', '=', 'productimage.productid',)
 <<<<<<< HEAD
+<<<<<<< HEAD
             ->get()->toArray();
 
         return $data;
@@ -45,6 +50,8 @@ class ProductController extends Controller
     public static function getProductImage()
     {
         $data = DB::table("productimage")
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             ->get()->toArray();
@@ -72,6 +79,7 @@ class ProductController extends Controller
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         $data = DB::table("product")
                   ->select("product.*", "productimage.*", "category.name as categoryname")
                   ->join("category", "category.id_category", '=', 'product.categoryid')
@@ -85,6 +93,8 @@ class ProductController extends Controller
                 return  '<div class="btn-group">' .
                     '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_product) . '\')" class="btn btn-info btn-lg" title="edit">' .
 =======
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
         $data = ProductController::getProduct();
@@ -102,6 +112,9 @@ class ProductController extends Controller
                 return  '<div class="btn-group">' .
                     '<button type="button" onclick="edit(' . $data->id_product . ')" class="btn btn-info btn-lg" title="edit">' .
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
@@ -110,6 +123,7 @@ class ProductController extends Controller
                     '<label class="fa fa-trash"></label></button>' .
                     '</div>';
             })
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             ->addColumn('priceMax', function ($data) {
@@ -125,6 +139,8 @@ class ProductController extends Controller
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             ->rawColumns(['aksi', 'image'])
             ->addIndexColumn()
             ->make(true);
@@ -133,6 +149,7 @@ class ProductController extends Controller
     public function simpan(Request $req)
     {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       if ($req->id == null) {
@@ -366,6 +383,8 @@ class ProductController extends Controller
 =======
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
         $idproduct = DB::table("product")->max('id_product') + 1;
         DB::table("product")
             ->insert([
@@ -402,6 +421,9 @@ class ProductController extends Controller
 
         return redirect('tambahproduct')->with('sukses', 'sukses');
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
@@ -418,6 +440,7 @@ class ProductController extends Controller
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             DB::table("productimage")
                 ->where("productid", $req->id)
                 ->delete();
@@ -430,6 +453,8 @@ class ProductController extends Controller
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
             DB::commit();
             return response()->json(["status" => 5]);
         } catch (\Exception $e) {
@@ -438,6 +463,7 @@ class ProductController extends Controller
         }
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public function edit($id)
@@ -462,6 +488,8 @@ class ProductController extends Controller
 =======
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
     public function edit(Request $req)
     {
         $data = DB::table("product")
@@ -470,6 +498,9 @@ class ProductController extends Controller
 
         return response()->json($data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
