@@ -75,4 +75,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/simpanfeatured', 'FeaturedController@simpan');
     Route::get('/editfeatured', 'FeaturedController@edit');
     Route::get('/hapusfeatured', 'FeaturedController@hapus');
+
+    //Special Price
+    Route::get('/specialprice', 'SpecialpriceController@index');
+    Route::get('/specialpricetable', 'SpecialpriceController@datatable');
+    Route::post('/simpanspecialprice', 'SpecialpriceController@simpan');
+    Route::get('/editspecialprice', 'SpecialpriceController@edit');
+    Route::get('/hapusspecialprice', 'SpecialpriceController@hapus');
 }); // End Route Groub middleware auth
