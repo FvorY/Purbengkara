@@ -35,6 +35,10 @@
                                 <th>Price Max</th>
                                 <th>Category</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                                <th>Image</th>
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
                                 <th>Image</th>
 >>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
@@ -109,7 +113,12 @@ var table = $('#table-data').DataTable({
           {data: 'priceMin', name: 'priceMin'},
           {data: 'priceMax', name: 'priceMax'},
 <<<<<<< HEAD
+<<<<<<< HEAD
           {data: 'categoryname', name: 'categoryname'},
+=======
+          {data: 'categoryid', name: 'categoryid'},
+          {data: 'image', name: 'image'},
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
 =======
           {data: 'categoryid', name: 'categoryid'},
           {data: 'image', name: 'image'},
