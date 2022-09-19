@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tambahproduct', 'ProductController@tambahproduct');
     Route::get('/producttable', 'ProductController@datatable');
     Route::post('/simpanproduct', 'ProductController@simpan');
-    Route::get('/editproduct', 'ProductController@edit');
+    Route::get('/editproduct/{id}', 'ProductController@edit');
     Route::get('/hapusproduct', 'ProductController@hapus');
 
     //Featured

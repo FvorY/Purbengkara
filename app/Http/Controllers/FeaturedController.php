@@ -38,14 +38,8 @@ class FeaturedController extends Controller
 
   public function datatable()
   {
-    $data = DB::table('featured')
-      ->get()->toArray();
+    $data = FeaturedController::getFeatured();
 
-
-    // return $data;
-    // $xyzab = collect($data);
-    // return $xyzab;
-    // return $xyzab->i_price;
     return Datatables::of($data)
       ->addColumn("image", function ($data) {
         return '<div> <img src="' . $data->icon . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
@@ -172,6 +166,10 @@ class FeaturedController extends Controller
       DB::table("featured")
         ->where("id_featured", $req->id)
         ->delete();
+
+      $dir = 'image/uploads/featured/' . $req->id;
+
+      $this->deleteDir($dir);
 
       DB::commit();
       return response()->json(["status" => 5]);

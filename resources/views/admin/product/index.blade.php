@@ -29,11 +29,27 @@
                             <thead class="bg-gradient-info">
                               <tr>
                                 <th>No</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Price Min</th>
                                 <th>Price Max</th>
                                 <th>Category</th>
+<<<<<<< HEAD
                                 <th>Image</th>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                                <th>Image</th>
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+                                <th>Image</th>
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+                                <th>Image</th>
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+>>>>>>> 6ac07568b9f999c66bb9de2cfeaf6c671774e552
                                 <th>Aksi</th>
                               </tr>
                             </thead>
@@ -100,11 +116,31 @@ var table = $('#table-data').DataTable({
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
+          {data: 'image', name: 'image'},
           {data: 'name', name: 'name'},
           {data: 'priceMin', name: 'priceMin'},
           {data: 'priceMax', name: 'priceMax'},
+<<<<<<< HEAD
           {data: 'categoryid', name: 'categoryid'},
           {data: 'image', name: 'image'},
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+          {data: 'categoryname', name: 'categoryname'},
+=======
+          {data: 'categoryid', name: 'categoryid'},
+          {data: 'image', name: 'image'},
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+          {data: 'categoryid', name: 'categoryid'},
+          {data: 'image', name: 'image'},
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+=======
+          {data: 'categoryid', name: 'categoryid'},
+          {data: 'image', name: 'image'},
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
+>>>>>>> 6ac07568b9f999c66bb9de2cfeaf6c671774e552
           {data: 'aksi', name: 'aksi'},
         ]
   });
@@ -112,6 +148,9 @@ var table = $('#table-data').DataTable({
 
 
   function edit(id) {
+<<<<<<< HEAD
+    window.location.href = "{{url('/')}}/editproduct/"+id;
+=======
     // body...
     $.ajax({
       url:baseUrl + '/editproduct',
@@ -124,6 +163,7 @@ var table = $('#table-data').DataTable({
       }
     });
 
+>>>>>>> 0350219cacf8fb870cafc85e63a0d78589fee673
   }
 
   $('#simpan').click(function(){
@@ -208,24 +248,7 @@ var table = $('#table-data').DataTable({
   }
 
   function reloadall() {
-    $('.table_modal :input').val("");
-    $('#tambah').modal('hide');
     table.ajax.reload();
   }
-
-  $(document).ready(function() {
-      $("#show_hide_password a").on('click', function(event) {
-          event.preventDefault();
-          if($('#show_hide_password input').attr("type") == "text"){
-              $('#show_hide_password input').attr('type', 'password');
-              $('#show_hide_password i').addClass( "fa-eye-slash" );
-              $('#show_hide_password i').removeClass( "fa-eye" );
-          }else if($('#show_hide_password input').attr("type") == "password"){
-              $('#show_hide_password input').attr('type', 'text');
-              $('#show_hide_password i').removeClass( "fa-eye-slash" );
-              $('#show_hide_password i').addClass( "fa-eye" );
-          }
-      });
-  });
 </script>
 @endsection

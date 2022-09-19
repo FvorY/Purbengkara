@@ -37,14 +37,8 @@ class SosmedController extends Controller
 
   public function datatable()
   {
-    $data = DB::table('sosmed')
-      ->get()->toArray();
+    $data = SosmedController::getSosmed();
 
-
-    // return $data;
-    // $xyzab = collect($data);
-    // return $xyzab;
-    // return $xyzab->i_price;
     return Datatables::of($data)
       ->addColumn("image", function ($data) {
         return '<div> <img src="' . $data->icon . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
@@ -171,6 +165,10 @@ class SosmedController extends Controller
       DB::table("sosmed")
         ->where("id_sosmed", $req->id)
         ->delete();
+
+      $dir = 'image/uploads/sosmed/' . $req->id;
+
+      $this->deleteDir($dir);
 
       DB::commit();
       return response()->json(["status" => 5]);

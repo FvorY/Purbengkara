@@ -1,5 +1,9 @@
 <?php
 
+function unique_code($limit, $id) {
+  return substr(base_convert(sha1($id), 16, 36), 0, $limit);
+}
+
 function FormatRupiah($angka) {
   $number = "Rp " . number_format($angka,2,',','.');
 
