@@ -92,9 +92,9 @@
                                   <option value="{{ $item->id_category }}" @if(isset($data)) @if($item->id_category == $data->categoryid) selected @endif @endif>{{ $item->name }}</option>
                                 @endforeach
                               </select>
+                              <p id="pesan_categoryid"></p>
                             </div>
                           </div>
-                          <p id="pesan_categoryid"></p>
 
                           <div id="pembungkus_image">
                             @if(isset($data))
@@ -183,7 +183,6 @@ function validasi() {
     var priceMax = $( "#priceMax" ).val();
     var spek = $( "#spek" ).val();
     var categoryid = $( "#categoryid" ).val();
-    var image = $( "image0" ).val();
     
     if (name == ""){
       $( "#name" ).focus().css("border-color","red");
@@ -200,18 +199,9 @@ function validasi() {
 		}else if (categoryid == 0) {
       $( "#categoryid" ).focus().css("border-color","red");
       $("#pesan_categoryid").html("Category tidak boleh kosong!").css("color", "red");
-    }else if (image == "") {
-      alert("gagal");
-		}else{
+    }else{
       $("#tambahproduct").submit();
 		}
-
-   // if (name != "") {
-   //   $("#tambahproduct").submit();
-	//	}else{
-   //   $( "#name" ).focus();
-   //   $("#pesan").html("Nama tidak boleh kosong!").css("color", "red");
-	//	}
 	}
 
 var index = parseInt($("#countImage").val()) - 1;
