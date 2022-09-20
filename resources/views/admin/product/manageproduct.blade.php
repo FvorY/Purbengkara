@@ -38,26 +38,26 @@
                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 1%;">
 
                         <div class="row">
-
                           <div class="col-md-4 col-sm-6 col-xs-12">
                             <label>Name</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm" name="name" value="@if(isset($data)){{$data->name}}@endif">
+                              <input type="text" id="name" class="form-control form-control-sm" name="name" value="@if(isset($data)){{$data->name}}@endif">
                               <input type="hidden" name="id" value="@if(isset($data)){{$data->id_product}}@endif">
                               <input type="hidden" id="countImage" name="countImage" value="@if(isset($data)){{count($image)}} @else 1 @endif">
                               <input type="hidden" id="replaceImageID" name="replaceImageID" value="">
                               <input type="hidden" id="removeImageID" name="removeImageID" value="">
+                              <p id="pesan_name"></p>
                             </div>
                           </div>
-
                           <div class="col-md-4 col-sm-6 col-xs-12">
                             <label>Price Min</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm rp" name="priceMin" value="@if(isset($data)){{FormatRupiahFront($data->priceMin)}}@endif">
+                              <input type="text" id="priceMin" class="form-control form-control-sm rp" name="priceMin" value="@if(isset($data)){{FormatRupiahFront($data->priceMin)}}@endif">
+                              <p id="pesan_priceMin"></p>
                             </div>
                           </div>
 
@@ -66,7 +66,8 @@
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" class="form-control form-control-sm rp" name="priceMax" value="@if(isset($data)){{FormatRupiahFront($data->priceMax)}}@endif">
+                              <input type="text" id="priceMax" class="form-control form-control-sm rp" name="priceMax" value="@if(isset($data)){{FormatRupiahFront($data->priceMax)}}@endif">
+                              <p id="pesan_priceMax"></p>
                             </div>
                           </div>
 
@@ -75,7 +76,8 @@
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <textarea class="form-control form-control-sm" name="spek" rows="8" cols="80">@if(isset($data)){{$data->spek}}@endif</textarea>
+                              <textarea class="form-control form-control-sm" id="spek" name="spek" rows="8" cols="80">@if(isset($data)){{$data->spek}}@endif</textarea>
+                              <p id="pesan_spek"></p>
                             </div>
                           </div>
 
@@ -85,13 +87,14 @@
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
                               <select class="form-select" name="categoryid" id="categoryid">
-                                <option selected>Pilih Category</option>
+                                <option selected value="0">Pilih Category</option>
                                 @foreach ($data2 as $item)
                                   <option value="{{ $item->id_category }}" @if(isset($data)) @if($item->id_category == $data->categoryid) selected @endif @endif>{{ $item->name }}</option>
                                 @endforeach
                               </select>
                             </div>
                           </div>
+                          <p id="pesan_categoryid"></p>
 
                           <div id="pembungkus_image">
                             @if(isset($data))
@@ -102,7 +105,7 @@
                                   </div>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                      <input type="file" id="files{{$i}}" class="form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" data-idrender="{{$image[$i]->id_productImage}}" name="image0" accept="image/*">
+                                      <input type="file" id="files{{$i}}" class="image form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" data-idrender="{{$image[$i]->id_productImage}}" name="image0" accept="image/*">
                                     </div>
                                   </div>
 
@@ -118,7 +121,7 @@
                                    </div>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                      <input type="file" id="files{{$i}}" name="image{{$i}}" onchange="previewImage(this)" data-index="{{$i}}" id="image_{{$i}}" data-idrender="{{$image[$i]->id_productImage}}" class="form-control form-control-sm uploadGambar" accept="image/*">
+                                      <input type="file" id="files{{$i}}" name="image{{$i}}" onchange="previewImage(this)" data-index="{{$i}}" id="image_{{$i}}" data-idrender="{{$image[$i]->id_productImage}}" class="form-control form-control-sm uploadGambar" accept="image/*" data-validation="mime size required">
                                       </div>
                                       </div>
                                       <center>
@@ -155,14 +158,12 @@
                               <button type="button" onclick="decrement()" class="btn btn-danger" style="color: white; border-radius: 18px"><i class="mdi mdi-minus menu-icon"></i></button>
                             </div>
                           </div>
-
                         </div>
                        </div>
                 </div>
-
               <hr>
               <div class="text-right w-100">
-                <button class="btn btn-primary save" type="submit">Simpan</button>
+                <button onclick="validasi()" type="button"  class="btn btn-primary" >Simpan</button>
                 <a href="{{url('/')}}/product" class="btn btn-secondary">Kembali</a>
               </div>
             </div>
@@ -175,6 +176,43 @@
 @endsection
 @section('extra_script')
 <script>
+
+function validasi() {	
+		var name = $( "#name" ).val();
+    var priceMin = $( "#priceMin" ).val();
+    var priceMax = $( "#priceMax" ).val();
+    var spek = $( "#spek" ).val();
+    var categoryid = $( "#categoryid" ).val();
+    var image = $( "image0" ).val();
+    
+    if (name == ""){
+      $( "#name" ).focus().css("border-color","red");
+      $("#pesan_name").html("Nama tidak boleh kosong!").css("color", "red");
+    }else if (priceMin == "") {
+      $( "#priceMin" ).focus().css("border-color","red");
+      $("#pesan_priceMin").html("Price min tidak boleh kosong!").css("color", "red");
+		}else if (priceMax == "") {
+      $( "#priceMax" ).focus().css("border-color","red");
+      $("#pesan_priceMax").html("Price Max tidak boleh kosong!").css("color", "red");
+		}else if (spek == "") {
+      $( "#spek" ).focus().css("border-color","red");
+      $("#pesan_spek").html("Spek tidak boleh kosong!").css("color", "red");
+		}else if (categoryid == 0) {
+      $( "#categoryid" ).focus().css("border-color","red");
+      $("#pesan_categoryid").html("Category tidak boleh kosong!").css("color", "red");
+    }else if (image == "") {
+      alert("gagal");
+		}else{
+      $("#tambahproduct").submit();
+		}
+
+   // if (name != "") {
+   //   $("#tambahproduct").submit();
+	//	}else{
+   //   $( "#name" ).focus();
+   //   $("#pesan").html("Nama tidak boleh kosong!").css("color", "red");
+	//	}
+	}
 
 var index = parseInt($("#countImage").val()) - 1;
 var replaceImageID = [];
@@ -223,6 +261,7 @@ var removeImageID = [];
 				return;
 			}
 		}
+ 
 
 function previewImage(elm) {
   let indexElm = $(elm).data("index");
