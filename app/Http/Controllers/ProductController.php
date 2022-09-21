@@ -46,6 +46,11 @@ class ProductController extends Controller
               ->where('name', 'like', '%' . $req->term . '%')
               ->groupBy("product.id_product")
               ->get()
+              ->map(function ($data) {
+                  $data->image = url('/') . '/' . $data->image;
+
+                  return $data;
+              })
               ->toArray();
 
     return response()->json($data);

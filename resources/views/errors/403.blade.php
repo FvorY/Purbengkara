@@ -1,7 +1,7 @@
 <html>
 
       <head>
-          <title>Purbengkara | 403</title>
+          <title>{{config('app.name')}} | 403</title>
           <link rel="stylesheet" id="brk-skin-color" href="{{asset('assets/css/skins/brk-green-1.css')}}">
           <link id="brk-base-color" rel="stylesheet" href="{{asset('assets/css/skins/brk-base-color.css')}}">
           <link id="brk-css-min" rel="stylesheet" href="{{asset('assets/css/style_front.css')}}">
