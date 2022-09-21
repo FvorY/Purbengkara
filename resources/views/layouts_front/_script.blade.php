@@ -1,5 +1,12 @@
 <a href="#top" id="toTop"></a>
 
+	<!-- plugins:js -->
+	<script src="{{asset('assets/node_modules/jquery/dist/jquery.min.js')}}"></script>
+	<!-- Mainly scripts -->
+	<script type="text/javascript" src="{{ asset('assets/plugins/jquery-1.12.3.min.js') }}"></script>
+
+	<!-- jQuery UI -->
+	<script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
@@ -10,7 +17,9 @@
 	<script defer="defer" src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/assets/brk-header.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/autocomplete/autocomplete.js')}}"></script>
 	<script>
+		var baseUrl = '{{ url('/') }}';
 		var revapi18,
 			tpj;
 		(function() {
@@ -99,4 +108,25 @@
 				}; /* END OF revapi call */
 			}; /* END OF ON LOAD FUNCTION */
 		}()); /* END OF WRAPPING FUNCTION */
+
+		// $("#searchBox").autocomplete({
+	  //   source: baseUrl + "/product/search",
+	  //   create: function() {
+	  //     $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
+		// 			console.log(item);
+	  //       return $('<li class="font__family-montserrat">')
+	  //         .append('<a href="' + baseUrl + '/produk/' + item.url_segment + '"><img class="icon" style="height: 30px; width: 30px;" src="' + baseUrl + '/' + item.image + '" />' + '<span style="margin-left: 5px;">' + item.name + '</span>' + '</a>')
+	  //         .appendTo(ul);
+	  //     };
+	  //   }
+	  // });
+
+		$('#searchBox').autocomplete({
+		source: baseUrl + "/product/search", appendTo: '#catcher'
+		}).data('ui-autocomplete')._renderItem = function(ul, item) {
+			return $('<li class="font__family-montserrat">')
+				.append('<a href="' + baseUrl + '/produk/' + item.url_segment + '"><img class="icon" style="height: 30px; width: 30px;" src="' + baseUrl + '/' + item.image + '" />' + '<span style="margin-left: 5px;">' + item.name + '</span>' + '</a>')
+				.appendTo($('#catcher'));
+		};
+
 	</script>

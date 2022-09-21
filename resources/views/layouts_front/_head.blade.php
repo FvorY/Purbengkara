@@ -69,6 +69,8 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/assets/brk-header-elements.css')}}">
 
+    <link href="{{ asset('assets/autocomplete/autocomplete.css') }}" rel="stylesheet">
+
     <style> #rev_slider_18_1_wrapper .tp-loader.spinner2{ background-color: #0071fc !important; } </style>
   	<style>.brk-castom-btn.rev-btn.rev-withicon i{margin-left:0 !important; margin-right:10px !important; vertical-align:0; top:-1px}.brk-castom-btn-1.rev-btn.rev-withicon i{vertical-align:2px}</style>
   	<style>.custom.tparrows{cursor:pointer;background:#000;background:rgba(0,0,0,0.5);width:40px;height:40px;position:absolute;display:block;z-index:100}.custom.tparrows:hover{background:#000}.custom.tparrows:before{font-family:"revicons";font-size:15px;color:#fff;display:block;line-height:40px;text-align:center}.custom.tparrows.tp-leftarrow:before{content:"\e824"}.custom.tparrows.tp-rightarrow:before{content:"\e825"}</style>
@@ -76,6 +78,46 @@
     <style media="screen">
       .brk-header {
         background-color: white !important;
+      }
+
+      .ui-autocomplete {
+          position: fixed;
+          z-index: 99999;
+          border-radius: 18px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          padding-left: 10px;
+          padding-right: 10px;
+          border: 0px;
+          max-height: 300px;
+          overflow-y: scroll;
+          overflow-x: none;
+      }
+
+      .ui-menu .ui-menu-item a{
+        height: 30px;
+      }
+
+      #catcher {
+        text-align: left;
+        color: #111;
+        top: 105%;
+        -webkit-box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+        box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+        left: 0;
+        right: 0;
+        background-color: rgba(255,255,255,0.95);
+        position: absolute;
+        list-style: none;
+        z-index: 99999;
+        border-radius: 18px;
+        max-height: 300px;
+        overflow-y: scroll;
+        overflow-x: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
     </style>
 </head>

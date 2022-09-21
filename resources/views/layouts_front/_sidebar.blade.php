@@ -1,32 +1,36 @@
-<div class="brk-header-mobile">
+<div class="brk-header-mobile" style="background-color: white !important;">
   <div class="brk-header-mobile__open">
     <span></span>
   </div>
-  <div class="brk-header-mobile__logo" style="margin-left: 20px;">
+  <div class="brk-header-mobile__logo" style="margin-left: 5%; margin-right: 5%;">
     <a href="{{url('/')}}">
       <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px; object-fit : contain">
       <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px; object-fit : contain">
     </a>
   </div>
 </div>
-<header class="brk-header brk-header_style-1 brk-header_skin-1 position-fixed d-lg-flex flex-column brk-header_color-dark position-fixed" style="display: none; object-fit : contain" data-logo-src="{{url('/')}}/{{$data->logo_website}}" data-bg-mobile="" data-brk-library="component__header">
+<header style="background-color: white !important;" class="brk-header brk-header_style-1 brk-header_skin-1 position-fixed d-lg-flex flex-column brk-header_color-dark position-fixed" style="display: none; object-fit : contain" data-logo-src="{{url('/')}}/{{$data->logo_website}}" data-bg-mobile="" data-brk-library="component__header">
   <div class="brk-header__top-bar order-lg-1 order-2 font__family-montserrat brk-header__top-bar_scroll" style="height: 46px;">
     <div class="brk-header__title font__family-montserrat font__weight-bold">Contact Us</div>
     <div class="container-fluid">
       <div class="row align-items-center">
         <div class="col-lg-6 align-self-lg-stretch text-left">
+          @if($data->telepon != null)
           <div class="brk-header__element brk-header__element_skin-2 brk-header__item">
             <a href="tel:{{$data->telepon}}" class="brk-header__element--wrap">
               <i class="fa fa-phone"></i>
               <span class="brk-header__element--label font__weight-semibold">{{$data->telepon}}</span>
             </a>
           </div>
+          @endif
+          @if($data->email != null)
           <div class="brk-header__element brk-header__element_skin-2 brk-header__item">
             <a href="mailto:{{$data->email}}" class="brk-header__element--wrap">
               <i class="fa fa-envelope"></i>
               <span class="brk-header__element--label font__weight-medium">{{$data->email}}</span>
             </a>
           </div>
+          @endif
         </div>
         <div class="col-lg-6 align-self-lg-stretch text-left text-lg-right">
           <div class="brk-mini-cart brk-header__item brk-header__element_skin-2">
@@ -163,107 +167,16 @@
             </ul>
           </nav>
         </div>
-        <div class="col-lg-3 align-self-lg-stretch text-lg-right">
-          <div class="brk-header__title font__family-montserrat font__weight-bold">Info</div>
-          <div class="brk-search brk-header__item">
-            <div class="brk-search__open">
-              <i class="fal fa-search" aria-hidden="true"></i>
-              <div class="brk-search__title">Search website</div>
+        <div class="col-lg-3 align-self-lg-stretch text-lg-right mt-15" style="margin-left: 20px; margin-right: 20px;">
+          <form class="brk-search__form" role="search" method="get" action="#">
+            <input class="font__family-open-sans" style="border: 1px solid #4aa6e8; border-radius: 20px; height: 40px" name="s" maxlength="50" type="search" id="searchBox" value="" placeholder="Cari Produk . . .">
+            <button type="submit"><i class="fas fa-search"></i></button>
+            <div id="catcher"></div>
             </div>
-            <div class="brk-search__block">
-              <div class="brk-search__header">
-                <span class="font__family-montserrat font__weight-bold font__size-18">Search</span>
-              </div>
-              <form class="brk-search__form" role="search" method="get" action="#">
-                <input name="s" maxlength="50" type="search" value="" placeholder="Enter search text">
-                <button type="submit"><i class="fas fa-search"></i></button>
-              </form>
-              <span class="brk-search__close font__family-montserrat font__weight-medium">Close <i class="fas fa-times"></i></span>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="brk-info-menu">
-    <div class="brk-info-menu__bar">
-      <button class="brk-info-menu__close"></button>
-      <h3 class="brk-info-menu__header font__family-montserrat font__weight-bold font__size-21">More info</h3>
-      <div class="brk-categories mb-20" data-brk-library="component__widgets">
-        <div class="brk-categories__list font__family-open-sans font__size-14 font__weight-normal">
-          <a href="#" class="brk-categories__item">
-            <span class="brk-categories__item-name">General</span>
-            <span class="brk-categories__item-count">12</span>
-          </a>
-          <a href="#" class="brk-categories__item active">
-            <span class="brk-categories__item-name">Mockups</span>
-            <span class="brk-categories__item-count">14</span>
-          </a>
-          <a href="#" class="brk-categories__item">
-            <span class="brk-categories__item-name">HTML & CSS</span>
-            <span class="brk-categories__item-count">18</span>
-          </a>
-          <a href="#" class="brk-categories__item">
-            <span class="brk-categories__item-name">Logo</span>
-            <span class="brk-categories__item-count">21</span>
-          </a>
-          <a href="#" class="brk-categories__item">
-            <span class="brk-categories__item-name">Web Design</span>
-            <span class="brk-categories__item-count">6</span>
-          </a>
-        </div>
-      </div>
-      <h3 class="brk-info-menu__header font__family-montserrat font__weight-bold font__size-21">Our instagram</h3>
-      <div class="default-slider dots-base-skin dots-base-color slick-loading mt-15" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "dots": true, "autoplay": false, "autoplaySpeed": 4000}' data-brk-library="slider__slick">
-        <div>
-          <div class="brk-header-slider">
-            <div class="brk-header-slider__img">
-              <img src="img/309x206_1.jpg" alt="alt">
-            </div>
-            <div class="brk-header-slider__content">
-              <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/head-icon.png" alt="alt">
-              <div class="brk-header-slider__content--title">
-                <h4 class="font__family-montserrat font__weight-bold font__size-16">@berserk</h4>
-                <span class="font__size-14">17 Hours ago</span>
-              </div>
-            </div>
-            <p class="brk-header-slider__text font__size-14 line__height-21">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
-              ante, dapibus in, viverra</p>
-          </div>
-        </div>
-        <div>
-          <div class="brk-header-slider">
-            <div class="brk-header-slider__img">
-              <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/309x206_2.jpg" alt="alt">
-            </div>
-            <div class="brk-header-slider__content">
-              <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/head-icon.png" alt="alt">
-              <div class="brk-header-slider__content--title">
-                <h4 class="font__family-montserrat font__weight-bold font__size-16">@berserk</h4>
-                <span class="font__size-14">17 Hours ago</span>
-              </div>
-            </div>
-            <p class="brk-header-slider__text font__size-14 line__height-21">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
-              ante, dapibus in, viverra</p>
-          </div>
-        </div>
-        <div>
-          <div class="brk-header-slider">
-            <div class="brk-header-slider__img">
-              <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/309x206_3.jpg" alt="alt">
-            </div>
-            <div class="brk-header-slider__content">
-              <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/head-icon.png" alt="alt">
-              <div class="brk-header-slider__content--title">
-                <h4 class="font__family-montserrat font__weight-bold font__size-16">@berserk</h4>
-                <span class="font__size-14">17 Hours ago</span>
-              </div>
-            </div>
-            <p class="brk-header-slider__text font__size-14 line__height-21">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
-              ante, dapibus in, viverra</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </header>

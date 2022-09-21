@@ -14,6 +14,7 @@
 
 
 Route::get('/', 'HomefrontController@index')->name('/');
+Route::get('/product/search', 'ProductController@search');
 
 Route::group(['middleware' => 'guest'], function () {
 

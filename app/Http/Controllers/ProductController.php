@@ -40,6 +40,17 @@ class ProductController extends Controller
         return $data;
     }
 
+    public function search(Request $req) {
+      $data = DB::table("product")
+                ->join("productimage", "productimage.productid", '=', "product.id_product")
+                ->where('name', 'like', '%' . $req->term . '%')
+                ->groupBy("product.id_product")
+                ->get()
+                ->toArray();
+
+      return response()->json($data);
+    }
+
     public function index()
     {
         $data = ProductController::getProduct();
