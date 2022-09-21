@@ -105,7 +105,7 @@
                                   </div>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                      <input type="file" id="files{{$i}}" class="image form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" data-idrender="{{$image[$i]->id_productImage}}" name="image0" accept="image/*">
+                                      <input type="file" id="image_0" class="image form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" data-idrender="{{$image[$i]->id_productImage}}" name="image0" accept="image/*">
                                     </div>
                                   </div>
 
@@ -121,7 +121,7 @@
                                    </div>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                      <input type="file" id="files{{$i}}" name="image{{$i}}" onchange="previewImage(this)" data-index="{{$i}}" id="image_{{$i}}" data-idrender="{{$image[$i]->id_productImage}}" class="form-control form-control-sm uploadGambar" accept="image/*" data-validation="mime size required">
+                                      <input type="file" name="image{{$i}}" onchange="previewImage(this)" data-index="{{$i}}" id="image_{{$i}}" data-idrender="{{$image[$i]->id_productImage}}" class="form-control form-control-sm uploadGambar" accept="image/*" data-validation="mime size required">
                                       </div>
                                       </div>
                                       <center>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                               <div class="form-group">
-                                <input type="file" class="form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" name="image0" accept="image/*">
+                                <input type="file" id="image_0" class="form-control form-control-sm uploadGambar0" onchange="previewImage(this)" data-index="0" name="image0" accept="image/*">
                               </div>
                             </div>
 
@@ -177,13 +177,29 @@
 @section('extra_script')
 <script>
 
-function validasi() {	
+var index = parseInt($("#countImage").val()) - 1;
+var replaceImageID = [];
+var removeImageID = [];
+
+function validasi() {
 		var name = $( "#name" ).val();
     var priceMin = $( "#priceMin" ).val();
     var priceMax = $( "#priceMax" ).val();
     var spek = $( "#spek" ).val();
     var categoryid = $( "#categoryid" ).val();
-    
+
+    for (var i = 0; i < index + 1; i++) {
+      var files = $('#image_'+i)[0].files;
+
+      if (files.length == 0) {
+        iziToast.warning({
+            icon: 'fa fa-info',
+            message: 'Gambar Ke '+ (i+1) +' Kosong, Mohon diisi terlebih dahulu!',
+        });
+        return false;
+      }
+    }
+
     if (name == ""){
       $( "#name" ).focus().css("border-color","red");
       $("#pesan_name").html("Nama tidak boleh kosong!").css("color", "red");
@@ -199,14 +215,10 @@ function validasi() {
 		}else if (categoryid == 0) {
       $( "#categoryid" ).focus().css("border-color","red");
       $("#pesan_categoryid").html("Category tidak boleh kosong!").css("color", "red");
-    }else{
+    } else{
       $("#tambahproduct").submit();
 		}
 	}
-
-var index = parseInt($("#countImage").val()) - 1;
-var replaceImageID = [];
-var removeImageID = [];
 
 		function increment(){
 
@@ -251,7 +263,7 @@ var removeImageID = [];
 				return;
 			}
 		}
- 
+
 
 function previewImage(elm) {
   let indexElm = $(elm).data("index");

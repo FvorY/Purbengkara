@@ -253,14 +253,16 @@ class ProductController extends Controller
                 }
               }
 
-              $insert = [
-                "id_productImage" => $idimage,
-                "productid" => $idproduct,
-                "image" => $imgPath,
-              ];
+              if($imgPath != null) {
+                $insert = [
+                  "id_productImage" => $idimage,
+                  "productid" => $idproduct,
+                  "image" => $imgPath,
+                ];
 
-              DB::table("productimage")
-                ->insert($insert);
+                DB::table("productimage")
+                  ->insert($insert);
+              }
             }
           }
         } else {
