@@ -40,6 +40,7 @@ class ProductController extends Controller
     return $data;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     public function search(Request $req) {
@@ -148,6 +149,93 @@ class ProductController extends Controller
           for ($i = 0; $i < count($req->file()); $i++) {
             $idimage = DB::table("productimage")->max('id_productImage') + 1;
 
+=======
+
+  public function index()
+  {
+    $data = ProductController::getProduct();
+
+    return view('admin.product.index', compact('data'));
+  }
+
+  public function tambahproduct()
+  {
+    $data_category = categoryController::getCategory();
+
+    return view('admin.product.manageproduct', [
+      'data2' => $data_category
+    ]);
+  }
+
+  public function datatable()
+  {
+    $data = DB::table("product")
+      ->select("product.*", "productimage.*", "category.name as categoryname")
+      ->join("category", "category.id_category", '=', 'product.categoryid')
+      ->join("productimage", "productimage.productid", '=', "product.id_product")
+      ->groupBy("product.id_product")
+      ->get()
+      ->toArray();
+
+    return Datatables::of($data)
+      ->addColumn('aksi', function ($data) {
+        return  '<div class="btn-group">' .
+          '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_product) . '\')" class="btn btn-info btn-lg" title="edit">' .
+          '<label class="fa fa-pencil-alt"></label></button>' .
+          '<button type="button" onclick="hapus(' . $data->id_product . ')" class="btn btn-danger btn-lg" title="hapus">' .
+          '<label class="fa fa-trash"></label></button>' .
+          '</div>';
+      })
+      ->addColumn('priceMax', function ($data) {
+        return  FormatRupiahFront($data->priceMax);
+      })
+      ->addColumn('priceMin', function ($data) {
+        return  FormatRupiahFront($data->priceMin);
+      })
+      ->addColumn("image", function ($data) {
+        return '<div> <img src="' . $data->image . '" style="height: 100px; width:100px; border-radius: 0px;" class="img-responsive"> </img> </div>';
+      })
+      ->rawColumns(['aksi', 'image'])
+      ->addIndexColumn()
+      ->make(true);
+  }
+
+  public function simpan(Request $req)
+  {
+
+    if ($req->id == null) {
+      DB::beginTransaction();
+      try {
+
+        $idproduct = DB::table("product")->max('id_product') + 1;
+        $priceMax = str_replace("Rp. ", "", $req->priceMax);
+        $priceMax = str_replace(".", "", $priceMax);
+        $priceMin = str_replace("Rp. ", "", $req->priceMin);
+        $priceMin = str_replace(".", "", $priceMin);
+
+        $urlsegment = strtolower(str_replace(" ", "-", $req->name));
+        $cek = DB::table("product")->where("url_segment", $urlsegment)->first();
+
+        if ($cek != null) {
+          $urlsegment = strtolower(str_replace(" ", "-", $req->name)) . "-" . unique_code(3, $idproduct);
+        }
+
+        DB::table("product")
+          ->insert([
+            "id_product" => $idproduct,
+            "name" => $req->name,
+            "priceMin" => $priceMin,
+            "priceMax" => $priceMax,
+            "spek" => $req->spek,
+            "url_segment" => $urlsegment,
+            "categoryid" => $req->categoryid,
+          ]);
+
+        if (count($req->file())) {
+          for ($i = 0; $i < count($req->file()); $i++) {
+            $idimage = DB::table("productimage")->max('id_productImage') + 1;
+
+>>>>>>> 0df1bf90f1ff931eaf83d250d56ff3192e1fbd96
             $imgPath = null;
             $tgl = carbon::now('Asia/Jakarta');
             $folder = $tgl->year . $tgl->month . $tgl->timestamp;
