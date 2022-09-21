@@ -39,6 +39,7 @@ class ProductController extends Controller
 
     return $data;
   }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     public function search(Request $req) {
@@ -56,6 +57,12 @@ class ProductController extends Controller
     {
         $data = ProductController::getProduct();
 =======
+  public function index()
+  {
+    $data = ProductController::getProduct();
+>>>>>>> 0df1bf90f1ff931eaf83d250d56ff3192e1fbd96
+=======
+
   public function index()
   {
     $data = ProductController::getProduct();
