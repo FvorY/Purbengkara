@@ -1,7 +1,7 @@
 <html>
 
       <head>
-          <title>Javasolit | 404</title>
+          <title>{{config('app.name')}} | 404</title>
           <link rel="stylesheet" href="{{ asset('assets/css/404.css') }}"/>
       </head>
 

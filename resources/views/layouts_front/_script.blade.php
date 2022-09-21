@@ -17,7 +17,8 @@
 	<script defer="defer" src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/assets/brk-header.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/autocomplete/autocomplete.js')}}"></script>
+	<script src="{{asset('assets/js/jquery.easy-autocomplete.js')}}"></script>
+	<script src="//wurfl.io/wurfl.js" crossorigin></script>
 	<script>
 		var baseUrl = '{{ url('/') }}';
 		var revapi18,
@@ -109,24 +110,47 @@
 			}; /* END OF ON LOAD FUNCTION */
 		}()); /* END OF WRAPPING FUNCTION */
 
-		// $("#searchBox").autocomplete({
-	  //   source: baseUrl + "/product/search",
-	  //   create: function() {
-	  //     $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
-		// 			console.log(item);
-	  //       return $('<li class="font__family-montserrat">')
-	  //         .append('<a href="' + baseUrl + '/produk/' + item.url_segment + '"><img class="icon" style="height: 30px; width: 30px;" src="' + baseUrl + '/' + item.image + '" />' + '<span style="margin-left: 5px;">' + item.name + '</span>' + '</a>')
-	  //         .appendTo(ul);
-	  //     };
-	  //   }
-	  // });
+		var options = {
+		url: baseUrl + "/product/search",
 
-		$('#searchBox').autocomplete({
-		source: baseUrl + "/product/search", appendTo: '#catcher'
-		}).data('ui-autocomplete')._renderItem = function(ul, item) {
-			return $('<li class="font__family-montserrat">')
-				.append('<a href="' + baseUrl + '/produk/' + item.url_segment + '"><img class="icon" style="height: 30px; width: 30px;" src="' + baseUrl + '/' + item.image + '" />' + '<span style="margin-left: 5px;">' + item.name + '</span>' + '</a>')
-				.appendTo($('#catcher'));
-		};
+		getValue: "name",
+
+	  cssClasses: "sheroes",
+
+	  template: {
+	    type: "iconLeft",
+	    fields: {
+	      iconSrc: "image"
+	    }
+	  },
+
+		list: {
+			match: {
+				enabled: true
+			},
+			maxNumberOfElements: 6,
+
+			showAnimation: {
+				type: "slide",
+				time: 300
+			},
+			hideAnimation: {
+				type: "slide",
+				time: 300
+			},
+			onClickEvent: function() {
+				var selectedItemValue = $("#searchBox").getSelectedItemData().url_segment;
+
+				window.location.href = "{{url('/')}}" + "/produk/" + selectedItemValue;
+			}
+		},
+
+		requestDelay: 300,
+
+		theme: "round"
+
+	};
+
+	$("#searchBox").easyAutocomplete(options);
 
 	</script>
