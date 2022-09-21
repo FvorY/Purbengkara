@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Special Price
     Route::get('/specialprice', 'SpecialpriceController@index');
+    Route::get('/tambahspecialprice', 'ProductController@tambahspecialprice');
     Route::get('/specialpricetable', 'SpecialpriceController@datatable');
     Route::post('/simpanspecialprice', 'SpecialpriceController@simpan');
     Route::get('/editspecialprice', 'SpecialpriceController@edit');

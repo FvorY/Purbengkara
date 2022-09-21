@@ -24,6 +24,8 @@ class SpecialpriceController extends Controller
     public static function getSpecialprice()
     {
         $data = DB::table("specialprice")
+            ->select("specialprice.*", "product.name as productname")
+            ->join("product", "product.id_product", '=', 'specialprice.productid')
             ->get()->toArray();
 
         return $data;
@@ -43,9 +45,9 @@ class SpecialpriceController extends Controller
         return Datatables::of($data)
             ->addColumn('aksi', function ($data) {
                 return  '<div class="btn-group">' .
-                    '<button type="button" onclick="edit(' . $data->id_category . ')" class="btn btn-info btn-lg" title="edit">' .
+                    '<button type="button" onclick="edit(' . $data->id_specialprice . ')" class="btn btn-info btn-lg" title="edit">' .
                     '<label class="fa fa-pencil-alt"></label></button>' .
-                    '<button type="button" onclick="hapus(' . $data->id_category . ')" class="btn btn-danger btn-lg" title="hapus">' .
+                    '<button type="button" onclick="hapus(' . $data->id_specialprice . ')" class="btn btn-danger btn-lg" title="hapus">' .
                     '<label class="fa fa-trash"></label></button>' .
                     '</div>';
             })

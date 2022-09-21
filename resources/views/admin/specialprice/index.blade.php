@@ -28,7 +28,6 @@
                             <thead class="bg-gradient-info">
                               <tr>
                                 <th style="width:15px">No</th>
-                                <th>product ID</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Note</th>
@@ -83,15 +82,10 @@ var table = $('#table-data').DataTable({
                  targets: 3,
                  className: 'center'
               },
-              {
-                 targets: 4,
-                 className: 'center'
-              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
-          {data: 'prodeuctid', name: 'productid'},
-          {data: 'name', name: 'name'},
+          {data: 'productname', name: 'name'},
           {data: 'price', name: 'price'},
           {data: 'note', name: 'note'},
           {data: 'aksi', name: 'aksi'},
