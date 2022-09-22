@@ -1,7 +1,6 @@
 @extends('main')
 @section('content')
 
-@include('admin.specialprice.tambah')
 <style type="text/css">
 
 </style>
@@ -12,7 +11,7 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Master Category</li>
+          <li class="breadcrumb-item active" aria-current="page">Master Special Price</li>
         </ol>
       </nav>
     </div>
@@ -21,13 +20,16 @@
                   <div class="card-body">
                     <h4 class="card-title">Master Category</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
-                    	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
+                    	<a href="{{ url('/tambahspecialprice') }}">
+                        <button type="button" class="btn btn-info" ><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
+                      </a>
                     </div>
                     <div class="table-responsive">
         				        <table class="table table_status table-hover " id="table-data" cellspacing="0">
                             <thead class="bg-gradient-info">
                               <tr>
                                 <th style="width:15px">No</th>
+                                <th>Product</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Note</th>
@@ -82,10 +84,19 @@ var table = $('#table-data').DataTable({
                  targets: 3,
                  className: 'center'
               },
+              {
+                 targets: 4,
+                 className: 'center'
+              },
+              {
+                 targets: 5,
+                 className: 'center'
+              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
-          {data: 'productname', name: 'name'},
+          {data: 'productname', name: 'productname'},
+          {data: 'name', name: 'name'},
           {data: 'price', name: 'price'},
           {data: 'note', name: 'note'},
           {data: 'aksi', name: 'aksi'},
@@ -96,18 +107,7 @@ var table = $('#table-data').DataTable({
 
 
   function edit(id) {
-    // body...
-    $.ajax({
-      url:baseUrl + '/editcategory',
-      data:{id},
-      dataType:'json',
-      success:function(data){
-        $('.id').val(data.id_category);
-        $('.name').val(data.name);
-        $('#tambah').modal('show');
-      }
-    });
-
+    window.location.href = "{{url('/')}}/editspecialprice/"+id;
   }
 
   $('#simpan').click(function(){
@@ -158,7 +158,7 @@ var table = $('#table-data').DataTable({
   		buttons: [
   			['<button><b>Ya</b></button>', function (instance, toast) {
           $.ajax({
-            url:baseUrl + '/hapuscategory',
+            url:baseUrl + '/hapusspecialprice',
             data:{id},
             dataType:'json',
             success:function(data){

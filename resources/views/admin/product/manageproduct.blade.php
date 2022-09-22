@@ -154,7 +154,6 @@
                           <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                               <button type="button" onclick="increment()" class="btn btn-success" style="color: white; border-radius: 18px"><i class="mdi mdi-plus menu-icon"></i></button>
-
                               <button type="button" onclick="decrement()" class="btn btn-danger" style="color: white; border-radius: 18px"><i class="mdi mdi-minus menu-icon"></i></button>
                             </div>
                           </div>

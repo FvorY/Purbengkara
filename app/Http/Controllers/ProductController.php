@@ -40,18 +40,19 @@ class ProductController extends Controller
     return $data;
   }
 
-  public function search(Request $req) {
+  public function search(Request $req)
+  {
     $data = DB::table("product")
-              ->join("productimage", "productimage.productid", '=', "product.id_product")
-              ->where('name', 'like', '%' . $req->term . '%')
-              ->groupBy("product.id_product")
-              ->get()
-              ->map(function ($data) {
-                  $data->image = url('/') . '/' . $data->image;
+      ->join("productimage", "productimage.productid", '=', "product.id_product")
+      ->where('name', 'like', '%' . $req->term . '%')
+      ->groupBy("product.id_product")
+      ->get()
+      ->map(function ($data) {
+        $data->image = url('/') . '/' . $data->image;
 
-                  return $data;
-              })
-              ->toArray();
+        return $data;
+      })
+      ->toArray();
 
     return response()->json($data);
   }
@@ -258,7 +259,7 @@ class ProductController extends Controller
                 }
               }
 
-              if($imgPath != null) {
+              if ($imgPath != null) {
                 $insert = [
                   "id_productImage" => $idimage,
                   "productid" => $idproduct,
