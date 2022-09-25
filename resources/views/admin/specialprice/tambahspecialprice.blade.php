@@ -117,26 +117,26 @@
 
   $(document).ready(
     function(){
-        $('#btn-tambah').click(
-            function(){
-                var toAdd = $('input[name=note]').val();
-                 $('#list').append(
-                  '<li>' + toAdd + '&ensp; <span class="fa fa-trash" style="color:red"> </span>  </li>');
-            });
-       
-       $("input[name=note]").keyup(function(event){
-          if(event.keyCode == 13){
-            $("#btn-tambah").click();
-          }         
+      $('#btn-tambah').click(
+          function(){
+              var toAdd = $('input[name=note]').val();
+                $('#list').append(
+                '<li>' + toAdd + '&ensp; <span class="fa fa-trash" style="color:red"> </span>  </li>');
+          })
+
+      $("input[name=note]").keyup(function(event){
+        if(event.keyCode == 13){
+          $("#btn-tambah").click();
+        }         
       })
-      
-    $(document).on('click','li', function(){
-        $(this).toggleClass('strike').fadeOut('slow');    
-      });
-      
-      $('input').focus(function() {
-        $(this).val('');
-      });
+
+      $(document).on('click','li', function(){
+          $(this).toggleClass('strike').fadeOut('slow');    
+        });
+        
+        $('input').focus(function() {
+          $(this).val('');
+        });
       
       $('#list').sortable();    
     })
