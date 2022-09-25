@@ -8,7 +8,7 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item"><a href="{{url('/product')}}">Special Price</a></li>
+          <li class="breadcrumb-item"><a href="{{url('/specialprice')}}">Special Price</a></li>
           <li class="breadcrumb-item">Manage Special Price</li>
         </ol>
       </nav>
@@ -20,13 +20,13 @@
 
                     @if (session('sukses'))
                     <div class="alert alert-success" role="alert">
-                      Success, Product Berhasil Disimpan
+                      Success, Special Price Berhasil Disimpan
                     </div>
                     @endif
 
                     @if (session('gagal'))
                     <div class="alert alert-danger" role="alert">
-                      Gagal, Product Gagal Disimpan
+                      Gagal, Special Price Gagal Disimpan
                     </div>
                     @endif
 
@@ -38,19 +38,20 @@
                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 1%;">
 
                         <div class="row">
-
+                          <input type="hidden" name="id" value="@if(isset($data)){{$data->id_specialprice}}@endif">
+                          <input type="hidden" name="count" id="count" value="@if(isset($data)) {{count(explode('+',$data->note))}} @else 0 @endif">
                           <div class="col-md-4 col-sm-6 col-xs-12">
-                            <label>Pilih Product</label>
+                            <label>Pilih Produk</label>
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
                               <select class="form-select" id="productid" name="productid" >
                                 <option selected value="0">Pilih Product</option>
-                                
+
                                 @foreach ($data_product as $item)
                                 <option value="{{ $item->id_product }}" @if(isset($data)) @if($item->id_product == $data->productid) selected @endif @endif>{{ $item->name }}</option>
                                 @endforeach
-                                
+
                               </select>
                               <p id="pesan_productid"></p>
                             </div>
@@ -70,7 +71,7 @@
                           </div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="form-group">
-                              <input type="text" id="price" class="form-control form-control-sm rp" name="price" value="@if(isset($data)){{FormatRupiahFront($data->price)}}@endif">
+                              <input type="text" id="price" class="form-control form-control-sm" name="price" value="@if(isset($data)){{$data->price}}@endif">
                               <p id="pesan_price"></p>
                             </div>
                           </div>
@@ -80,9 +81,9 @@
                           </div>
                           <div class="col-md-4 col-sm-3 col-xs-12">
                             <div class="form-group">
-                              <input type="text" id="note" class="form-control form-control-sm" name="note" value="@if(isset($data)){{$data->note}}@endif">
+                              <input type="text" id="note" class="form-control form-control-sm" name="note">
                               <p id="pesan_note"></p>
-                            </div>  
+                            </div>
                           </div>
                           <div class="col-md-4 col-sm-3 col-xs-12">
                             <div class="form-group">
@@ -92,8 +93,27 @@
 
                           <div class=" col-md-8 col-sm-6 col-xs-12 offset-md-4">
                             <div class="border">
-                              <ol id="list">
-                              </ol>
+                              <table class="table table_status table-hover" cellspacing="0">
+                                  <thead class="bg-gradient-info">
+                                    <tr>
+                                      <th style="width:15px">No</th>
+                                      <th>Name</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody align="center" id="list">
+                                    @if(isset($data))
+                                      <?php $note = explode("+",$data->note) ?>
+                                      @for ($i = 0; $i < count($note); $i++)
+                                      <tr id="list{{$i + 1}}">
+                                        <td>{{$i + 1}}</td>
+                                        <td>{{$note[$i]}}<input type="hidden" name="note[]" value="{{$note[$i]}}"></td>
+                                        <td><button type="button" class="btn btn-danger" name="button" onclick="deleteList()"><span class="fa fa-trash" style="color:white"> </span></button></td>
+                                      </tr>
+                                      @endfor
+                                    @endif
+                                  </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
@@ -102,7 +122,7 @@
               <hr>
               <div class="text-right w-100">
                 <button onclick="validasi()" type="button"  class="btn btn-primary" >Simpan</button>
-                <a href="{{url('/')}}/product" class="btn btn-secondary">Kembali</a>
+                <a href="{{url('/')}}/specialprice" class="btn btn-secondary">Kembali</a>
               </div>
             </div>
           </div>
@@ -114,35 +134,46 @@
 @endsection
 @section('extra_script')
 <script>
-
+var index = parseInt($("#count").val());
   $(document).ready(
     function(){
         $('#btn-tambah').click(
             function(){
                 var toAdd = $('input[name=note]').val();
-                 $('#list').append(
-                  '<li>' + toAdd + '&ensp; <span class="fa fa-trash" style="color:red"> </span>  </li>');
+                if(toAdd != "") {
+                  index++;
+
+                  let html = '<tr id="list'+index+'">'+
+                              '<td>'+(index)+'</td>'+
+                              '<td>'+toAdd+'<input type="hidden" name="note[]" value="'+toAdd+'"></td>'+
+                              '<td><button type="button" class="btn btn-danger" name="button" onclick="deleteList()"><span class="fa fa-trash" style="color:white"> </span></button></td>'+
+                            '</tr>';
+
+                  $("#list").append(html);
+
+                  $('input[name=note]').val('');
+                } else {
+                  iziToast.warning({
+                      icon: 'fa fa-info',
+                      message: 'Isi Note terlebih dahulu!',
+                  });
+                }
             });
-       
+
        $("input[name=note]").keyup(function(event){
           if(event.keyCode == 13){
             $("#btn-tambah").click();
-          }         
+          }
       })
-      
-    $(document).on('click','li', function(){
-        $(this).toggleClass('strike').fadeOut('slow');    
-      });
-      
-      $('input').focus(function() {
-        $(this).val('');
-      });
-      
-      $('#list').sortable();    
-    })
+    });
+
+    function deleteList() {
+      $("#list"+index).remove();
+      index--;
+    }
 
 function validasi() {
-	
+
   var productid = $( "#productid" ).val();
   var name = $( "#name" ).val();
   var price = $( "#price" ).val();

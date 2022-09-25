@@ -1,6 +1,8 @@
 @extends('main')
 @section('content')
 
+@include('admin.specialprice.detail')
+
 <style type="text/css">
 
 </style>
@@ -11,14 +13,14 @@
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-info">
           <li class="breadcrumb-item"><i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Master Special Price</li>
+          <li class="breadcrumb-item active" aria-current="page">Special Price</li>
         </ol>
       </nav>
     </div>
   	<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Master Category</h4>
+                    <h4 class="card-title">Special Price</h4>
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right" style="margin-bottom: 15px;">
                     	<a href="{{ url('/tambahspecialprice') }}">
                         <button type="button" class="btn btn-info" ><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Data</button>
@@ -32,7 +34,6 @@
                                 <th>Product</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Note</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -88,17 +89,12 @@ var table = $('#table-data').DataTable({
                  targets: 4,
                  className: 'center'
               },
-              {
-                 targets: 5,
-                 className: 'center'
-              },
             ],
         "columns": [
           {data: 'DT_Row_Index', name: 'DT_Row_Index'},
           {data: 'productname', name: 'productname'},
           {data: 'name', name: 'name'},
           {data: 'price', name: 'price'},
-          {data: 'note', name: 'note'},
           {data: 'aksi', name: 'aksi'},
 
         ]
@@ -189,6 +185,36 @@ var table = $('#table-data').DataTable({
   			}],
   		]
   	});
+  }
+
+  function detail(id) {
+    $("#listDetail").html("");
+    // body...
+    $.ajax({
+      url:baseUrl + '/detailspecialprice',
+      data:{id},
+      dataType:'json',
+      success:function(data){
+        console.log(data);
+        $('.produk').val(data.data.productname);
+        $('.name').val(data.data.specialname);
+        $('.price').val(data.data.price);
+
+            for (var i = 0; i < data.note.length; i++) {
+              let note = data.note[i];
+
+              let html = '<tr id="list'+(i + 1)+'">'+
+                          '<td>'+(i + 1)+'</td>'+
+                          '<td>'+note+'<input type="hidden" name="note[]" value="'+note+'"></td>'+
+                        '</tr>';
+
+              $("#listDetail").append(html);
+            }
+
+        $('#detail').modal('show');
+      }
+    });
+
   }
 
   function reloadall() {

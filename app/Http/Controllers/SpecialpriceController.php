@@ -24,13 +24,6 @@ use Yajra\Datatables\Datatables;
 
 class SpecialpriceController extends Controller
 {
-    public static function getProduct()
-    {
-        $data = DB::table("product")
-            ->get()->toArray();
-
-        return $data;
-    }
 
     public static function getSpecialprice()
     {
@@ -56,7 +49,9 @@ class SpecialpriceController extends Controller
         return Datatables::of($data)
             ->addColumn('aksi', function ($data) {
                 return  '<div class="btn-group">' .
-                    '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_specialprice) . '\')" class="btn btn-info btn-lg" title="edit">' .
+                    '<button type="button" onclick="detail(\'' . $data->id_specialprice . '\')" class="btn btn-info btn-lg" title="detail">' .
+                    '<label class="fa fa-folder"></label></button>' .
+                    '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_specialprice) . '\')" class="btn btn-warning btn-lg" title="edit">' .
                     '<label class="fa fa-pencil-alt"></label></button>' .
                     '<button type="button" onclick="hapus(' . $data->id_specialprice . ')" class="btn btn-danger btn-lg" title="hapus">' .
                     '<label class="fa fa-trash"></label></button>' .
@@ -74,13 +69,8 @@ class SpecialpriceController extends Controller
 
     public function simpan(Request $req)
     {
-
-
         if ($req->id == null) {
             try {
-                $price = str_replace("Rp. ", "", $req->price);
-                $price = str_replace(".", "", $price);
-
                 DB::beginTransaction();
 
                 $max = DB::table("specialprice")->max('id_specialprice') + 1;
@@ -90,7 +80,8 @@ class SpecialpriceController extends Controller
                         "id_specialprice" => $max,
                         "productid" => $req->productid,
                         "name" => $req->name,
-                        "price" => $price,
+                        "price" => $req->price,
+                        "note" => implode("+",$req->note),
                     ]);
 
                 DB::commit();
@@ -108,10 +99,10 @@ class SpecialpriceController extends Controller
                 DB::table("specialprice")
                     ->where('id_specialprice', $req->id)
                     ->update([
-                        "id_specialprice" => $max,
                         "productid" => $req->productid,
                         "name" => $req->name,
                         "price" => $req->price,
+                        "note" => implode("+",$req->note),
                     ]);
 
                 DB::commit();
@@ -148,11 +139,30 @@ class SpecialpriceController extends Controller
         $data = DB::table("specialprice")
             ->where("id_specialprice", $id)
             ->first();
+
         $data_product = ProductController::getProduct();
 
         return view('admin.specialprice.tambahspecialprice', [
             "data" => $data,
             "data_product" => $data_product,
+        ]);
+    }
+
+    public function detail(Request $req)
+    {
+        $id = $req->id;
+
+        $data = DB::table("specialprice")
+            ->select("specialprice.*", "product.*", "product.name as productname", "specialprice.name as specialname")
+            ->join("product", 'product.id_product', '=', 'specialprice.productid')
+            ->where("id_specialprice", $id)
+            ->first();
+
+        $note = explode("+", $data->note);
+
+        return response()->json([
+          "data" => $data,
+          "note" => $note,
         ]);
     }
 }

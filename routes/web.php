@@ -15,6 +15,7 @@
 
 Route::get('/', 'HomefrontController@index')->name('/');
 Route::get('/product/search', 'ProductController@search');
+Route::get('/cara-order', 'HomefrontController@caraorder');
 
 Route::group(['middleware' => 'guest'], function () {
 
@@ -84,4 +85,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/simpanspecialprice', 'SpecialpriceController@simpan');
     Route::get('/editspecialprice/{id}', 'SpecialpriceController@edit');
     Route::get('/hapusspecialprice', 'SpecialpriceController@hapus');
+    Route::get('/detailspecialprice', 'SpecialpriceController@detail');
+
 }); // End Route Groub middleware auth
