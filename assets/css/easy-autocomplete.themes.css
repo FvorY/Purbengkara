@@ -54,6 +54,7 @@
   font-weight: 600;
 }
 .easy-autocomplete.eac-round {
+  width: 100% !important;
   font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .easy-autocomplete.eac-round input {

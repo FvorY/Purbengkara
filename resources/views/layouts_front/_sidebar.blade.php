@@ -2,7 +2,7 @@
   <div class="brk-header-mobile__open">
     <span></span>
   </div>
-  <div class="brk-header-mobile__logo" style="margin-left: 5%; margin-right: 5%;">
+  <div class="brk-header-mobile__logo" style="display: block;margin-left: auto;margin-right: auto;width: 90%;">
     <a href="{{url('/')}}">
       <img class="brk-header-mobile__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px; object-fit : contain">
       <img class="brk-header-mobile__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px; object-fit : contain">
@@ -139,7 +139,7 @@
             <div class="brk-open-top-bar__circle"></div>
             <div class="brk-open-top-bar__circle"></div>
           </div>
-          <a href="/" class="brk-header__logo brk-header__item @@modifier">
+          <a href="{{url('/')}}" class="brk-header__logo brk-header__item @@modifier">
             <img class="brk-header__logo-1 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px;object-fit:contain;">
             <img class="brk-header__logo-2 lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{url('/')}}/{{$data->logo_website}}" alt="Purbengkara Logo" style="height: 50px;object-fit:contain;">
           </a>
@@ -154,21 +154,27 @@
                 </a>
                 <?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
                 @if(count($product) != 0)
-                <ul class="brk-nav__sub-menu brk-nav-drop-down font__family-montserrat">
+                <ul class="brk-nav__sub-menu brk-nav-drop-down font__weight-semibold font__family-montserrat">
                   @foreach ($product as $pro)
                   <li class="dd-effect">
-                    <a href="{{url('/')}}/product/{{$pro->url_segment}}">{{$pro->name}}</a>
+                    <a href="{{url('/')}}/produk/{{$pro->url_segment}}">{{$pro->name}}</a>
                   </li>
                   @endforeach
                 </ul>
                 @endif
               </li>
               @endforeach
+
+              <li class="brk-nav__children brk-nav__drop-down-effect">
+                <a href="{{url('/')}}/cara-order">
+                  <span>Cara Order</span>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
         <div class="col-lg-3 align-self-lg-stretch text-lg-right mt-15" style="margin-left: 20px; margin-right: 20px;">
-          <form class="brk-search__form" role="search" method="get" action="#">
+          <form class="brk-search__form" role="search" method="get">
             <input class="font__family-open-sans" style="border: 1px solid #4aa6e8; border-radius: 20px; height: 40px" name="s" maxlength="50" type="search" id="searchBox" value="" placeholder="Cari Produk . . .">
             <button type="submit"><i class="fas fa-search"></i></button>
             </div>

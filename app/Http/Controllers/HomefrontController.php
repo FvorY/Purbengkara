@@ -14,11 +14,20 @@ class HomefrontController extends Controller
         $slideimage = SlideimageController::getSlideImage();
 
         $product = DB::table("product")
-                      ->select("product.*", "category.name as categoryname", "productimage.*")
+                      ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
                       ->join("category", 'category.id_category', '=', 'product.categoryid')
+                      ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
                       ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
                       ->get()->toArray();
 
         return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product'));
+    }
+
+    public function caraorder() {
+      $data = SettingController::getSetting();
+      $category = CategoryController::getCategory();
+      $sosmed = SosmedController::getSosmed();
+
+      return view("caraorder", compact('data', 'category', 'sosmed'));
     }
 }
