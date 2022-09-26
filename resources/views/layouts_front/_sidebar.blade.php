@@ -174,7 +174,7 @@
           </nav>
         </div>
         <div class="col-lg-3 align-self-lg-stretch text-lg-right mt-15" style="margin-left: 20px; margin-right: 20px;">
-          <form class="brk-search__form" role="search" method="get">
+          <form class="brk-search__form" role="search" method="get" action="#" >
             <input class="font__family-open-sans" style="border: 1px solid #4aa6e8; border-radius: 20px; height: 40px" name="s" maxlength="50" type="search" id="searchBox" value="" placeholder="Cari Produk . . .">
             <button type="submit"><i class="fas fa-search"></i></button>
             </div>

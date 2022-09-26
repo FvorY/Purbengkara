@@ -7,15 +7,15 @@
 
 	<!-- jQuery UI -->
 	<script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
-	<script src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.navigation.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.parallax.min.js')}}"></script>
-	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
-	<script src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
-	<script src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.navigation.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.parallax.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
+	<script defer="defer" src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
 	<script src="{{asset('assets/js/assets/brk-header.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.easy-autocomplete.js')}}"></script>
 	<script src="//wurfl.io/wurfl.js" crossorigin></script>

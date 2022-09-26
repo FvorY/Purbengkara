@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/simpanproduct', 'ProductController@simpan');
     Route::get('/editproduct/{id}', 'ProductController@edit');
     Route::get('/hapusproduct', 'ProductController@hapus');
+    Route::get('/tofrontproduct', 'ProductController@tofront');
 
     //Featured
     Route::get('/featured', 'FeaturedController@index');

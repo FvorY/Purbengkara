@@ -109,7 +109,49 @@ var table = $('#table-data').DataTable({
         ]
   });
 
+  function toFront(id) {
+    iziToast.question({
+      close: false,
+  		overlay: true,
+  		displayMode: 'once',
+  		title: 'Tampilkan ke halaman depan?',
+  		message: 'Apakah anda yakin ?',
+  		position: 'center',
+  		buttons: [
+  			['<button><b>Ya</b></button>', function (instance, toast) {
+          $.ajax({
+            url:baseUrl + '/tofrontproduct',
+            data:{id},
+            dataType:'json',
+            success:function(data){
 
+              if (data.status == 5) {
+                iziToast.success({
+                    icon: 'fa fa-check',
+                    message: 'Berhasil ditampilkan!',
+                });
+                reloadall();
+              }else if(data.status == 6){
+                iziToast.warning({
+                    icon: 'fa fa-info',
+                    message: 'Gagal ditampilkan!',
+                });
+              } else if(data.status == 7){
+                iziToast.warning({
+                    icon: 'fa fa-info',
+                    message: data.message,
+                });
+              }
+
+            }
+          });
+  			}, true],
+  			['<button>Tidak</button>', function (instance, toast) {
+  				instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+  			}],
+  		]
+  	});
+  }
 
   function edit(id) {
     window.location.href = "{{url('/')}}/editproduct/"+id;
