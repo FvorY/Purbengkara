@@ -18,6 +18,8 @@ class HomefrontController extends Controller
                       ->join("category", 'category.id_category', '=', 'product.categoryid')
                       ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
                       ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+                      ->groupBy("product.id_product")
+                      ->where("product.tofront", "Y")
                       ->get()->toArray();
 
         return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product'));

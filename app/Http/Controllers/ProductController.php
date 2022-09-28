@@ -85,7 +85,16 @@ class ProductController extends Controller
 
     return Datatables::of($data)
       ->addColumn('aksi', function ($data) {
+        if($data->tofront == "Y") {
+          $actionfront = '<button type="button" onclick="toFront(' . $data->id_product . ')" class="btn btn-warning btn-lg" title="to Front">' .
+                          '<label class="fa fa-minus"></label></button>';
+        } else {
+          $actionfront = '<button type="button" onclick="toFront(' . $data->id_product . ')" class="btn btn-success btn-lg" title="to Front">' .
+                          '<label class="fa fa-plus"></label></button>';
+        }
+
         return  '<div class="btn-group">' .
+          $actionfront.
           '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_product) . '\')" class="btn btn-info btn-lg" title="edit">' .
           '<label class="fa fa-pencil-alt"></label></button>' .
           '<button type="button" onclick="hapus(' . $data->id_product . ')" class="btn btn-danger btn-lg" title="hapus">' .
@@ -357,6 +366,37 @@ class ProductController extends Controller
       $dir = 'image/uploads/product/' . $req->id;
 
       $this->deleteDir($dir);
+
+      DB::commit();
+      return response()->json(["status" => 5]);
+    } catch (\Exception $e) {
+      DB::rollback();
+      return response()->json(["status" => 6]);
+    }
+  }
+
+  public function tofront(Request $req)
+  {
+    DB::beginTransaction();
+    try {
+
+      $cek = DB::table("product")
+              ->where("id_product", $req->id)
+              ->first();
+
+      if($cek->tofront == "Y") {
+        DB::table("product")
+          ->where("id_product", $req->id)
+          ->update([
+            "tofront" => "N"
+          ]);
+      } else {
+        DB::table("product")
+          ->where("id_product", $req->id)
+          ->update([
+            "tofront" => "Y"
+          ]);
+      }
 
       DB::commit();
       return response()->json(["status" => 5]);
