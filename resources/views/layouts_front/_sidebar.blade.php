@@ -78,7 +78,7 @@
             <ul class="brk-nav__menu">
               @foreach ($category as $cat)
               <li class="brk-nav__children brk-nav__drop-down-effect">
-                <a href="#">
+                <a href="{{url('/')}}/product/search?sort={{$sort}}&show={{$show}}&category={{$cat->id_category}}">
                   <span>{{$cat->name}}</span>
                 </a>
                 <?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
@@ -94,7 +94,7 @@
               </li>
               @endforeach
 
-              <li class="brk-nav__children brk-nav__drop-down-effect">
+              <li>
                 <a href="{{url('/')}}/cara-order">
                   <span>Cara Order</span>
                 </a>

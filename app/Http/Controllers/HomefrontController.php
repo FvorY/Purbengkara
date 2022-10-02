@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomefrontController extends Controller
 {
+
     public function index()
     {
         $data = SettingController::getSetting();
@@ -12,6 +13,11 @@ class HomefrontController extends Controller
         $category = CategoryController::getCategory();
         $featured = FeaturedController::getFeatured();
         $slideimage = SlideimageController::getSlideImage();
+
+        $sort = "terbaru";
+        $all = false;
+        $show = 10;
+        $categoryFilter = 0;
 
         $product = DB::table("product")
                       ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
@@ -22,7 +28,7 @@ class HomefrontController extends Controller
                       ->where("product.tofront", "Y")
                       ->get()->toArray();
 
-        return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product'));
+        return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product', 'show', 'sort', 'categoryFilter', 'all'));
     }
 
     public function caraorder() {
@@ -30,6 +36,11 @@ class HomefrontController extends Controller
       $category = CategoryController::getCategory();
       $sosmed = SosmedController::getSosmed();
 
-      return view("caraorder", compact('data', 'category', 'sosmed'));
+      $sort = "terbaru";
+      $all = false;
+      $show = 10;
+      $categoryFilter = 0;
+
+      return view("caraorder", compact('data', 'category', 'sosmed', 'show', 'sort', 'categoryFilter', 'all'));
     }
 }

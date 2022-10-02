@@ -7,7 +7,8 @@
 
 	<!-- jQuery UI -->
 	<script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/berserk.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
@@ -16,7 +17,6 @@
 	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
 	<script defer="defer" src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
-	<script src="{{asset('assets/js/assets/brk-header.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.easy-autocomplete.js')}}"></script>
 	<script src="//wurfl.io/wurfl.js" crossorigin></script>
 	<script>
@@ -206,15 +206,17 @@
 	function calculateCart() {
 		let cart = JSON.parse(localStorage.getItem('products'));
 
-		if (cart.length == 0) {
-			$("#checkoutCart").css("display", 'none');
-		} else {
-			$("#checkoutCart").css("display", '');
+		if(localStorage.getItem('products')){
+			if (cart.length == 0) {
+				$("#checkoutCart").css("display", 'none');
+			} else {
+				$("#checkoutCart").css("display", '');
+			}
+
+			$("#countCart").text(cart.length);
+
+			renderCart()
 		}
-
-		$("#countCart").text(cart.length);
-
-		renderCart()
 	}
 
 	function renderCart() {
