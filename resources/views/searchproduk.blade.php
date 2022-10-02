@@ -87,7 +87,7 @@
                           </ul>
                         </div>
                         <div class="flip-box__split-actions">
-                          <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{url('/')}}/{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
+                          <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
                             <i class="fas fa-shopping-cart"></i>
                           </a>
                           <a href="{{url('/')}}/produk/{{$pro->url_segment}}" class="add-search d-flex align-items-center justify-content-center fancybox">
