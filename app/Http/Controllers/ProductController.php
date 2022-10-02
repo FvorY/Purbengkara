@@ -40,7 +40,7 @@ class ProductController extends Controller
     return $data;
   }
 
-  public function search(Request $req)
+  public function searchWord(Request $req)
   {
     $data = DB::table("product")
       ->join("productimage", "productimage.productid", '=', "product.id_product")
@@ -55,6 +55,214 @@ class ProductController extends Controller
       ->toArray();
 
     return response()->json($data);
+  }
+
+  public function search(Request $req) {
+    $data = SettingController::getSetting();
+    $category = CategoryController::getCategoryCountProduct();
+    $sosmed = SosmedController::getSosmed();
+
+    $sort = "terbaru";
+    $all = false;
+    $show = 10;
+    $categoryFilter = 0;
+
+    if($req->sort != null) {
+      $sort = $req->sort;
+    }
+
+    if($req->show != null) {
+      if($req->show == "all") {
+        $all = true;
+        $show = DB::table("product")->count();
+      } else {
+        $all = false;
+        $show = $req->show;
+      }
+    }
+
+    if($req->category != null) {
+      $categoryFilter = $req->category;
+    }
+
+    if($sort == "terbaru") {
+      if($categoryFilter == 0) {
+        $produk = DB::table("product")
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->latest()
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      } else {
+        $produk = DB::table("product")
+          ->where("product.categoryid", '=', $categoryFilter)
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->latest()
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      }
+    } else if ($sort == "termurah"){
+      if($categoryFilter == 0) {
+        $produk = DB::table("product")
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderByRaw('SUM(product.priceMin+product.priceMax) asc')
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      } else {
+        $produk = DB::table("product")
+          ->where("product.categoryid", '=', $categoryFilter)
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderByRaw('SUM(product.priceMin+product.priceMax) asc')
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      }
+    } else if ($sort == "termahal") {
+      if($categoryFilter == 0) {
+        $produk = DB::table("product")
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderByRaw('SUM(product.priceMin+product.priceMax) DESC')
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      } else {
+        $produk = DB::table("product")
+          ->where("product.categoryid", '=', $categoryFilter)
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderByRaw('SUM(product.priceMin+product.priceMax) DESC')
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      }
+    } else if ($sort == "a-z") {
+      if($categoryFilter == 0) {
+        $produk = DB::table("product")
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderBy("product.name", "asc")
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      } else {
+        $produk = DB::table("product")
+          ->where("product.categoryid", '=', $categoryFilter)
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderBy("product.name", "asc")
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      }
+    } else if ($sort == "z-a") {
+      if($categoryFilter == 0) {
+        $produk = DB::table("product")
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderBy("product.name", "desc")
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      } else {
+        $produk = DB::table("product")
+          ->where("product.categoryid", '=', $categoryFilter)
+          ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
+          ->join("category", 'category.id_category', '=', 'product.categoryid')
+          ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
+          ->leftjoin("productimage", 'productimage.productid', '=', 'product.id_product')
+          ->groupBy("product.id_product")
+          ->orderBy("product.name", "desc")
+          ->limit($show)
+          ->get()
+          ->map(function ($data) {
+            $data->image = url('/') . '/' . $data->image;
+
+            return $data;
+          })
+          ->toArray();
+      }
+    }
+
+    return view("searchproduk", compact('data', 'category', 'sosmed', 'produk', 'show', 'sort', 'categoryFilter', 'all'));
   }
 
   public function index()

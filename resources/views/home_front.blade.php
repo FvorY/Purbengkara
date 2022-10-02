@@ -131,10 +131,14 @@
           </div>
         </div>
 			</section>
+      <div class="col-12 mt-20" align="center">
+        <a href="{{url('/')}}/product/search" class="btn btn-inside-out btn-lg btn-inside-out-invert border-radius-30 font__family-open-sans font__size-16 font__weight-bold text-uppercase brk-library-rendered rendered" data-brk-library="component__button">
+          <span class="before">Lihat Semua Produk</span><span class="text" style="min-width: 86.2344px;">Click Me</span><span class="after">Lihat Semua Produk</span>
+        </a>
+      </div>
   </main>
-
-
 </div>
+
 @endif
 
 @if($data->maps_link != null)

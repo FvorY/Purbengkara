@@ -111,7 +111,7 @@
 		}()); /* END OF WRAPPING FUNCTION */
 
 		var options = {
-		url: baseUrl + "/product/search",
+		url: baseUrl + "/product/searchWord",
 
 		getValue: "name",
 

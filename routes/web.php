@@ -14,6 +14,7 @@
 
 
 Route::get('/', 'HomefrontController@index')->name('/');
+Route::get('/product/searchWord', 'ProductController@searchWord');
 Route::get('/product/search', 'ProductController@search');
 Route::get('/cara-order', 'HomefrontController@caraorder');
 

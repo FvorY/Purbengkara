@@ -49,8 +49,8 @@
               </div>
               <div class="brk-mini-cart__links" id="checkoutCart">
                 <div class="brk-mini-cart__links--wrap">
-                  <a class="brk-mini-cart__links--cart" onclick="redirectCartWA()"><i class="fa fa-shopping-basket"></i></a>
-                  <a class="brk-mini-cart__links--checkout" onclick="redirectCartWA()">Proceed to checkout <i class="far fa-arrow-right"></i></a>
+                  <a class="brk-mini-cart__links--cart" onclick="redirectCartWA()" style="cursor: pointer;"><i class="fa fa-shopping-basket"></i></a>
+                  <a class="brk-mini-cart__links--checkout" onclick="redirectCartWA()" style="cursor: pointer;">Proceed to checkout <i class="far fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>

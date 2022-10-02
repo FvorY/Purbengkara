@@ -22,6 +22,23 @@ class CategoryController extends Controller
         return $data;
     }
 
+    public static function getCategoryCountProduct()
+    {
+        $data = DB::table("category")
+            ->select("category.*", "category.id_category as count")
+            ->get()
+            ->map(function ($data) {
+              $data->count = DB::table("product")
+                              ->where("categoryid", $data->id_category)
+                              ->count();
+
+              return $data;
+            })
+            ->toArray();
+
+        return $data;
+    }
+
     public function index()
     {
         $data = SettingController::getSetting();
