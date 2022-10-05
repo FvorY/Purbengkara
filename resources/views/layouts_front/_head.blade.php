@@ -21,6 +21,9 @@
     <link rel="apple-touch-icon" href="{{url('/')}}/image/icon.png">
     <link rel="android-touch-icon" href="{{url('/')}}/image/icon.png" />
     <link rel="windows-touch-icon" href="{{url('/')}}/image/icon.png" />
+    <!-- detail product -->
+    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico">
 
     <!-- For Facebook -->
     <meta property="og:image" content="{{url('/')}}/image/icon.png" />
@@ -120,4 +123,5 @@
         padding-right: 10px;
       }
     </style>
-</head>
+
+  </head>
