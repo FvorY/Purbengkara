@@ -49,8 +49,8 @@
               </div>
               <div class="brk-mini-cart__links" id="checkoutCart">
                 <div class="brk-mini-cart__links--wrap">
-                  <a class="brk-mini-cart__links--cart" onclick="redirectCartWA()"><i class="fa fa-shopping-basket"></i></a>
-                  <a class="brk-mini-cart__links--checkout" onclick="redirectCartWA()">Proceed to checkout <i class="far fa-arrow-right"></i></a>
+                  <a class="brk-mini-cart__links--cart" onclick="redirectCartWA()" style="cursor: pointer;"><i class="fa fa-shopping-basket"></i></a>
+                  <a class="brk-mini-cart__links--checkout" onclick="redirectCartWA()" style="cursor: pointer;">Proceed to checkout <i class="far fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -78,7 +78,7 @@
             <ul class="brk-nav__menu">
               @foreach ($category as $cat)
               <li class="brk-nav__children brk-nav__drop-down-effect">
-                <a href="#">
+                <a href="{{url('/')}}/product/search?sort={{$sort}}&show={{$show}}&category={{$cat->id_category}}">
                   <span>{{$cat->name}}</span>
                 </a>
                 <?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
@@ -94,7 +94,7 @@
               </li>
               @endforeach
 
-              <li class="brk-nav__children brk-nav__drop-down-effect">
+              <li>
                 <a href="{{url('/')}}/cara-order">
                   <span>Cara Order</span>
                 </a>

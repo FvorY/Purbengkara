@@ -62,6 +62,14 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/components/services.css')}}">
 
+    <link rel="stylesheet" href="{{asset('assets/css/components/widgets.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/components/elements.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/components/buttons.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/components/shop-components-cards.css')}}">
+
     <link rel="stylesheet" href="{{asset('assets/css/components/shop-components-grid-filter.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/components/tags.css')}}">
@@ -123,5 +131,7 @@
         padding-right: 10px;
       }
     </style>
+    
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=633e3d459fffcd001962e85f&product=inline-share-buttons" async="async"></script>
 
   </head>

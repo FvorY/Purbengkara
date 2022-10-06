@@ -4,21 +4,23 @@
 	<script src="{{asset('assets/node_modules/jquery/dist/jquery.min.js')}}"></script>
 	<!-- Mainly scripts -->
 	<script type="text/javascript" src="{{ asset('assets/plugins/jquery-1.12.3.min.js') }}"></script>
-
 	<!-- jQuery UI -->
-	<script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.navigation.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.parallax.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
-	<script defer="defer" src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
-	<script src="{{asset('assets/js/assets/brk-header.js')}}"></script>
+
 	<script src="{{asset('assets/js/jquery.easy-autocomplete.js')}}"></script>
+
+	<script src="{{asset('assets/js/vendor/berserk.js')}}"></script>
+
+	<script src="{{asset('assets/js/vendor/scripts.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.tools.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/jquery.themepunch.revolution.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.navigation.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.parallax.min.js')}}"></script>
+	<script src="{{asset('assets/js/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
+	<script src="{{asset('assets/vendor/isotope/js/isotope.pkgd.min.js')}}"></script>
+	<script src="{{asset('assets/js/components/shop-components-grid-filter.js')}}"></script>
 	<script src="//wurfl.io/wurfl.js" crossorigin></script>
+
 	<script>
 		var baseUrl = '{{ url('/') }}';
 		var revapi18,
@@ -110,50 +112,6 @@
 			}; /* END OF ON LOAD FUNCTION */
 		}()); /* END OF WRAPPING FUNCTION */
 
-		var options = {
-		url: baseUrl + "/product/search",
-
-		getValue: "name",
-
-	  cssClasses: "sheroes",
-
-	  template: {
-	    type: "iconLeft",
-	    fields: {
-	      iconSrc: "image"
-	    }
-	  },
-
-		list: {
-			match: {
-				enabled: true
-			},
-			maxNumberOfElements: 6,
-
-			showAnimation: {
-				type: "slide",
-				time: 300
-			},
-			hideAnimation: {
-				type: "slide",
-				time: 300
-			},
-			onClickEvent: function() {
-				var selectedItemValue = $("#searchBox").getSelectedItemData().url_segment;
-
-				$("#searchBox").val("");
-				window.location.href = "{{url('/')}}" + "/produk/" + selectedItemValue;
-			}
-		},
-
-		requestDelay: 300,
-
-		theme: "round"
-
-	};
-
-	$("#searchBox").easyAutocomplete(options);
-
 	$('#Btn').click(function(){
 	let products = [];
 
@@ -206,46 +164,53 @@
 	function calculateCart() {
 		let cart = JSON.parse(localStorage.getItem('products'));
 
-		if (cart.length == 0) {
-			$("#checkoutCart").css("display", 'none');
+		if(localStorage.getItem('products')){
+			if (cart.length == 0) {
+				$("#checkoutCart").css("display", 'none');
+			} else {
+				$("#checkoutCart").css("display", '');
+			}
+
+			$("#countCart").text(cart.length);
 		} else {
-			$("#checkoutCart").css("display", '');
+			$("#checkoutCart").css("display", 'none');
 		}
-
-		$("#countCart").text(cart.length);
-
 		renderCart()
 	}
 
 	function renderCart() {
 		var html = '';
 
-		let storageProducts = JSON.parse(localStorage.getItem('products'));
+		if(localStorage.getItem('products')){
+			let storageProducts = JSON.parse(localStorage.getItem('products'));
 
-		if (storageProducts.length == 0) {
-			html = '<span class=font__family-montserrat font__size-16 line__height-21 font__weight-semibold text-truncate"> Cart kosong, silahkan tambah produk ke cart terlebih dahulu! </span>';
-		} else {
-			for (var i = 0; i < storageProducts.length; i++) {
-				let product = storageProducts[i];
+			if (storageProducts.length == 0) {
+				html = '<span class=font__family-montserrat font__size-16 line__height-21 font__weight-semibold text-truncate"> Cart kosong, silahkan tambah produk ke cart terlebih dahulu! </span>';
+			} else {
+				for (var i = 0; i < storageProducts.length; i++) {
+					let product = storageProducts[i];
 
-				html += '<div class="brk-mini-cart__product">'+
-								'<div class="brk-mini-cart__product--img">'+
-									'<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'+product.image+'" alt="Product Image">'+
-								'</div>'+
-								'<div class="brk-mini-cart__product--title-price">'+
-									'<a href="'+product.link+'">'+
-										'<h4 class="font__family-montserrat font__size-16 line__height-21 font__weight-semibold text-truncate">'+product.name+'</h4>'+
-									'</a>'+
-									'<span class="brk-mini-cart__product--price font__family-montserrat">'+product.price+'</span>'+
-								'</div>'+
-								'<div class="brk-quantity">'+
-									'<span class="brk-quantity__arrows minus" onclick="minusQuantityCart('+product.productId+')"></span>'+
-									'<input class="brk-quantity__value" name="quantity" id="qty'+product.productId+'" onkeyup="changeQuantityCart('+product.productId+')" type="text" value="'+product.quantity+'">'+
-									'<span class="brk-quantity__arrows plus" onclick="plusQuantityCart('+product.productId+')"></span>'+
-								'</div>'+
-								'<a onclick="removeCart('+product.productId+')" class="brk-mini-cart__product--remove remove"><i class="fa fa-times-circle" aria-hidden="true"></i></a>'+
-							'</div>';
+					html += '<div class="brk-mini-cart__product">'+
+									'<div class="brk-mini-cart__product--img">'+
+										'<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="'+product.image+'" alt="Product Image">'+
+									'</div>'+
+									'<div class="brk-mini-cart__product--title-price">'+
+										'<a href="'+product.link+'">'+
+											'<h4 class="font__family-montserrat font__size-16 line__height-21 font__weight-semibold text-truncate">'+product.name+'</h4>'+
+										'</a>'+
+										'<span class="brk-mini-cart__product--price font__family-montserrat">'+product.price+'</span>'+
+									'</div>'+
+									'<div class="brk-quantity">'+
+										'<span class="brk-quantity__arrows minus" onclick="minusQuantityCart('+product.productId+')"></span>'+
+										'<input class="brk-quantity__value" name="quantity" id="qty'+product.productId+'" onkeyup="changeQuantityCart('+product.productId+')" type="text" value="'+product.quantity+'">'+
+										'<span class="brk-quantity__arrows plus" onclick="plusQuantityCart('+product.productId+')"></span>'+
+									'</div>'+
+									'<a onclick="removeCart('+product.productId+')" class="brk-mini-cart__product--remove remove"><i class="fa fa-times-circle" aria-hidden="true"></i></a>'+
+								'</div>';
+				}
 			}
+		} else {
+			html = '<span class=font__family-montserrat font__size-16 line__height-21 font__weight-semibold text-truncate"> Cart kosong, silahkan tambah produk ke cart terlebih dahulu! </span>';
 		}
 
 		$("#showCartProduct").html(html);
@@ -321,5 +286,51 @@
 
 		window.open(link,'_blank');
 	}
+
+	$(document).ready(function(){
+		var options = {
+		url: baseUrl + "/product/searchWord",
+
+		getValue: "name",
+
+		cssClasses: "sheroes",
+
+		template: {
+			type: "iconLeft",
+			fields: {
+				iconSrc: "image"
+			}
+		},
+
+		list: {
+			match: {
+				enabled: true
+			},
+			maxNumberOfElements: 6,
+
+			showAnimation: {
+				type: "slide",
+				time: 300
+			},
+			hideAnimation: {
+				type: "slide",
+				time: 300
+			},
+			onClickEvent: function() {
+				var selectedItemValue = $("#searchBox").getSelectedItemData().url_segment;
+
+				$("#searchBox").val("");
+				window.location.href = "{{url('/')}}" + "/produk/" + selectedItemValue;
+			}
+		},
+
+		requestDelay: 300,
+
+		theme: "round"
+
+	};
+
+	$("#searchBox").easyAutocomplete(options);
+	})
 
 	</script>

@@ -14,6 +14,11 @@ class HomefrontController extends Controller
     $featured = FeaturedController::getFeatured();
     $slideimage = SlideimageController::getSlideImage();
 
+    $sort = "terbaru";
+    $all = false;
+    $show = 10;
+    $categoryFilter = 0;
+
     $product = DB::table("product")
       ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
       ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -23,7 +28,7 @@ class HomefrontController extends Controller
       ->where("product.tofront", "Y")
       ->get()->toArray();
 
-    return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product'));
+    return view("home_front", compact('data', 'sosmed', 'category', 'featured', 'slideimage', 'product', 'show', 'sort', 'categoryFilter', 'all'));
   }
 
   public function caraorder()
@@ -32,18 +37,30 @@ class HomefrontController extends Controller
     $category = CategoryController::getCategory();
     $sosmed = SosmedController::getSosmed();
 
-    return view("caraorder", compact('data', 'category', 'sosmed'));
+    $all = false;
+    $sort = "terbaru";
+    $show = 10;
+    $categoryFilter = 0;
+
+    return view("caraorder", compact('data', 'category', 'sosmed', 'show', 'sort', 'categoryFilter', 'all'));
   }
 
-  public function detailproduct()
+
+  public function detailproduct($slug)
   {
+    //$slug = "banner-phz";
     $data = SettingController::getSetting();
     $sosmed = SosmedController::getSosmed();
     $category = CategoryController::getCategory();
     $featured = FeaturedController::getFeatured();
     $slideimage = SlideimageController::getSlideImage();
 
-    $data_product = DB::table("product")->where("id_product", 2)
+    $all = false;
+    $sort = "terbaru";
+    $show = 10;
+    $categoryFilter = 0;
+
+    $data_product = DB::table("product")->where("url_segment", $slug)
       ->select("product.*", "productimage.*", "specialprice.*", "product.name as productname", "category.name as categoryname")
       ->join("category", "category.id_category", '=', 'product.categoryid')
       ->leftjoin("productimage", "productimage.productid", '=', "product.id_product")
@@ -60,6 +77,9 @@ class HomefrontController extends Controller
     //  ->where("id_specialprice", 2)
     //  ->first();
 
-    return view("detail_product", compact("data", "sosmed", "featured", "category", "slideimage", "data_product"));
+    if ($data_product == null) {
+      abort(404);
+    }
+    return view("detail_product", compact("sort", "show", "categoryFilter", "data", "sosmed", "featured", "category", "slideimage", "data_product"));
   }
 }
