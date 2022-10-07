@@ -10,6 +10,7 @@
         <li data-index="rs-77" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1400" data-thumb="img/demo_shop_video/images/transparent.png" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
           <img src="{{url('/')}}/{{$sld->image}}" data-bgcolor="#f6f7f7" style="background:#f6f7f7" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" data-no-retina>
         </li>
+       
         @endforeach
       </ul>
       <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>

@@ -45,7 +45,7 @@
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-         <!--  <li class="nav-item dropdown">
+           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <i class="mdi mdi-email-outline"></i>
               <span class="count"></span>
@@ -65,7 +65,7 @@
                 </div>
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+                <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                     <img src="{{asset('assets/images/faces/face2.jpg')}}" alt="image" class="profile-pic">
                 </div>
