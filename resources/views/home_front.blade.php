@@ -119,7 +119,7 @@
                       <div class="text-center pt-35">
                         <div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
                             <a onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{url('/')}}/{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
-                            <a href="{{url('/')}}/produk/{{$pro->url_segment}}" class="add-wishlist brk-bg-color"><i class="fal fa-folder-open brk-white-font-color"></i></a>
+                            <a href="{{url('/')}}/product/detail/{{$pro->url_segment}}" class="add-wishlist brk-bg-color"><i class="fal fa-folder-open brk-white-font-color"></i></a>
                             <a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="add-compare brk-bg-color"><i class="fab fa-whatsapp brk-white-font-color"></i></a>
                         </div>
                       </div>

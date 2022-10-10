@@ -67,34 +67,34 @@
                     <div class="flip__back lazyload">
                       <div class="flip-box__split-overlay brk-base-bg-gradient-10deg"></div>
                       <div class="flip-box__split-content">
-                        <div class="pt-lg-30 pb-lg-30 pt-sm-20 pb-sm-20 pt-xs-40 pb-xs-40 pt-20 pb-20 position-relative z-index-5" onclick="openDetail(this)" data-url_segment="{{$pro->url_segment}}" style="cursor: pointer;">
-                          <a href="#">
+                        <a href="{{url('/')}}/product/detail/{{$pro->url_segment}}">
+                          <div class="pt-lg-30 pb-lg-30 pt-sm-20 pb-sm-20 pt-xs-40 pb-xs-40 pt-20 pb-20 position-relative z-index-5" onclick="openDetail(this)" data-url_segment="{{$pro->url_segment}}" style="cursor: pointer;">
                             <h4 class="font__family-montserrat font__weight-bold font__size-18 line__height-24">
                               {{$pro->specialname}}
                             </h4>
-                          </a>
-                          <div class="flip-box__split-price font__family-montserrat font__size-15">
-                            <span class="font__weight-bold"></span>
-                            {{$pro->specialprice}}
+                            <div class="flip-box__split-price font__family-montserrat font__size-15">
+                              <span class="font__weight-bold"></span>
+                              {{$pro->specialprice}}
+                            </div>
                           </div>
-                        </div>
-                        <div class="flip-box__split-list">
-                          <ul class="font__family-open-sans font__size-15 line__height-20 font__weight-light text-left letter-spacing-40 pt-15 pb-15">
-                            <?php $note = explode("+",$pro->note) ?>
-                            @for ($i = 0; $i < count($note); $i++)
+                          <div class="flip-box__split-list">
+                            <ul class="font__family-open-sans font__size-15 line__height-20 font__weight-light text-left letter-spacing-40 pt-15 pb-15">
+                              <?php $note = explode("+",$pro->note) ?>
+                              @for ($i = 0; $i < count($note); $i++)
                               <li class="d-flex font__weight-bold"><i class="far fa-check brk-blue-light-font-color"></i><span class="letter-spacing-40">{{$note[$i]}}</span></li>
-                            @endfor
-                          </ul>
-                        </div>
-                        <div class="flip-box__split-actions">
-                          <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
-                            <i class="fas fa-shopping-cart"></i>
-                          </a>
-                          <a href="{{url('/')}}/produk/{{$pro->url_segment}}" class="add-search d-flex align-items-center justify-content-center fancybox">
-                            <i class="fas fa-folder-open"></i>
-                          </a>
-                          <a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="add-wishlist d-flex align-items-center justify-content-center">
-                            <i class="fab fa-whatsapp"></i>
+                              @endfor
+                            </ul>
+                          </div>
+                        </a>
+                          <div class="flip-box__split-actions">
+                            <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
+                              <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <a href="{{url('/')}}/produk/{{$pro->url_segment}}" class="add-search d-flex align-items-center justify-content-center fancybox">
+                              <i class="fas fa-folder-open"></i>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="add-wishlist d-flex align-items-center justify-content-center">
+                              <i class="fab fa-whatsapp"></i>
                           </a>
                         </div>
                       </div>

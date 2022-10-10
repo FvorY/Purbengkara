@@ -86,7 +86,7 @@
                 <ul class="brk-nav__sub-menu brk-nav-drop-down font__weight-semibold font__family-montserrat">
                   @foreach ($product as $pro)
                   <li class="dd-effect">
-                    <a href="{{url('/')}}/detail_product/{{$pro->url_segment}}">{{$pro->name}}</a>
+                    <a href="{{url('/')}}/product/detail/{{$pro->url_segment}}">{{$pro->name}}</a>
                   </li>
                   @endforeach
                 </ul>
