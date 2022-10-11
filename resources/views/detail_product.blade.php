@@ -64,7 +64,7 @@
 											@foreach($produk as $pro)
 											<div class="brk-sc-info-grid d-flex flex-wrap pt-4 pb-3">
 												<div class="">
-													<a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" style="cursor: pointer;">
+													<a target="_blank" href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" style="cursor: pointer;">
 														<i class="fab fa-whatsapp" aria-hidden="true"></i>
 														<span class="before"></span><span class="after"></span><span class="border-btn"></span>Order Via whatsapp
 													</a>
