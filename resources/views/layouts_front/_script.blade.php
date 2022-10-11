@@ -269,7 +269,7 @@
 	}
 
 	function redirectCartWA() {
-		var link = "https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=";
+		var link = "https://api.whatsapp.com/send?phone=083117764077&text=";
 		var string = "*Halo%2C%20Purbengkara%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20%3A%20";
 
 		let products = [];

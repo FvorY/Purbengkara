@@ -137,6 +137,7 @@
 var index = parseInt($("#count").val());
   $(document).ready(
     function(){
+
         $('#btn-tambah').click(
             function(){
                 var toAdd = $('input[name=note]').val();

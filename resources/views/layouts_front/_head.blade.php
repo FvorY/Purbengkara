@@ -21,6 +21,9 @@
     <link rel="apple-touch-icon" href="{{url('/')}}/image/icon.png">
     <link rel="android-touch-icon" href="{{url('/')}}/image/icon.png" />
     <link rel="windows-touch-icon" href="{{url('/')}}/image/icon.png" />
+    <!-- detail product -->
+    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="favicon.ico">
 
     <!-- For Facebook -->
     <meta property="og:image" content="{{url('/')}}/image/icon.png" />
@@ -127,5 +130,212 @@
         padding-left: 10px;
         padding-right: 10px;
       }
+
+      /* style slide image
+
+      /* begin external css: flickity.css
+      /*! Flickity v2.0.4
+      * https://npmcdn.com/flickity@2/dist/flickity.css
+      https://flickity.metafizzy.co
+      ---------------------------------------------- */
+
+      .flickity-enabled {
+        position: relative;
+      }
+
+      .flickity-enabled:focus { outline: none; }
+
+      .flickity-viewport {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+      }
+
+      .flickity-slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* draggable */
+
+      .flickity-enabled.is-draggable {
+        -webkit-tap-highlight-color: transparent;
+                tap-highlight-color: transparent;
+        -webkit-user-select: none;
+          -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+      }
+
+      .flickity-enabled.is-draggable .flickity-viewport {
+        cursor: move;
+        cursor: -webkit-grab;
+        cursor: grab;
+      }
+
+      .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+      }
+
+      /* ---- previous/next buttons ---- */
+
+      .flickity-prev-next-button {
+        position: absolute;
+        top: 50%;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 50%;
+        background: white;
+        background: hsla(0, 0%, 100%, 0.75);
+        cursor: pointer;
+        /* vertically center */
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+      }
+
+      .flickity-prev-next-button:hover { background: white; }
+
+      .flickity-prev-next-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 5px #09F;
+      }
+
+      .flickity-prev-next-button:active {
+        opacity: 0.6;
+      }
+
+      .flickity-prev-next-button.previous { left: 10px; }
+      .flickity-prev-next-button.next { right: 10px; }
+      /* right to left */ */
+      /* .flickity-rtl .flickity-prev-next-button.previous { */
+      /*   left: auto; */
+      /*   right: 10px; */
+      /* } */
+      /* .flickity-rtl .flickity-prev-next-button.next { */
+      /*   right: auto; */
+      /*   left: 10px; */
+      /* } */
+
+      .flickity-prev-next-button:disabled {
+        opacity: 0.3;
+        cursor: auto;
+      }
+
+      .flickity-prev-next-button svg {
+        position: absolute;
+        left: 20%;
+        top: 20%;
+        width: 60%;
+        height: 60%;
+      }
+
+      .flickity-prev-next-button .arrow {
+        fill: #333;
+      }
+
+      /* ---- page dots ---- */
+
+      /* .flickity-page-dots { */
+      /*   position: absolute; */
+      /*   width: 100%; */
+      /*   bottom: -25px; */
+      /*   padding: 0; */
+      /*   margin: 0; */
+      /*   list-style: none; */
+      /*   text-align: center; */
+      /*   line-height: 1; */
+      /* } */
+      /*  */
+      /* .flickity-rtl .flickity-page-dots { direction: rtl; } */
+      /*  */
+      /* .flickity-page-dots .dot { */
+      /*   display: inline-block; */
+      /*   width: 10px; */
+      /*   height: 10px; */
+      /*   margin: 0 8px; */
+      /*   background: #333; */
+      /*   border-radius: 50%; */
+      /*   opacity: 0.25; */
+      /*   cursor: pointer; */
+      /* } */
+      /*  */
+      /* .flickity-page-dots .dot.is-selected { */
+      /*   opacity: 1; */
+      /* } */
+
+      /* end external css: flickity.css */
+      /*! Flickity v2.0.4
+      https://flickity.metafizzy.co
+      ---------------------------------------------- */
+
+      * { box-sizing: border-box; }
+
+      body { font-family: sans-serif; }
+
+      .carousel {
+        background: #FAFAFA;
+      }
+
+      .carousel-main {
+        margin-bottom: 8px;
+      }
+
+      .carousel-cell {
+        width: 100%;
+        height: 504px;
+        margin-right: 8px;
+        background: #ffffff;
+        border-radius: 5px;
+        /* counter-increment: carousel-cell; */
+      }
+
+      /* cell number */ 
+      /* .carousel-cell:before { */
+      /*   display: block; */
+      /*   text-align: center; */
+      /*   content: counter(carousel-cell); */
+      /*   line-height: 200px; */
+      /*   font-size: 80px; */
+      /*   color: white; */
+      /* } */
+
+      .carousel-nav .carousel-cell {
+        height: 90px;
+        width: 120px;
+      }
+
+      /* .carousel-nav .carousel-cell:before { */
+      /*   font-size: 50px; */
+      /*   line-height: 80px; */
+      /* } */
+
+      /* .carousel-nav .carousel-cell.is-nav-selected { */
+      /*   background: #ED2; */
+      /* } */
+
+      /* Atelierbram edit */
+      .carousel-main img {
+        display: block;
+        margin: 0 auto; 
+        width: 100%;
+        height: 504px;
+      }
+
+      .container-slideimage {
+        max-width: 672px;
+        margin: 0 auto;
+      }
+
+      span {
+        text-decoration: blink;
+      }
+
     </style>
-</head>
+    
+     
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=633e3d459fffcd001962e85f&product=inline-share-buttons" async="async"></script>
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2.3.0/dist/flickity.pkgd.js" async="async"></script>
+  </head>

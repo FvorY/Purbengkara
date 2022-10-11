@@ -20,10 +20,28 @@
 							<div class="col-lg-4 col-12">
 								<div class="brk-footer__bordered-col h-100 pt-40 pt-lg-30 pr-lg-30">
 									<h6 class="brk-white-font-color font__family-montserrat font__weight-bold text-uppercase letter-spacing-100 font__size-21 line__height-28 mb-15">Kategori</h6>
+
 									<ul class="brk-tags brk-tags_solid font__family-montserrat brk-tags_transparent brk-tags_gray mb-20 brk-library-rendered" data-brk-library="component__tags">
-										@foreach ($category as $item)
-											<li><a href="#" rel="tag">{{ $item->name }}</a></li>
+										
+										@foreach ($category as $cat)
+										<li>
+											<a href="{{url('/')}}/product/search?sort={{$sort}}&show={{$show}}&category={{$cat->id_category}}">
+												<span>{{$cat->name}}</span>
+											</a>
+											
+											<?php $product = DB::table("product")->where("categoryid", $cat->id_category)->get()->toArray(); ?>
+											@if(count($product) != 0)
+											<ul class="brk-nav__sub-menu brk-nav-drop-down font__weight-semibold font__family-montserrat">
+												@foreach ($product as $pro)
+												<li class="dd-effect">
+													<a href="{{url('/')}}/produk/{{$pro->url_segment}}">{{$pro->name}}</a>
+												</li>
+												@endforeach
+											</ul>
+											@endif
+										</li>
 										@endforeach
+
 									</ul>
 								</div>
 							</div>

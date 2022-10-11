@@ -57,7 +57,8 @@ class ProductController extends Controller
     return response()->json($data);
   }
 
-  public function search(Request $req) {
+  public function search(Request $req)
+  {
     $data = SettingController::getSetting();
     $category = CategoryController::getCategoryCountProduct();
     $sosmed = SosmedController::getSosmed();
@@ -67,12 +68,12 @@ class ProductController extends Controller
     $show = 10;
     $categoryFilter = 0;
 
-    if($req->sort != null) {
+    if ($req->sort != null) {
       $sort = $req->sort;
     }
 
-    if($req->show != null) {
-      if($req->show == "all") {
+    if ($req->show != null) {
+      if ($req->show == "all") {
         $all = true;
         $show = DB::table("product")->count();
       } else {
@@ -81,12 +82,12 @@ class ProductController extends Controller
       }
     }
 
-    if($req->category != null) {
+    if ($req->category != null) {
       $categoryFilter = $req->category;
     }
 
-    if($sort == "terbaru") {
-      if($categoryFilter == 0) {
+    if ($sort == "terbaru") {
+      if ($categoryFilter == 0) {
         $produk = DB::table("product")
           ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
           ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -120,8 +121,8 @@ class ProductController extends Controller
           })
           ->toArray();
       }
-    } else if ($sort == "termurah"){
-      if($categoryFilter == 0) {
+    } else if ($sort == "termurah") {
+      if ($categoryFilter == 0) {
         $produk = DB::table("product")
           ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
           ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -156,7 +157,7 @@ class ProductController extends Controller
           ->toArray();
       }
     } else if ($sort == "termahal") {
-      if($categoryFilter == 0) {
+      if ($categoryFilter == 0) {
         $produk = DB::table("product")
           ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
           ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -191,7 +192,7 @@ class ProductController extends Controller
           ->toArray();
       }
     } else if ($sort == "a-z") {
-      if($categoryFilter == 0) {
+      if ($categoryFilter == 0) {
         $produk = DB::table("product")
           ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
           ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -226,7 +227,7 @@ class ProductController extends Controller
           ->toArray();
       }
     } else if ($sort == "z-a") {
-      if($categoryFilter == 0) {
+      if ($categoryFilter == 0) {
         $produk = DB::table("product")
           ->select("product.*", "product.name as productname", "category.name as categoryname", "productimage.*", "specialprice.*", "specialprice.name as specialname", "specialprice.price as specialprice")
           ->join("category", 'category.id_category', '=', 'product.categoryid')
@@ -293,16 +294,16 @@ class ProductController extends Controller
 
     return Datatables::of($data)
       ->addColumn('aksi', function ($data) {
-        if($data->tofront == "Y") {
+        if ($data->tofront == "Y") {
           $actionfront = '<button type="button" onclick="toFront(' . $data->id_product . ')" class="btn btn-warning btn-lg" title="to Front">' .
-                          '<label class="fa fa-minus"></label></button>';
+            '<label class="fa fa-minus"></label></button>';
         } else {
           $actionfront = '<button type="button" onclick="toFront(' . $data->id_product . ')" class="btn btn-success btn-lg" title="to Front">' .
-                          '<label class="fa fa-plus"></label></button>';
+            '<label class="fa fa-plus"></label></button>';
         }
 
         return  '<div class="btn-group">' .
-          $actionfront.
+          $actionfront .
           '<button type="button" onclick="edit(\'' . Crypt::encryptString($data->id_product) . '\')" class="btn btn-info btn-lg" title="edit">' .
           '<label class="fa fa-pencil-alt"></label></button>' .
           '<button type="button" onclick="hapus(' . $data->id_product . ')" class="btn btn-danger btn-lg" title="hapus">' .
@@ -589,10 +590,10 @@ class ProductController extends Controller
     try {
 
       $cek = DB::table("product")
-              ->where("id_product", $req->id)
-              ->first();
+        ->where("id_product", $req->id)
+        ->first();
 
-      if($cek->tofront == "Y") {
+      if ($cek->tofront == "Y") {
         DB::table("product")
           ->where("id_product", $req->id)
           ->update([
