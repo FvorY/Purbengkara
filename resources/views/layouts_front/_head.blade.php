@@ -100,6 +100,15 @@
   	<style>.custom.tparrows{cursor:pointer;background:#000;background:rgba(0,0,0,0.5);width:40px;height:40px;position:absolute;display:block;}.custom.tparrows:hover{background:#000}.custom.tparrows:before{font-family:"revicons";font-size:15px;color:#fff;display:block;line-height:40px;text-align:center}.custom.tparrows.tp-leftarrow:before{content:"\e824"}.custom.tparrows.tp-rightarrow:before{content:"\e825"}</style>
 
     <style media="screen">
+      .btn:focus {
+        color: var(--brand-primary);
+        background: #fff;
+        border: 0;
+        box-shadow: 0 5px 16px rgb(0 0 0 / 20%);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
       .brk-header {
         background-color: white !important;
       }

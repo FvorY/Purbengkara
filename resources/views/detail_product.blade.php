@@ -73,10 +73,10 @@
 											@endforeach
 											<div class="brk-sc-info-grid d-flex flex-wrap pt-4 pb-3">
 												<div class="">
-													<a href="#" class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" onclick="addCart(this)" data-id="{{$data_product->id_product}}" data-image="{{url('/')}}/{{$data_product->image}}" data-name="{{$data_product->productname}}" data-link="{{url('/')}}/product/detail/{{$data_product->url_segment}}" data-price="Mulai {{FormatRupiahFront($data_product->priceMin)}} - {{FormatRupiahFront($data_product->priceMax)}}" style="cursor: pointer;">
+													<button class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" onclick="addCart(this)" data-id="{{$data_product->id_product}}" data-image="{{url('/')}}/{{$data_product->image}}" data-name="{{$data_product->productname}}" data-link="{{url('/')}}/product/detail/{{$data_product->url_segment}}" data-price="Mulai {{FormatRupiahFront($data_product->priceMin)}} - {{FormatRupiahFront($data_product->priceMax)}}" style="cursor: pointer;">
 														<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 														<span class="before"></span><span class="after"></span><span class="border-btn"></span>Add to cart
-													</a>
+													</button>
 												</div>
 											</div>
 											<hr>
