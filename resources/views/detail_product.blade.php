@@ -4,35 +4,34 @@
 	$jumlahimage = count($productimage)-1;
 @endphp
 	<div class="main-wrapper brk-z-index-10">
-		<main class="main-container pt-180">
+		<main class="main-container" id="topBar">
 			<div class="container">
 				<div class="brk-sc-shop-item" data-brk-library="component__shop_item_page_sidebar">
 					<div class="row">
 						<div class="col-12 col-lg-12 col-xl-12">
 							<div class="brk-sc-shop-item__main">
 								<div class="row pb-20 justify-content-md-start justify-content-center">
-									
+
 								<div class="col-lg-5 col-sm-12">
 								<!-- slide gambar -->
 									<div class="container-slideimage">
 										<!-- Flickity HTML init -->
 										<div class="carousel carousel-main" data-flickity='{"pageDots": false }'>
-											@for ($i=0; $i <= $jumlahimage; $i++) 
-												<div class="carousel-cell"><img src="{{asset($productimage[$i]->image)}}"/></div>
-											@endfor  
+											@for ($i=0; $i <= $jumlahimage; $i++)
+												<div class="carousel-cell"><img style="object-fit: contain;" src="{{asset($productimage[$i]->image)}}"/></div>
+											@endfor
 										</div>
 
 										<div class="carousel carousel-nav" data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false }'>
 										@for ($i=0; $i <=  $jumlahimage; $i++)
-											<div class="carousel-cell"><img src="{{asset($productimage[$i]->image)}}"/></div>
+											<div class="carousel-cell"><img style="object-fit: contain; height: 90px; width: 120px;" src="{{asset($productimage[$i]->image)}}"/></div>
 										@endfor
 										</div>
 									</div><!-- /.container -->
 								</div>
 								<!-- end slide gambar -->
 
-
-								<div class="col-lg-7 col-sm-12">
+								<div class="col-lg-7 col-sm-12 mt-20">
 										<div class="container">
 											<h2 class="font__family-montserrat brk-black-font-color font__size-28 font__weight-light line__height-32">
 												<span class="font__weight-bold">{{ $data_product->productname }} </span>
@@ -45,7 +44,7 @@
 														Harga Mulai:
 													</span>
 													<div class="fw-bold font__family-montserrat font__weight-light font__size-25 line__height-38">
-														{{ FormatRupiahFront($data_product->priceMin) }} 
+														{{ FormatRupiahFront($data_product->priceMin) }}
 														<span class="brk-sc-category__title font__family-montserrat font__size-12 font__weight-bold mr-10 text-uppercase">
 															s/d </span>
 														{{ FormatRupiahFront($data_product->priceMax)}}
@@ -64,7 +63,7 @@
 											</div>
 											<div class="brk-sc-info-grid d-flex flex-wrap pt-4 pb-3">
 												<div class="">
-													<a href="#" class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" onclick="addCart(this)" data-id="{{$data_product->id_product}}" data-image="{{$data_product->image}}" data-name="{{$data_product->productname}}" data-link="{{url('/')}}/produk/{{$data_product->url_segment}}" data-price="Mulai {{FormatRupiahFront($data_product->priceMin)}} - {{FormatRupiahFront($data_product->priceMax)}}" style="cursor: pointer;">
+													<a href="#" class="btn btn-prime btn-lg border-radius-30 font__family-open-sans font__weight-bold m-0 pr-30 pl-30 brk-sc-shop-item__info-btn letter-spacing-40" onclick="addCart(this)" data-id="{{$data_product->id_product}}" data-image="{{url('/')}}/{{$data_product->image}}" data-name="{{$data_product->productname}}" data-link="{{url('/')}}/product/detail/{{$data_product->url_segment}}" data-price="Mulai {{FormatRupiahFront($data_product->priceMin)}} - {{FormatRupiahFront($data_product->priceMax)}}" style="cursor: pointer;">
 														<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 														<span class="before"></span><span class="after"></span><span class="border-btn"></span>Add to cart
 													</a>
@@ -88,7 +87,7 @@
 													<a href="#" class="brk-dark-font-color font__family-open-sans font__size-14 mr-1">{{ $data_product->note }}</a>
 												</div>
 											</div>
-											
+
 											<hr>
 											<!-- share sosmed -->
 											<div class="sharethis-inline-share-buttons"></div>
@@ -97,7 +96,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 								<!-- Descripsi -->
 								<div class="card mt-3 mb-5">
 									<div class="card-header bg-light">
@@ -109,7 +108,7 @@
 										<p class="brk-dark-font-color font__family-open-sans font__size-14 mr-1">{{ $data_product->spek }}</p>
 									</div>
 								</div>
-								
+
 
 							<!-- related product -->
 								@if($produk != null)
@@ -165,9 +164,9 @@
 													</div>
 													<div class="text-center pt-35">
 														<div class="brk-shop-grid-filter-strict__actions clearfix brk-base-box-shadow-primary">
-															<a onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{url('/')}}/{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
+															<a onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{url('/')}}/{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/product/detail/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart brk-bg-color"><i class="fas fa-shopping-cart brk-white-font-color"></i></a>
 															<a href="{{url('/')}}/product/detail/{{$pro->url_segment}}" class="add-wishlist brk-bg-color"><i class="fal fa-folder-open brk-white-font-color"></i></a>
-															<a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="add-compare brk-bg-color"><i class="fab fa-whatsapp brk-white-font-color"></i></a>
+															<a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/product/detail/{{$pro->url_segment}}" class="add-compare brk-bg-color"><i class="fab fa-whatsapp brk-white-font-color"></i></a>
 														</div>
 													</div>
 													</div>
@@ -193,8 +192,30 @@
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 		</main>
 	</div>
 
+@endsection
+
+@section('extra_script')
+<script type="text/javascript">
+  if (WURFL.is_mobile === true && WURFL.form_factor === "Tablet") {
+    $("#topBar").css("margin-top", "80px");
+  }
+
+  if (WURFL.is_mobile === true && WURFL.form_factor === "Smartphone") {
+    $("#topBar").css("margin-top", "21%");
+  }
+
+  if (WURFL.form_factor === "Desktop") {
+    $("#topBar").css("margin-top", "120px");
+  }
+
+  function openDetail(elm) {
+    let link = $(elm).data("url_segment");
+
+    window.location.href = "{{url('/')}}/product/detail/"+link;
+  }
+</script>
 @endsection

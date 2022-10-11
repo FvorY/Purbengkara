@@ -87,13 +87,13 @@
                           </div>
                         </a>
                           <div class="flip-box__split-actions">
-                            <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/produk/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
+                            <a href="#" onclick="addCart(this)" data-id="{{$pro->id_product}}" data-image="{{$pro->image}}" data-name="{{$pro->productname}}" data-link="{{url('/')}}/product/detail/{{$pro->url_segment}}" data-price="Mulai {{FormatRupiahFront($pro->priceMin)}} - {{FormatRupiahFront($pro->priceMax)}}" style="cursor: pointer;" class="add-cart d-flex align-items-center justify-content-center">
                               <i class="fas fa-shopping-cart"></i>
                             </a>
-                            <a href="{{url('/')}}/produk/{{$pro->url_segment}}" class="add-search d-flex align-items-center justify-content-center fancybox">
+                            <a href="{{url('/')}}/product/detail/{{$pro->url_segment}}" class="add-search d-flex align-items-center justify-content-center fancybox">
                               <i class="fas fa-folder-open"></i>
                             </a>
-                            <a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/produk/{{$pro->url_segment}}" class="add-wishlist d-flex align-items-center justify-content-center">
+                            <a href="https://api.whatsapp.com/send?phone={{hp($data->whatsapp)}}&text=*Halo%2C%20{{config('app.name')}}%20%F0%9F%91%8B*%0ASaya%20ingin%20order%20produk%20ini%20:%20%0A%0A{{$pro->productname}}%20%0A{{url('/')}}/product/detail/{{$pro->url_segment}}" class="add-wishlist d-flex align-items-center justify-content-center">
                               <i class="fab fa-whatsapp"></i>
                           </a>
                         </div>
@@ -168,7 +168,7 @@
   function openDetail(elm) {
     let link = $(elm).data("url_segment");
 
-    window.location.href = "{{url('/')}}/produk/"+link;
+    window.location.href = "{{url('/')}}/product/detail/"+link;
   }
 </script>
 @endsection

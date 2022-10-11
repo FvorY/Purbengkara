@@ -1,7 +1,13 @@
 <head>
 
     <!-- Title -->
-    <title>{{config('app.name')}}</title>
+    @if(isset($customTitle))
+      <title>{{$customTitle}}</title>
+    @elseif(isset($data->seo_title))
+      <title>{{$data->seo_title}}</title>
+    @else
+      <title>{{config('app.name')}}</title>
+    @endif
     <meta property="og:title" content="{{$data->seo_title}}" />
 
     <meta charset="utf-8">
@@ -18,18 +24,27 @@
     <meta http-equiv="Cache-control" content="public">
     <meta name="mobile-web-app-capable" content="yes">
 
+    @if(isset($customImage))
+    <link rel="apple-touch-icon" href="{{url('/')}}/{{$customImage}}">
+    <link rel="android-touch-icon" href="{{url('/')}}/{{$customImage}}" />
+    <link rel="windows-touch-icon" href="{{url('/')}}/{{$customImage}}" />
+    <meta property="og:image" itemprop="image" content="{{url('/')}}/{{$customImage}}"/>
+    <!-- For Facebook -->
+    <meta property="og:image" content="{{url('/')}}/{{url('/')}}/{{$customImage}}" />
+
+    <!-- For Twitter -->
+    <meta name="twitter:image" content="{{url('/')}}/{{url('/')}}/{{$customImage}}" />
+    @else
     <link rel="apple-touch-icon" href="{{url('/')}}/image/icon.png">
     <link rel="android-touch-icon" href="{{url('/')}}/image/icon.png" />
     <link rel="windows-touch-icon" href="{{url('/')}}/image/icon.png" />
-    <!-- detail product -->
-    <link rel="shortcut icon" href="favicon.ico">
-	<link rel="apple-touch-icon-precomposed" href="favicon.ico">
-
+    <meta property="og:image" itemprop="image" content="{{url('/')}}/image/icon.png"/>
     <!-- For Facebook -->
     <meta property="og:image" content="{{url('/')}}/image/icon.png" />
 
     <!-- For Twitter -->
     <meta name="twitter:image" content="{{url('/')}}/image/icon.png" />
+    @endif
 
     <meta name="author" content="{{config('app.name')}}">
     <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
@@ -40,8 +55,6 @@
 
     <meta property="og:url" content="{{url('/')}}" />
     <meta property="og:site_name" content="{{config('app.name')}}" />
-
-    <meta  property="og:image" itemprop="image" content="{{url('/')}}/image/icon.png"/>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{url('/')}}/image/icon.png">
@@ -292,7 +305,7 @@
         /* counter-increment: carousel-cell; */
       }
 
-      /* cell number */ 
+      /* cell number */
       /* .carousel-cell:before { */
       /*   display: block; */
       /*   text-align: center; */
@@ -319,7 +332,7 @@
       /* Atelierbram edit */
       .carousel-main img {
         display: block;
-        margin: 0 auto; 
+        margin: 0 auto;
         width: 100%;
         height: 504px;
       }
@@ -334,8 +347,8 @@
       }
 
     </style>
-    
-     
+
+
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=633e3d459fffcd001962e85f&product=inline-share-buttons" async="async"></script>
     <script type="text/javascript" src="https://npmcdn.com/flickity@2.3.0/dist/flickity.pkgd.js" async="async"></script>
   </head>

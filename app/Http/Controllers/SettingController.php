@@ -25,6 +25,17 @@ class SettingController extends Controller
         return $data;
      }
 
+     public static function getSettingProduk($produk) {
+       $data = DB::table("setting")
+         ->where('id', 1)->first();
+
+         $data->seo_title = $produk->productname;
+         $data->seo_keyword = $produk->productname . " , Jasa " . $produk->productname . " , Jasa " . $produk->productname . "Surabaya , Jasa Cetak " . $produk->productname . " , Jasa Cetak " . $produk->productname . " Surabaya";
+         $data->seo_description = $produk->spek;
+
+        return $data;
+     }
+
      public function index() {
 
        $data = SettingController::getSetting();

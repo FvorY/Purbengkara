@@ -50,8 +50,6 @@ class HomefrontController extends Controller
 
   public function detailproduct($url_segment)
   {
-
-    $data = SettingController::getSetting();
     $sosmed = SosmedController::getSosmed();
     $category = CategoryController::getCategory();
     $featured = FeaturedController::getFeatured();
@@ -69,9 +67,11 @@ class HomefrontController extends Controller
       ->leftjoin("productimage", "productimage.productid", '=', "product.id_product")
       ->leftjoin("specialprice", "specialprice.productid", '=', "product.id_product")
       ->groupBy("product.id_product")
-      ->get()
       ->first();
 
+    $customTitle = "Purbengkara | " . $data_product->productname;
+    $customImage = $data_product->image;
+    $data = SettingController::getSettingProduk($data_product);
 
     $produk = DB::table("product")
       ->where("product.categoryid", '=', $data_product->categoryid)
@@ -94,11 +94,6 @@ class HomefrontController extends Controller
       ->where("productimage.productid", '=', $data_product->productid)
       ->get()->toArray();
 
-    //$jumlahimage = count($productimage);
-    //for ($i=0; $i <=  $jumlahimage; $i++) { 
-    //  $productimage[$i]->image;
-    //}
-
     if ($data_product == null) {
       abort(404);
     }
@@ -114,7 +109,9 @@ class HomefrontController extends Controller
       "category",
       "slideimage",
       "data_product",
-      "productimage"
+      "productimage",
+      "customTitle",
+      "customImage"
     ));
   }
 }

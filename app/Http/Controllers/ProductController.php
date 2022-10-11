@@ -63,6 +63,10 @@ class ProductController extends Controller
     $category = CategoryController::getCategoryCountProduct();
     $sosmed = SosmedController::getSosmed();
 
+    $data->seo_title = "Purbengkara | Cari Produk";
+    $data->seo_keyword = "Purbengkara Cari Produk , Purbengkara Search Produk , Purbengkara Cari Produk Surabaya , Purbengkara Search Produk Surabaya";
+    $customTitle = "Purbengkara | Cari Produk";
+
     $sort = "terbaru";
     $all = false;
     $show = 10;
@@ -263,7 +267,7 @@ class ProductController extends Controller
       }
     }
 
-    return view("searchproduk", compact('data', 'category', 'sosmed', 'produk', 'show', 'sort', 'categoryFilter', 'all'));
+    return view("searchproduk", compact('data', 'category', 'sosmed', 'produk', 'show', 'sort', 'categoryFilter', 'all', 'customTitle'));
   }
 
   public function index()
